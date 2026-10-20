@@ -46,7 +46,7 @@ export interface CartaoSalvoPayload {
 }
 
 export interface PixSalvo {
-  id: string;
+  id: number;
   empresaId: number;
   apelido: string;
   tipoChave: TipoChavePix;
