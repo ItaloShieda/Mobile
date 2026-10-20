@@ -13,7 +13,7 @@ interface AuthScreenShellProps {
 }
 
 export function AuthScreenShell({
-  subtitle = 'BEM-VINDO AO QUICKSTOCK',
+  subtitle = 'BEM-VINDO AO STOCK4EVENT',
   children,
   showBack = true,
 }: AuthScreenShellProps) {

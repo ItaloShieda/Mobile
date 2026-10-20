@@ -30,7 +30,7 @@ export function WelcomeScreen() {
           </View>
         ) : null}
         <AuthBrand light size="lg" />
-        <Text style={styles.kicker}>BEM-VINDO AO QUICKSTOCK</Text>
+        <Text style={styles.kicker}>BEM-VINDO AO STOCK4EVENT</Text>
         <Text style={styles.description}>Gerenciamento inteligente</Text>
       </View>
 

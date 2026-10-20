@@ -62,8 +62,8 @@ export function PerfilScreen() {
         <View style={[styles.header, { paddingTop: topPadding }]}>
           <View style={styles.headerTop}>
             <View style={styles.brandRow}>
-              <Text style={styles.brandQuick}>Quick</Text>
-              <Text style={styles.brandStock}>Stock</Text>
+              <Text style={styles.brandQuick}>Stock</Text>
+              <Text style={styles.brandStock}>4event</Text>
             </View>
             <TouchableOpacity
               style={styles.bellButton}
@@ -85,7 +85,7 @@ export function PerfilScreen() {
             </View>
             <View style={styles.userCopy}>
               <Text style={styles.userName} numberOfLines={1}>
-                {user?.nome || user?.empresa?.nome || 'Conta QuickStock'}
+                {user?.nome || user?.empresa?.nome || 'Conta Stock4event'}
               </Text>
               <Text style={styles.userEmail} numberOfLines={1}>
                 {user?.email || '—'}
@@ -133,7 +133,7 @@ export function PerfilScreen() {
                 confirm({
                   title: 'Ajuda',
                   message:
-                    'Dúvidas e suporte: fale com a equipe QuickStock pelo e-mail de cadastro da sua conta.',
+                    'Dúvidas e suporte: fale com a equipe Stock4event pelo e-mail de cadastro da sua conta.',
                   confirmText: 'Ok',
                   cancelText: 'Fechar',
                   onConfirm: () => undefined,

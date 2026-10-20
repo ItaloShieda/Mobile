@@ -13,7 +13,7 @@ const OPCOES: { modo: ModoAtivo; label: string; icon: keyof typeof Ionicons.glyp
   { modo: 'Fornecedor', label: 'Fornecedor', icon: 'storefront-outline', cor: COMPANY_COLORS.primary },
 ];
 
-/** Troca entre as telas de cliente e de fornecedor em contas "Cliente e fornecedor". */
+/** Troca entre as telas de cliente e de fornecedor; só aparece na conta demo. */
 export function AlternarPerfilCard() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { podeAlternarPerfil, perfilUso, alternarPerfil } = useAuth();

@@ -3,7 +3,7 @@ import type { StoredSession } from '../types/auth';
 
 export type { StoredSession };
 
-const SESSION_KEY = '@quickstock_session';
+const SESSION_KEY = '@stock4event_session';
 
 export function isSessionExpired(expiresAt: number): boolean {
   return Date.now() >= expiresAt;

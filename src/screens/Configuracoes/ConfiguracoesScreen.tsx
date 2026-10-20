@@ -178,8 +178,8 @@ export function ConfiguracoesScreen() {
             <View style={clienteStyles.headerTop}>
               <BackButton onPress={goBack} iconColor={PRIMARY} />
               <View style={clienteStyles.brandRow}>
-                <Text style={clienteStyles.brandQuick}>Quick</Text>
-                <Text style={clienteStyles.brandStock}>Stock</Text>
+                <Text style={clienteStyles.brandQuick}>Stock</Text>
+                <Text style={clienteStyles.brandStock}>4event</Text>
               </View>
               <View style={{ width: 32 }} />
             </View>

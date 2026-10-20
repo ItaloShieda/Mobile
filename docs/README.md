@@ -1,12 +1,12 @@
-# 📱 QuickStock - Mobile App
+# 📱 Stock4event - Mobile App
 
 [![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactnative.dev/)
 [![Expo](https://img.shields.io/badge/Expo-1B1F23?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-O **QuickStock Mobile** é a interface front-end móvel do ecossistema QuickStock. Desenvolvido com **React Native** e **Expo**, o aplicativo foi projetado para gerenciar estoques descentralizados, vendas em eventos, controle de quiosques e fluxo de pagamentos de forma ágil e intuitiva.
+O **Stock4event Mobile** é a interface front-end móvel do ecossistema Stock4event. Desenvolvido com **React Native** e **Expo**, o aplicativo foi projetado para gerenciar estoques descentralizados, vendas em eventos, controle de quiosques e fluxo de pagamentos de forma ágil e intuitiva.
 
-Este aplicativo consome a [API REST do QuickStock Backend](https://github.com/LuanSantos26/QuickStock-BackEnd).
+Este aplicativo consome a [API REST do Stock4event Backend](https://github.com/LuanSantos26/QuickStock-BackEnd).
 
 ---
 
@@ -76,7 +76,7 @@ O app tem dois fluxos, escolhidos no cadastro. Os dois seguem o mesmo layout, e 
 * Git
 * Um emulador Android/iOS configurado, ou o aplicativo **Expo Go** no celular
 
-> **Aviso:** o QuickStock Backend precisa estar rodando (localmente ou hospedado) para o login e os dados funcionarem.
+> **Aviso:** o Stock4event Backend precisa estar rodando (localmente ou hospedado) para o login e os dados funcionarem.
 
 ---
 
@@ -114,12 +114,12 @@ npm start
 
 ### Conta de demonstração
 
-Com o backend rodando, entre com `demo@quickstock.com` / `demo1234`. A conta já tem endereço, cartão de crédito e chave PIX cadastrados, e acessa as telas de cliente e de fornecedor: troque de visão em **Ajustes → Alternar visão**.
+Com o backend rodando, entre com `demo@stock4event.com` / `demo1234`. A conta já tem endereço, cartão de crédito e chave PIX cadastrados, e acessa as telas de cliente e de fornecedor: troque de visão pelo botão no fim da barra inferior ou em **Ajustes → Alternar visão**. Só essa conta tem a troca de visão.
 
 Para a tela de login já vir preenchida na sua máquina, crie um `.env.local` na raiz do projeto (ele não vai para o git) e reinicie o Expo:
 
 ```bash
-EXPO_PUBLIC_LOGIN_EMAIL=demo@quickstock.com
+EXPO_PUBLIC_LOGIN_EMAIL=demo@stock4event.com
 EXPO_PUBLIC_LOGIN_SENHA=demo1234
 ```
 

@@ -1,5 +1,5 @@
 /**
- * Gerador da Documentação Oficial QuickStock (ABNT + DOCX)
+ * Gerador da Documentação Oficial Stock4event (ABNT + DOCX)
  * Executar: node gerar_documentacao.mjs
  */
 import fs from "fs";
@@ -28,8 +28,8 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DOCS_DIR = path.resolve(__dirname, "..");
 const DIAGRAMAS_DIR = path.join(DOCS_DIR, "diagramas");
-const OUTPUT_DOCX = path.join(DOCS_DIR, "DOCUMENTACAO_OFICIAL_QUICKSTOCK.docx");
-const OUTPUT_MD = path.join(DOCS_DIR, "DOCUMENTACAO_OFICIAL_QUICKSTOCK.md");
+const OUTPUT_DOCX = path.join(DOCS_DIR, "DOCUMENTACAO_OFICIAL_STOCK4EVENT.docx");
+const OUTPUT_MD = path.join(DOCS_DIR, "DOCUMENTACAO_OFICIAL_STOCK4EVENT.md");
 
 const FONT = "Times New Roman";
 const SIZE = 24; // 12pt
@@ -348,7 +348,7 @@ function buildCoverSection() {
   return [
     para("[PREENCHER: NOME DA INSTITUIÇÃO DE ENSINO]", { center: true, noIndent: true, after: 400 }),
     para("[PREENCHER: NOME DO AUTOR]", { center: true, noIndent: true, after: 800 }),
-    para("QUICKSTOCK", { center: true, noIndent: true, bold: true, after: 120 }),
+    para("STOCK4EVENT", { center: true, noIndent: true, bold: true, after: 120 }),
     para("Sistema mobile de gestão de estoque e marketplace B2B para o setor de bebidas", {
       center: true,
       noIndent: true,
@@ -363,7 +363,7 @@ function buildCoverSection() {
 function buildTitlePageSection() {
   return [
     para("[PREENCHER: NOME DO AUTOR]", { center: true, noIndent: true, after: 600 }),
-    para("QUICKSTOCK", { center: true, noIndent: true, bold: true, after: 120 }),
+    para("STOCK4EVENT", { center: true, noIndent: true, bold: true, after: 120 }),
     para("Sistema mobile de gestão de estoque e marketplace B2B para o setor de bebidas", {
       center: true,
       noIndent: true,
@@ -392,7 +392,7 @@ function buildMainContent() {
       "O comércio de bebidas e atacado enfrenta desafios recorrentes na gestão de estoque em múltiplos pontos de venda e na reposição de mercadorias junto a distribuidoras. Processos manuais, planilhas dispersas e a falta de integração entre controle interno e compras externas dificultam a operação de bares, revendas e empreendedores que operam quiosques em eventos."
     ),
     para(
-      "O QuickStock foi desenvolvido como resposta a esse cenário: uma solução composta por aplicativo mobile (React Native / Expo) e API REST (Spring Boot), integrados a um banco de dados PostgreSQL. O sistema permite que empresas compradoras gerenciem catálogo de produtos, quiosques com estoque por filial, comprem de distribuidoras via marketplace integrado, acompanhem pedidos e configurem endereços e formas de pagamento."
+      "O Stock4event foi desenvolvido como resposta a esse cenário: uma solução composta por aplicativo mobile (React Native / Expo) e API REST (Spring Boot), integrados a um banco de dados PostgreSQL. O sistema permite que empresas compradoras gerenciem catálogo de produtos, quiosques com estoque por filial, comprem de distribuidoras via marketplace integrado, acompanhem pedidos e configurem endereços e formas de pagamento."
     ),
     heading2("1.1 Objetivo geral"),
     para(
@@ -407,7 +407,7 @@ function buildMainContent() {
     bullet("Documentar arquitetura, frontend, backend e modelagem de dados conforme normas ABNT."),
     heading2("1.3 Justificativa"),
     para(
-      "A digitalização do controle de estoque e das compras entre empresas reduz erros operacionais, agiliza reposição e aproxima a experiência do usuário de aplicativos de delivery já consolidados no mercado. O QuickStock unifica, em um único app, gestão interna e compras externas, agregando valor acadêmico e prático ao demonstrar integração mobile-backend-banco de dados."
+      "A digitalização do controle de estoque e das compras entre empresas reduz erros operacionais, agiliza reposição e aproxima a experiência do usuário de aplicativos de delivery já consolidados no mercado. O Stock4event unifica, em um único app, gestão interna e compras externas, agregando valor acadêmico e prático ao demonstrar integração mobile-backend-banco de dados."
     ),
     heading2("1.4 Escopo"),
     para(
@@ -417,7 +417,7 @@ function buildMainContent() {
     // 2 METODOLOGIA
     heading1("2 Metodologia e arquitetura"),
     para(
-      "O desenvolvimento seguiu abordagem incremental, com entregas por domínio funcional: autenticação, gestão interna (produtos e quiosques), marketplace B2B, checkout, acompanhamento de pedidos e configurações. A comunicação entre camadas utiliza HTTP/JSON na porta 8080."
+      "O desenvolvimento seguiu abordagem incremental, com entregas por domínio funcional: autenticação, gestão interna (produtos e quiosques), marketplace B2B, checkout, acompanhamento de pedidos e configurações. A comunicação entre camadas utiliza HTTP/JSON na porta 8081."
     ),
     heading2("2.1 Stack tecnológica"),
     makeTable(
@@ -434,7 +434,7 @@ function buildMainContent() {
     para("", { after: 200, noIndent: true }),
     heading2("2.2 Arquitetura cliente-servidor"),
     imageParagraph("arquitetura-sistema.png", 520, 200),
-    caption("Figura 1 – Arquitetura geral do sistema QuickStock"),
+    caption("Figura 1 – Arquitetura geral do sistema Stock4event"),
     para(
       "O aplicativo mobile organiza-se em telas (screens), contexts para estado global, services para chamadas HTTP e componentes reutilizáveis. O backend segue camadas Controller → Service → Repository → Entity. O PostgreSQL armazena dados persistentes; imagens de produtos ficam em uploads/produtos/ no servidor."
     ),
@@ -449,7 +449,7 @@ function buildMainContent() {
     // 3.1 FRONTEND
     heading2("3.1 Frontend mobile"),
     para(
-      "O frontend QuickStock é um aplicativo Expo 54 com React Native 0.81 e TypeScript. A navegação utiliza React Navigation (Native Stack) com gate de autenticação: usuários não autenticados acessam Welcome, Login e Register; autenticados acessam o stack principal. O app atende dois perfis, escolhidos no cadastro: Cliente (comerciante que compra de fornecedores) e Fornecedor (distribuidora que vende e gerencia o catálogo). Cada perfil tem telas e barra inferior próprias, com o mesmo layout e cores diferentes."
+      "O frontend Stock4event é um aplicativo Expo 54 com React Native 0.81 e TypeScript. A navegação utiliza React Navigation (Native Stack) com gate de autenticação: usuários não autenticados acessam Welcome, Login e Register; autenticados acessam o stack principal. O app atende dois perfis, escolhidos no cadastro: Cliente (comerciante que compra de fornecedores) e Fornecedor (distribuidora que vende e gerencia o catálogo). Cada perfil tem telas e barra inferior próprias, com o mesmo layout e cores diferentes."
     ),
     heading3("3.1.1 Estrutura de pastas"),
     makeTable(
@@ -518,7 +518,7 @@ function buildMainContent() {
     caption("Figura 2 – Fluxo principal de navegação do aplicativo"),
     heading3("3.1.5 Integração com a API"),
     para(
-      "Nove services encapsulam chamadas REST: authService, productService, barracaService, marketplaceService, enderecoService, formaPagamentoService, financeiroService, notificacaoService e sessionStorage (AsyncStorage). A URL base é resolvida em api.ts conforme o ambiente (localhost, 10.0.2.2 no Android ou IP do Expo Go). O token JWT é persistido na chave @quickstock_session."
+      "Nove services encapsulam chamadas REST: authService, productService, barracaService, marketplaceService, enderecoService, formaPagamentoService, financeiroService, notificacaoService e sessionStorage (AsyncStorage). A URL base é resolvida em api.ts conforme o ambiente (localhost, 10.0.2.2 no Android ou IP do Expo Go). O token JWT é persistido na chave @stock4event_session."
     ),
 
     heading3("3.1.6 Quiosques do cliente"),
@@ -543,7 +543,7 @@ function buildMainContent() {
     // 3.2 BACKEND
     heading2("3.2 Backend API"),
     para(
-      "O backend QuickStock-BackEnd é uma API REST monolítica Spring Boot 3.4 em Java 17, executada na porta 8080. Organiza-se em 17 controllers, 11 services, 17 repositories e 14 entidades JPA mapeadas para PostgreSQL."
+      "O backend Stock4event-BackEnd é uma API REST monolítica Spring Boot 3.4 em Java 17, executada na porta 8081. Organiza-se em 17 controllers, 11 services, 17 repositories e 14 entidades JPA mapeadas para PostgreSQL."
     ),
     heading3("3.2.1 Camadas"),
     bullet("Controller: expõe endpoints REST sob /api/*"),
@@ -579,7 +579,7 @@ function buildMainContent() {
     // 3.3 BANCO DE DADOS
     heading2("3.3 Banco de dados"),
     para(
-      "O banco quickstock no PostgreSQL contém 14 tabelas derivadas das entidades JPA. Os relacionamentos são unidirecionais (@ManyToOne no lado filho). A entidade Empresa possui papel dual: COMPRADOR, DISTRIBUIDOR ou PLATAFORMA, permitindo que a mesma tabela represente compradores e fornecedores."
+      "O banco stock4event no PostgreSQL contém 14 tabelas derivadas das entidades JPA. Os relacionamentos são unidirecionais (@ManyToOne no lado filho). A entidade Empresa possui papel dual: COMPRADOR, DISTRIBUIDOR ou PLATAFORMA, permitindo que a mesma tabela represente compradores e fornecedores."
     ),
     heading3("3.3.1 Modelo conceitual"),
     para(
@@ -619,7 +619,7 @@ function buildMainContent() {
     // 4 CONCLUSÃO
     heading1("4 Conclusão"),
     para(
-      "O QuickStock entrega uma solução funcional de gestão de estoque e marketplace B2B, integrando aplicativo mobile Expo, API Spring Boot e banco PostgreSQL. Foram implementados cadastro unificado com perfis Cliente e Fornecedor, CRUD de produtos e quiosques, quiosques do cliente montados a partir das compras recebidas, fluxo completo de compra (vitrine → sacola → pedido → acompanhamento), configurações de perfil, formas de pagamento e notificações, com identidade visual consistente entre os perfis."
+      "O Stock4event entrega uma solução funcional de gestão de estoque e marketplace B2B, integrando aplicativo mobile Expo, API Spring Boot e banco PostgreSQL. Foram implementados cadastro unificado com perfis Cliente e Fornecedor, CRUD de produtos e quiosques, quiosques do cliente montados a partir das compras recebidas, fluxo completo de compra (vitrine → sacola → pedido → acompanhamento), configurações de perfil, formas de pagamento e notificações, com identidade visual consistente entre os perfis."
     ),
     para(
       "Como limitações conhecidas, destacam-se: autenticação JWT parcial (sem filtro global), dados mock na Home e aba Carteira do app, notificações geradas em tempo real sem tabela dedicada, resumo financeiro parcialmente sintético no backend e quiosques do cliente dependentes de o backend lançar as compras entregues no estoque do comprador. Trabalhos futuros incluem Spring Security completo, ampliação dos testes automatizados, push notifications e eliminação de dados mock."
@@ -722,7 +722,7 @@ async function main() {
   // Markdown versionável simplificado
   fs.writeFileSync(
     OUTPUT_MD,
-    "# QuickStock — Documentação Oficial\n\nDocumento Word gerado em DOCUMENTACAO_OFICIAL_QUICKSTOCK.docx\n\nAtualize executando: cd docs/scripts && npm install && node gerar_documentacao.mjs\n"
+    "# Stock4event — Documentação Oficial\n\nDocumento Word gerado em DOCUMENTACAO_OFICIAL_STOCK4EVENT.docx\n\nAtualize executando: cd docs/scripts && npm install && node gerar_documentacao.mjs\n"
   );
   console.log(`Markdown auxiliar: ${OUTPUT_MD}`);
 }

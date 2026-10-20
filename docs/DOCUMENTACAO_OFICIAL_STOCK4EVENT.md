@@ -1,6 +1,6 @@
-# QuickStock — Documentação Oficial
+# Stock4event — Documentação Oficial
 
-> Versão versionável em Markdown. O documento Word para entrega acadêmica está em **DOCUMENTACAO_OFICIAL_QUICKSTOCK.docx**.
+> Versão versionável em Markdown. O documento Word para entrega acadêmica está em **DOCUMENTACAO_OFICIAL_STOCK4EVENT.docx**.
 >
 > Para regenerar o `.docx`: `cd docs/scripts && npm install && node gerar_documentacao.mjs`
 
@@ -15,7 +15,7 @@
 
 ## 1 Introdução
 
-O comércio de bebidas e atacado enfrenta desafios na gestão de estoque em múltiplos pontos de venda e na reposição junto a distribuidoras. O **QuickStock** integra aplicativo mobile (Expo / React Native) e API REST (Spring Boot) com PostgreSQL.
+O comércio de bebidas e atacado enfrenta desafios na gestão de estoque em múltiplos pontos de venda e na reposição junto a distribuidoras. O **Stock4event** integra aplicativo mobile (Expo / React Native) e API REST (Spring Boot) com PostgreSQL.
 
 ### 1.1 Objetivo geral
 
@@ -45,7 +45,7 @@ Arquitetura, frontend, backend e modelagem de dados, com testes unitários das r
 - **Mobile:** Expo 54, React Native 0.81, TypeScript 5.9
 - **Backend:** Spring Boot 3.4, Java 17
 - **Banco:** PostgreSQL 18
-- **Comunicação:** HTTP/JSON, porta 8080
+- **Comunicação:** HTTP/JSON, porta 8081
 - **Testes (mobile):** Jest + jest-expo
 
 Diagramas em `diagramas/arquitetura-sistema.png` e `diagramas/fluxo-navegacao.png`.
@@ -124,7 +124,7 @@ Tabelas: `perfis`, `empresas`, `usuarios`, `produtos`, `eventos`, `barracas`, `e
 
 ## 4 Conclusão
 
-O QuickStock entrega gestão de estoque, marketplace B2B e quiosques do cliente montados a partir das compras, com identidade visual consistente entre os perfis Cliente e Fornecedor. Limitações: JWT parcial, dados mock na Home/Carteira, notificações sem tabela, financeiro parcialmente sintético e quiosques do cliente dependentes de o backend lançar as compras entregues no estoque do comprador.
+O Stock4event entrega gestão de estoque, marketplace B2B e quiosques do cliente montados a partir das compras, com identidade visual consistente entre os perfis Cliente e Fornecedor. Limitações: JWT parcial, dados mock na Home/Carteira, notificações sem tabela, financeiro parcialmente sintético e quiosques do cliente dependentes de o backend lançar as compras entregues no estoque do comprador.
 
 ---
 

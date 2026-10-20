@@ -1,6 +1,6 @@
-# QuickStock — Guia Completo para Apresentação
+# Stock4event — Guia Completo para Apresentação
 
-Documento de estudo detalhado sobre o que foi implementado no projeto **QuickStock**, cobrindo o aplicativo mobile (React Native / Expo) e a API backend (Spring Boot). Use este material para preparar slides, demonstração ao vivo e respostas a perguntas da banca.
+Documento de estudo detalhado sobre o que foi implementado no projeto **Stock4event**, cobrindo o aplicativo mobile (React Native / Expo) e a API backend (Spring Boot). Use este material para preparar slides, demonstração ao vivo e respostas a perguntas da banca.
 
 ---
 
@@ -24,9 +24,9 @@ Documento de estudo detalhado sobre o que foi implementado no projeto **QuickSto
 
 ## 1. Visão geral do projeto
 
-### O que é o QuickStock?
+### O que é o Stock4event?
 
-O **QuickStock** é uma solução mobile + backend para **gestão de estoque e compras B2B** no setor de bebidas/atacado. O app atende empresas que:
+O **Stock4event** é uma solução mobile + backend para **gestão de estoque e compras B2B** no setor de bebidas/atacado. O app atende empresas que:
 
 - **Gerenciam** seu próprio catálogo de produtos e estoque em quiosques (pontos de venda / filiais).
 - **Compram** de distribuidoras parceiras via um marketplace integrado (fluxo estilo app de delivery).
@@ -43,7 +43,7 @@ Na escolha de perfil há também a opção **"Cliente e fornecedor"**; quem a es
 
 ### Problema que o projeto resolve
 
-| Dor do usuário | Solução no QuickStock |
+| Dor do usuário | Solução no Stock4event |
 |----------------|----------------------|
 | Controlar produtos e quantidades em vários pontos de venda | CRUD de produtos + quiosques com estoque por filial |
 | Repor estoque comprando de distribuidoras | Marketplace com vitrine, sacola e checkout |
@@ -99,7 +99,7 @@ Na escolha de perfil há também a opção **"Cliente e fornecedor"**; quem a es
 ### Comunicação
 
 ```
-[App Mobile]  ──HTTP/JSON──►  [API :8080]  ──JDBC──►  [PostgreSQL :5432]
+[App Mobile]  ──HTTP/JSON──►  [API :8081]  ──JDBC──►  [PostgreSQL :5432]
      │                              │
      └── AsyncStorage               └── uploads/produtos/ (imagens)
          (sessão, prefs)
@@ -142,13 +142,13 @@ Na escolha de perfil há também a opção **"Cliente e fornecedor"**; quem a es
                             ▼
                     ┌───────────────┐
                     │  PostgreSQL   │
-                    │  quickstock   │
+                    │  stock4event   │
                     └───────────────┘
 ```
 
 ### Dois domínios de negócio no mesmo app
 
-O QuickStock une **três frentes** que convivem na mesma aplicação:
+O Stock4event une **três frentes** que convivem na mesma aplicação:
 
 1. **Gestão interna (Fornecedor)** — produtos, quiosques, estoque, vendas e logística.
 2. **Marketplace B2B** — descobrir fornecedores, montar sacola, finalizar compra, rastrear pedido.
@@ -163,7 +163,7 @@ Isso é um diferencial na apresentação: não é só um e-commerce; é gestão 
 ### Estrutura de pacotes
 
 ```
-com.quickstock.backend/
+com.stock4event.backend/
 ├── BackendApplication.java      ← ponto de entrada
 ├── config/                        ← CORS, seeds, correção de dados
 ├── controller/                    ← 17 controllers REST
@@ -200,7 +200,7 @@ Empresa (compradora) ──► SolicitacaoCompra ◄── Empresa (fornecedora)
 |------|-------|
 | `COMPRADOR` | Empresa que compra no marketplace |
 | `DISTRIBUIDOR` | Fornecedor de produtos |
-| `PLATAFORMA` | QuickStock / hub central |
+| `PLATAFORMA` | Stock4event / hub central |
 
 ### Endpoints usados pelo app mobile (principais)
 
@@ -312,9 +312,9 @@ O backend sobe com dados prontos para demo:
 ### Configuração (`application.properties`)
 
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/quickstock
-server.port=8080
-jwt.secret=QuickStockDevSecretKey2026Minimo32Chars!!
+spring.datasource.url=jdbc:postgresql://localhost:5432/stock4event
+server.port=8081
+jwt.secret=Stock4eventDevSecretKey2026Minimo32Chars!!
 jwt.expiration-ms=86400000
 upload.dir=uploads/produtos
 spring.servlet.multipart.max-file-size=5MB
@@ -431,7 +431,7 @@ Faixa azul sólida com cantos inferiores arredondados, no mesmo layout do cabeç
 
 ```
 ┌──────────────────────────────────────────────┐
-│ [☰] QuickStock                [ação] [🔔]    │  ← menu, logo, ação extra e sino
+│ [☰] Stock4event                [ação] [🔔]    │  ← menu, logo, ação extra e sino
 │ Olá, {empresa}!                              │  ← saudação (só na Home)
 │ Título da aba / subtítulo                    │
 │ [ busca opcional ]                           │
@@ -441,7 +441,7 @@ Faixa azul sólida com cantos inferiores arredondados, no mesmo layout do cabeç
 - Props principais: `title`, `subtitle`, `showGreeting`, `rightSlot` (ex.: botão "Gráficos"), `overlap` (primeiro card sobe sobre o cabeçalho) e `inset` (compensa a margem do contêiner).
 - `BackTitleHeader` é a versão das telas internas: voltar, logo centralizada e título.
 - `TabScreenLayout` junta cabeçalho e conteúdo e aceita `headerContent` (ex.: campo de busca).
-- `BrandMark` desenha a logo "QuickStock".
+- `BrandMark` desenha a logo "Stock4event".
 
 #### `BottomTabBar` — barra inferior por perfil
 
@@ -500,7 +500,7 @@ Implementado como **Modal** (70% da largura), sem Drawer Navigator.
 // - iOS / web: localhost
 // - Dispositivo físico: IP do debugger Expo
 
-API_BASE_URL = `http://${host}:8080`
+API_BASE_URL = `http://${host}:8081`
 ```
 
 ### Identidade visual
@@ -532,7 +532,7 @@ Welcome
   │
   └── "Entrar" → LoginScreen
         └── POST /api/usuarios/login
-              └── salva JWT no AsyncStorage (@quickstock_session)
+              └── salva JWT no AsyncStorage (@stock4event_session)
                     └── AuthContext → telas autenticadas
 ```
 
@@ -725,7 +725,7 @@ Reaproveitam a API de quiosques (`/api/barracas`) e os produtos que o backend cr
 
 | Tempo | Bloco | O que mostrar |
 |-------|-------|---------------|
-| 2 min | **Introdução** | Problema, persona, visão geral do QuickStock |
+| 2 min | **Introdução** | Problema, persona, visão geral do Stock4event |
 | 3 min | **Arquitetura** | Diagrama mobile ↔ API ↔ PostgreSQL; dois domínios (gestão + marketplace) |
 | 2 min | **Backend** | Entidades, endpoints principais, JWT, seeds |
 | 8 min | **Demo ao vivo** | Fluxo completo (ver roteiro abaixo) |
@@ -752,7 +752,7 @@ Reaproveitam a API de quiosques (`/api/barracas`) e os produtos que o backend cr
 
 ### Frases-chave para a apresentação
 
-> "O QuickStock integra gestão de estoque local com compras B2B de distribuidoras, tudo em um único app mobile."
+> "O Stock4event integra gestão de estoque local com compras B2B de distribuidoras, tudo em um único app mobile."
 
 > "A arquitetura segue camadas: telas → contexts → services → API REST → banco PostgreSQL."
 
@@ -775,7 +775,7 @@ R: Permite times independentes, deploy separado, e o backend pode servir outros 
 R: `src/config/api.ts` detecta o host (emulador Android usa `10.0.2.2`, iOS usa `localhost`, dispositivo físico usa IP do Expo).
 
 **P: Onde fica o token de autenticação?**  
-R: AsyncStorage, chave `@quickstock_session`. Enviado como `Authorization: Bearer {token}` nas requisições autenticadas.
+R: AsyncStorage, chave `@stock4event_session`. Enviado como `Authorization: Bearer {token}` nas requisições autenticadas.
 
 ### Sobre negócio
 
@@ -815,17 +815,17 @@ R: Parcialmente — compras mensais vêm de pedidos reais; lucros e alguns gráf
 
 - Node.js + npm
 - Java 17 + Maven
-- PostgreSQL rodando com banco `quickstock`
+- PostgreSQL rodando com banco `stock4event`
 - Expo Go ou emulador Android/iOS
 
 ### Backend
 
 ```bash
-cd QuickStock-BackEnd
+cd Stock4event-BackEnd
 # Configurar application.properties se necessário (usuário/senha PG)
 mvn spring-boot:run
-# API disponível em http://localhost:8080
-# Swagger: http://localhost:8080/swagger-ui/index.html
+# API disponível em http://localhost:8081
+# Swagger: http://localhost:8081/swagger-ui/index.html
 ```
 
 ### Mobile
@@ -841,7 +841,7 @@ npm test   # testes unitários
 ### Checklist antes da apresentação
 
 - [ ] PostgreSQL rodando
-- [ ] Backend iniciado (porta 8080)
+- [ ] Backend iniciado (porta 8081)
 - [ ] App conectando (verificar host no emulador/dispositivo)
 - [ ] Usuários de teste (cliente e fornecedor) com senha conhecida
 - [ ] Um pedido do cliente já entregue, para demonstrar os quiosques do cliente
@@ -861,7 +861,7 @@ Resumo cronológico das principais entregas implementadas:
 - Cadastro unificado (`POST /api/cadastro`)
 - JWT + sessão persistida (AsyncStorage)
 - AuthContext com restore automático
-- Tema visual (gradientes, cores QuickStock)
+- Tema visual (gradientes, cores Stock4event)
 
 ### Fase 2 — Gestão interna
 
@@ -951,4 +951,4 @@ Resumo cronológico das principais entregas implementadas:
 
 ---
 
-*Documento gerado para estudo e apresentação acadêmica do projeto QuickStock. Última atualização: outubro/2026.*
+*Documento gerado para estudo e apresentação acadêmica do projeto Stock4event. Última atualização: outubro/2026.*

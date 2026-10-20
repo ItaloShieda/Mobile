@@ -28,16 +28,18 @@ import {
   ModoAtivo,
 } from '../services/perfilStorage';
 import type { PerfilCadastro } from '../types/auth';
+import { isContaDemo } from '../config/demo';
 
 interface AuthContextValue {
   user: UsuarioLogado | null;
   token: string | null;
   isLoading: boolean;
   isAuthenticated: boolean;
-  /** Visão ativa das telas. Em contas "Cliente e fornecedor", é a visão escolhida. */
+  /** Visão ativa das telas. Na conta demo, é a visão escolhida. */
   perfilUso: PerfilCadastro | null;
-  /** Perfil da conta, que define quais visões ela pode usar. */
+  /** Perfil da conta salvo no cadastro ou enviado pelo servidor. */
   perfilConta: PerfilCadastro | null;
+  /** Só a conta demo (testes e manutenção do administrador) alterna entre cliente e fornecedor. */
   podeAlternarPerfil: boolean;
   signIn: (payload: LoginPayload) => Promise<void>;
   signOut: () => Promise<void>;
@@ -69,7 +71,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const perfil = (await loadPerfilUso(email)) ?? session.usuario.perfilUso ?? null;
     setPerfilConta(perfil);
     if (perfil === 'ClienteFornecedor') {
-      setPerfilUsoState((await loadModoAtivo(email)) ?? 'Fornecedor');
+      // Outras contas "Cliente e fornecedor" ficam sempre na visão de fornecedor.
+      const modo = isContaDemo(email) ? await loadModoAtivo(email) : null;
+      setPerfilUsoState(modo ?? 'Fornecedor');
     } else {
       setPerfilUsoState(perfil);
     }
@@ -170,7 +174,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [user?.email]);
 
-  const podeAlternarPerfil = perfilConta === 'ClienteFornecedor';
+  const podeAlternarPerfil = perfilConta === 'ClienteFornecedor' && isContaDemo(user?.email);
 
   const alternarPerfil = useCallback(async (modo: ModoAtivo) => {
     if (!podeAlternarPerfil) return;

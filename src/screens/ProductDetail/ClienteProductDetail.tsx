@@ -66,8 +66,8 @@ export function ClienteProductDetail({
         </TouchableOpacity>
         <View style={styles.headerCenter}>
           <View style={styles.brandRow}>
-            <Text style={styles.brandQuick}>Quick</Text>
-            <Text style={styles.brandStock}>Stock</Text>
+            <Text style={styles.brandQuick}>Stock</Text>
+            <Text style={styles.brandStock}>4event</Text>
           </View>
           <Text style={styles.headerSubtitle}>Detalhes do produto</Text>
         </View>

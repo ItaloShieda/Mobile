@@ -41,7 +41,7 @@ Para validar 1 e 2, é preciso uma conta de cliente real com o backend rodando. 
 - `ClienteQuiosqueForm: { quiosqueId?: number } | undefined`
 
 ### Tela 1 — Meus quiosques (`screens/ClienteQuiosques/ClienteQuiosquesScreen.tsx`)
-- **Cabeçalho amarelo** no padrão do cliente (logo QuickStock e o título "Meus quiosques"), com o botão "+ Novo quiosque".
+- **Cabeçalho amarelo** no padrão do cliente (logo Stock4event e o título "Meus quiosques"), com o botão "+ Novo quiosque".
 - **Card de resumo:** "X un. compradas · Y un. nos quiosques · Z livres".
 - **Lista de quiosques:** cada card mostra nome, quantidade de produtos, total de unidades e valor estimado (soma de quantidade × `precoVenda`). Tocar no card abre o formulário em modo de edição.
   - Se algum item do quiosque estiver acima do disponível, o card mostra o aviso "Estoque acima do disponível".

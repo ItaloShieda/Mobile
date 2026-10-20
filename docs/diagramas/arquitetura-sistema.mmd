@@ -9,7 +9,7 @@ flowchart LR
         SRV[Services]
         REPO[Repositories JPA]
     end
-    DB[(PostgreSQL quickstock)]
+    DB[(PostgreSQL stock4event)]
     UI --> CTX --> SVC
-    SVC -->|JSON REST porta 8080| CTRL
+    SVC -->|JSON REST porta 8081| CTRL
     CTRL --> SRV --> REPO --> DB

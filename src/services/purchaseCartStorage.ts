@@ -3,7 +3,7 @@ import type { CartItem, StoredPurchaseCart } from '../types/marketplace';
 
 export type { CartItem, StoredPurchaseCart };
 
-const CART_KEY_PREFIX = '@quickstock_purchase_cart';
+const CART_KEY_PREFIX = '@stock4event_purchase_cart';
 
 interface LegacyStoredPurchaseCart {
   fornecedorId?: number | null;
