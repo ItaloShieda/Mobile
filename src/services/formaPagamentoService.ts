@@ -87,3 +87,18 @@ export async function removerFormaPagamento(id: number, empresaId: number): Prom
     );
   }
 }
+
+export async function definirFormaPagamentoPrincipal(
+  id: number,
+  empresaId: number,
+): Promise<FormaPagamentoSalva> {
+  const response = await fetch(
+    `${API_BASE_URL}/api/formas-pagamento/${id}/principal?empresaId=${empresaId}`,
+    { method: 'PATCH' },
+  );
+  return parseResponse<FormaPagamentoSalva>(
+    response,
+    'Não foi possível definir a forma de pagamento principal.',
+    { treatOutdatedServer: true },
+  );
+}

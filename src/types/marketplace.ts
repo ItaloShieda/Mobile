@@ -33,6 +33,8 @@ export interface SolicitacaoCompra {
   pedidoId?: number;
   fornecedorId: number;
   fornecedorNome: string;
+  compradorId?: number;
+  compradorNome?: string;
   status: string;
   statusLabel?: string;
   etapas?: EtapaPedido[];

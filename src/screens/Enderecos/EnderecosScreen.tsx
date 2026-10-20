@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   ScrollView,
+  Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
@@ -16,7 +17,12 @@ import { EnderecoFormModal } from '../../components/Card/EnderecoFormModal';
 import { useAuth } from '../../context/AuthContext';
 import { useAppGoBack } from '../../hooks/useAppGoBack';
 import { useHeaderTopPadding } from '../../utils/safeArea';
-import { EnderecoEntrega, listarEnderecos } from '../../services/enderecoService';
+import {
+  EnderecoEntrega,
+  definirEnderecoPrincipal,
+  listarEnderecos,
+  removerEndereco,
+} from '../../services/enderecoService';
 import { clienteStyles, styles } from './styles';
 import { CLIENTE_COLORS } from '../../theme/theme';
 
@@ -70,6 +76,39 @@ export function EnderecosScreen() {
 
   const handleEnderecoSalvo = async () => {
     await carregar();
+  };
+
+  const executar = async (acao: () => Promise<unknown>, falha: string) => {
+    try {
+      await acao();
+      await carregar();
+    } catch (err) {
+      Alert.alert('Endereço', err instanceof Error ? err.message : falha);
+    }
+  };
+
+  const abrirOpcoes = (endereco: EnderecoEntrega) => {
+    if (!empresaId) return;
+    const opcoes: Parameters<typeof Alert.alert>[2] = [];
+    if (!endereco.principal) {
+      opcoes.push({
+        text: 'Tornar principal',
+        onPress: () => executar(
+          () => definirEnderecoPrincipal(endereco.id, empresaId),
+          'Não foi possível definir o endereço principal.',
+        ),
+      });
+    }
+    opcoes.push({
+      text: 'Excluir',
+      style: 'destructive',
+      onPress: () => executar(
+        () => removerEndereco(endereco.id, empresaId),
+        'Não foi possível remover o endereço.',
+      ),
+    });
+    opcoes.push({ text: 'Voltar', style: 'cancel' });
+    Alert.alert(endereco.apelido, endereco.resumo, opcoes);
   };
 
   const modal = empresaId ? (
@@ -160,6 +199,13 @@ export function EnderecosScreen() {
                         </View>
                       ) : null}
                     </View>
+                    <TouchableOpacity
+                      onPress={() => abrirOpcoes(endereco)}
+                      hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                      accessibilityLabel={`Opções do endereço ${endereco.apelido}`}
+                    >
+                      <Ionicons name="ellipsis-vertical" size={18} color="#9CA3AF" />
+                    </TouchableOpacity>
                   </View>
                 ))}
               </View>
@@ -237,7 +283,13 @@ export function EnderecosScreen() {
                     </View>
                   ) : null}
                 </View>
-                <Ionicons name="chevron-forward" size={16} color="#D4B56A" />
+                <TouchableOpacity
+                  onPress={() => abrirOpcoes(endereco)}
+                  hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                  accessibilityLabel={`Opções do endereço ${endereco.apelido}`}
+                >
+                  <Ionicons name="ellipsis-vertical" size={18} color="#D4B56A" />
+                </TouchableOpacity>
               </View>
             ))}
           </View>

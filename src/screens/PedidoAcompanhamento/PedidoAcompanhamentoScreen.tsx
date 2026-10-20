@@ -16,6 +16,7 @@ import { formatarDataCurta } from '../../utils/dateFormat';
 import { styles } from './styles';
 import { ClientePedidoDetail } from './ClientePedidoDetail';
 import { ACCENT, InfoRow, ProgressBar, TimelineStep } from './components/PedidoParts';
+import { CancelarPedidoButton } from './components/CancelarPedidoButton';
 import { usePedidoAcompanhamento } from './usePedidoAcompanhamento';
 import { COMPANY_COLORS } from '../../theme/theme';
 
@@ -39,6 +40,9 @@ export function PedidoAcompanhamentoScreen() {
     subtituloHero,
     heroIcon,
     perfilUso,
+    podeCancelar,
+    cancelando,
+    confirmarCancelamento,
   } = usePedidoAcompanhamento();
 
   if (loading && !pedido) {
@@ -75,6 +79,9 @@ export function PedidoAcompanhamentoScreen() {
         pedido={pedido}
         etapas={etapas}
         error={error}
+        podeCancelar={podeCancelar}
+        cancelando={cancelando}
+        onCancelar={confirmarCancelamento}
       />
     );
   }
@@ -246,6 +253,9 @@ export function PedidoAcompanhamentoScreen() {
             <Text style={styles.primaryButtonText}>Continuar comprando</Text>
           </TouchableOpacity>
         </View>
+        {podeCancelar ? (
+          <CancelarPedidoButton onPress={confirmarCancelamento} loading={cancelando} />
+        ) : null}
       </ScrollView>
     </SafeAreaView>
   );

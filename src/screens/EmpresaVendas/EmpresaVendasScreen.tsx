@@ -1,48 +1,163 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useCallback, useMemo, useState } from 'react';
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  ActivityIndicator,
+  Alert,
+  RefreshControl,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { ScreenHeader } from '../../components/Header/ScreenHeader';
 import { styles } from './styles';
 import { BottomTabBar } from '../../components/layout/BottomTabBar';
+import { useAuth } from '../../context/AuthContext';
+import {
+  SolicitacaoCompra,
+  StatusPedidoFornecedor,
+  atualizarStatusSolicitacao,
+  labelStatusPedido,
+  listarSolicitacoesRecebidas,
+} from '../../services/marketplaceService';
+import { formatarPreco } from '../../services/productService';
+
+const STATUS_ANDAMENTO = ['aguardando_liberacao', 'em_rota'];
+
+function mesmoDia(a: Date, b: Date): boolean {
+  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+}
+
+function mesmoMes(a: Date, b: Date): boolean {
+  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth();
+}
+
+function formatarHora(value: string): string {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return '';
+  return date.toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+}
+
+function estiloStatus(status: string) {
+  switch (status) {
+    case 'em_rota':
+      return { pill: styles.statusPillRota, text: styles.statusTextRota };
+    case 'entregue':
+      return { pill: styles.statusPillEntregue, text: styles.statusTextEntregue };
+    case 'cancelada':
+      return { pill: styles.statusPillCancelada, text: styles.statusTextCancelada };
+    default:
+      return { pill: null, text: null };
+  }
+}
 
 export function EmpresaVendasScreen() {
   const navigation = useNavigation<any>();
+  const { user } = useAuth();
+  const empresaId = user?.empresa?.id;
 
-  // Estado para armazenar vendas
-  const [vendasRecentes, setVendasRecentes] = useState([
-    { id: '1007', cliente: 'Ateliê Jardim', valor: 'R$ 2.680,00', status: 'Entregue', hora: '08:30' },
-  ]);
+  const [pedidos, setPedidos] = useState<SolicitacaoCompra[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [error, setError] = useState('');
+  const [atualizandoId, setAtualizandoId] = useState<number | null>(null);
 
-  // Estado para métricas
-  const [metricas, setMetricas] = useState({
-    hoje: { valor: 'R$ 18.450', delta: '+12,4% vs. ontem' },
-    mes: { valor: 'R$ 172.380', delta: '+8,1% no mês' },
-    pedidos: { valor: '258', delta: '34 em andamento' },
-  });
+  const carregar = useCallback(async () => {
+    if (!empresaId) return;
+    setError('');
+    try {
+      setPedidos(await listarSolicitacoesRecebidas(empresaId));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Não foi possível carregar os pedidos.');
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  }, [empresaId]);
 
-  // Exemplo de atualização simulada (poderia ser chamada de API)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setMetricas({
-        hoje: { valor: 'R$ 20.000', delta: '+15% vs. ontem' },
-        mes: { valor: 'R$ 180.000', delta: '+9% no mês' },
-        pedidos: { valor: '270', delta: '40 em andamento' },
-      });
+  useFocusEffect(
+    useCallback(() => {
+      carregar();
+    }, [carregar]),
+  );
 
-      setVendasRecentes(prev => [
-        ...prev,
-        { id: '1008', cliente: 'Loja Nova', valor: 'R$ 1.200,00', status: 'Em rota', hora: '10:15' },
-      ]);
-    }, 5000); // atualiza após 5 segundos
+  const metricas = useMemo(() => {
+    const agora = new Date();
+    const validos = pedidos.filter((p) => p.status !== 'cancelada');
+    const somar = (lista: SolicitacaoCompra[]) => lista.reduce((total, p) => total + p.valorTotal, 0);
+    const doDia = validos.filter((p) => mesmoDia(new Date(p.criadoEm), agora));
+    const doMes = validos.filter((p) => mesmoMes(new Date(p.criadoEm), agora));
+    const emAndamento = validos.filter((p) => STATUS_ANDAMENTO.includes(p.status)).length;
+    return {
+      hoje: { valor: formatarPreco(somar(doDia)), delta: `${doDia.length} pedido(s) hoje` },
+      mes: { valor: formatarPreco(somar(doMes)), delta: `${doMes.length} pedido(s) no mês` },
+      pedidos: { valor: String(validos.length), delta: `${emAndamento} em andamento` },
+    };
+  }, [pedidos]);
 
-    return () => clearTimeout(timer);
-  }, []);
+  const mudarStatus = async (pedido: SolicitacaoCompra, status: StatusPedidoFornecedor) => {
+    if (!empresaId) return;
+    setAtualizandoId(pedido.id);
+    try {
+      const atualizado = await atualizarStatusSolicitacao(pedido.id, empresaId, status);
+      setPedidos((lista) => lista.map((p) => (p.id === atualizado.id ? atualizado : p)));
+    } catch (err) {
+      Alert.alert('Pedido', err instanceof Error ? err.message : 'Não foi possível atualizar o pedido.');
+    } finally {
+      setAtualizandoId(null);
+    }
+  };
+
+  const confirmarCancelamento = (pedido: SolicitacaoCompra) => {
+    Alert.alert(
+      'Cancelar pedido',
+      `Cancelar o pedido #${pedido.id}? O estoque volta para o seu catálogo.`,
+      [
+        { text: 'Voltar', style: 'cancel' },
+        { text: 'Cancelar pedido', style: 'destructive', onPress: () => mudarStatus(pedido, 'cancelada') },
+      ],
+    );
+  };
+
+  const renderAcoes = (pedido: SolicitacaoCompra) => {
+    if (!STATUS_ANDAMENTO.includes(pedido.status)) return null;
+    if (atualizandoId === pedido.id) {
+      return <ActivityIndicator style={styles.actionLoader} />;
+    }
+    const proximo: { status: StatusPedidoFornecedor; label: string } =
+      pedido.status === 'aguardando_liberacao'
+        ? { status: 'em_rota', label: 'Despachar' }
+        : { status: 'entregue', label: 'Confirmar entrega' };
+    return (
+      <View style={styles.actionRow}>
+        <TouchableOpacity style={styles.actionPrimary} onPress={() => mudarStatus(pedido, proximo.status)}>
+          <Text style={styles.actionPrimaryText}>{proximo.label}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.actionSecondary} onPress={() => confirmarCancelamento(pedido)}>
+          <Text style={styles.actionSecondaryText}>Cancelar</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
 
   return (
     <View style={styles.root}>
     <SafeAreaView style={styles.container} edges={['left', 'right']}>
-      <ScrollView style={styles.scroll} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.scroll}
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => {
+              setRefreshing(true);
+              carregar();
+            }}
+          />
+        }
+      >
         <ScreenHeader
           title="Vendas"
           subtitle="Acompanhe o faturamento e os pedidos da empresa."
@@ -73,23 +188,41 @@ export function EmpresaVendasScreen() {
           </View>
         </View>
 
-        {/* Últimas vendas */}
+        {/* Pedidos recebidos */}
         <View style={styles.sectionCard}>
-          <Text style={styles.sectionTitle}>Últimas vendas</Text>
-          {vendasRecentes.map((venda) => (
-            <View key={venda.id} style={styles.saleRow}>
-              <View>
-                <Text style={styles.saleClient}>{venda.cliente}</Text>
-                <Text style={styles.saleMeta}>Pedido {venda.id} • {venda.hora}</Text>
-              </View>
-              <View style={styles.saleRight}>
-                <Text style={styles.saleValue}>{venda.valor}</Text>
-                <View style={styles.statusPill}>
-                  <Text style={styles.statusText}>{venda.status}</Text>
+          <Text style={styles.sectionTitle}>Pedidos recebidos</Text>
+          {loading ? (
+            <ActivityIndicator style={styles.actionLoader} />
+          ) : error ? (
+            <Text style={styles.errorText}>{error}</Text>
+          ) : pedidos.length === 0 ? (
+            <Text style={styles.emptyText}>Nenhum pedido recebido ainda.</Text>
+          ) : (
+            pedidos.map((pedido) => {
+              const status = estiloStatus(pedido.status);
+              return (
+                <View key={pedido.id} style={styles.saleRow}>
+                  <View style={styles.saleTop}>
+                    <View style={styles.saleLeft}>
+                      <Text style={styles.saleClient}>{pedido.compradorNome ?? 'Cliente'}</Text>
+                      <Text style={styles.saleMeta}>
+                        Pedido #{pedido.id} • {formatarHora(pedido.criadoEm)} • {pedido.itens.length} item(ns)
+                      </Text>
+                    </View>
+                    <View style={styles.saleRight}>
+                      <Text style={styles.saleValue}>{formatarPreco(pedido.valorTotal)}</Text>
+                      <View style={[styles.statusPill, status.pill]}>
+                        <Text style={[styles.statusText, status.text]}>
+                          {pedido.statusLabel ?? labelStatusPedido(pedido.status)}
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                  {renderAcoes(pedido)}
                 </View>
-              </View>
-            </View>
-          ))}
+              );
+            })
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

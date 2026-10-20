@@ -18,6 +18,7 @@ import { chipStatus, codigoPedido, unidadesPedido } from '../Pedidos/usePedidos'
 import { styles as empresaStyles } from './styles';
 import { clientePedidoStyles as styles } from './styles';
 import { CLIENTE_COLORS } from '../../theme/theme';
+import { CancelarPedidoButton } from './components/CancelarPedidoButton';
 
 const PRIMARY = CLIENTE_COLORS.primary;
 
@@ -48,9 +49,20 @@ interface Props {
   pedido: SolicitacaoCompra;
   etapas: EtapaPedido[];
   error: string;
+  podeCancelar: boolean;
+  cancelando: boolean;
+  onCancelar: () => void;
 }
 
-export function ClientePedidoDetail({ goBack, pedido, etapas, error }: Props) {
+export function ClientePedidoDetail({
+  goBack,
+  pedido,
+  etapas,
+  error,
+  podeCancelar,
+  cancelando,
+  onCancelar,
+}: Props) {
   const topPadding = useHeaderTopPadding(8);
   const tabBarHeight = useBottomTabBarHeight();
   const chip = chipStatus(pedido.status);
@@ -215,6 +227,8 @@ export function ClientePedidoDetail({ goBack, pedido, etapas, error }: Props) {
             <Ionicons name="help-circle-outline" size={18} color={PRIMARY} />
             <Text style={styles.helpText}>Precisa de ajuda?</Text>
           </TouchableOpacity>
+
+          {podeCancelar ? <CancelarPedidoButton onPress={onCancelar} loading={cancelando} /> : null}
         </View>
       </ScrollView>
       <BottomTabBar activeRoute="PedidoAcompanhamento" />
