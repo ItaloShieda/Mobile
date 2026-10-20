@@ -18,6 +18,7 @@ import { useProdutos } from '../../context/ProductsContext';
 import { getImageUrl } from '../../config/api';
 import { formatarPreco, formatarQuantidadeEstoque, Produto, removerProduto } from '../../services/productService';
 import { styles } from './styles';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export function ManageProductsScreen() {
   const { user } = useAuth();
@@ -71,9 +72,11 @@ export function ManageProductsScreen() {
         </TouchableOpacity>
 
         {loading ? (
-          <ActivityIndicator color="#F8B125" style={styles.loader} />
+          <ActivityIndicator color={COMPANY_COLORS.primary} style={styles.loader} />
         ) : error ? (
-          <View style={styles.sectionCard}>
+          <View style={[styles.sectionCard, { alignItems: 'center', paddingVertical: 24 }]}>
+            <Ionicons name="cloud-offline-outline" size={40} color={COMPANY_COLORS.primary} />
+            <Text style={styles.errorTitle}>Não foi possível carregar</Text>
             <Text style={styles.errorText}>{error}</Text>
             <TouchableOpacity onPress={refresh}>
               <Text style={styles.retryText}>Tentar novamente</Text>
@@ -82,7 +85,7 @@ export function ManageProductsScreen() {
         ) : produtos.length === 0 ? (
           <View style={styles.sectionCard}>
             <View style={styles.emptyIconWrap}>
-              <Ionicons name="cube-outline" size={22} color="#F8B125" />
+              <Ionicons name="cube-outline" size={22} color={COMPANY_COLORS.primary} />
             </View>
             <Text style={styles.emptyTitle}>Nenhum produto cadastrado</Text>
             <Text style={styles.emptyText}>
@@ -151,7 +154,7 @@ export function ManageProductsScreen() {
                     accessibilityLabel="Remover produto"
                     onPress={() => confirmarRemocao(item)}
                   />
-                  <Ionicons name="chevron-forward" size={16} color="#D4B56A" />
+                  <Ionicons name="chevron-forward" size={16} color={COMPANY_COLORS.primaryMuted} />
                 </View>
               </View>
             ))}

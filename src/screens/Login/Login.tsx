@@ -18,25 +18,25 @@ export default function LoginScreen() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleLogin = async () => {
+  const performLogin = async (loginEmail: string, loginSenha: string) => {
     setError('');
-
-    if (!email.trim() || !senha.trim()) {
-      setError('Preencha e-mail e senha.');
-      return;
-    }
-
-    const emailNormalizado = email.trim().toLowerCase();
-    const senhaNormalizada = senha.trim();
-
     setLoading(true);
     try {
-      await signIn({ email: emailNormalizado, senha: senhaNormalizada });
+      await signIn({ email: loginEmail, senha: loginSenha });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erro ao fazer login. Tente novamente.');
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleLogin = async () => {
+    if (!email.trim() || !senha.trim()) {
+      setError('Preencha e-mail e senha.');
+      return;
+    }
+
+    await performLogin(email.trim().toLowerCase(), senha.trim());
   };
 
   return (

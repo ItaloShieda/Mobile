@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { GOLD, GREEN, NAVY, PAGE_BG } from '../ClienteHome/styles';
+import { GOLD, GREEN, PRIMARY, PAGE_BG } from '../ClienteHome/styles';
 
-export { GOLD, GREEN, NAVY, PAGE_BG };
+export { GOLD, GREEN, PRIMARY, PAGE_BG };
 
 export const clienteProductStyles = StyleSheet.create({
   root: {
@@ -9,7 +9,7 @@ export const clienteProductStyles = StyleSheet.create({
     backgroundColor: PAGE_BG,
   },
   header: {
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
     paddingHorizontal: 12,
     paddingBottom: 16,
     flexDirection: 'row',
@@ -34,7 +34,7 @@ export const clienteProductStyles = StyleSheet.create({
     fontWeight: '800',
   },
   brandStock: {
-    color: GOLD,
+    color: '#1F2937',
     fontSize: 18,
     fontWeight: '800',
   },
@@ -63,7 +63,7 @@ export const clienteProductStyles = StyleSheet.create({
   name: {
     fontSize: 22,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
     marginBottom: 4,
   },
   volume: {
@@ -91,7 +91,7 @@ export const clienteProductStyles = StyleSheet.create({
   price: {
     fontSize: 28,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
   },
   unit: {
     fontSize: 14,
@@ -144,7 +144,7 @@ export const clienteProductStyles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
     marginRight: 10,
   },
   vendorCopy: {
@@ -158,7 +158,7 @@ export const clienteProductStyles = StyleSheet.create({
   vendorName: {
     fontSize: 15,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
     marginBottom: 4,
   },
   vendorMeta: {
@@ -173,7 +173,7 @@ export const clienteProductStyles = StyleSheet.create({
   verQuiosque: {
     fontSize: 12,
     fontWeight: '700',
-    color: NAVY,
+    color: PRIMARY,
   },
   sectionTitle: {
     fontSize: 15,
@@ -222,7 +222,7 @@ export const clienteProductStyles = StyleSheet.create({
     minWidth: 18,
     textAlign: 'center',
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
     fontSize: 14,
   },
   totalBlock: {
@@ -237,7 +237,7 @@ export const clienteProductStyles = StyleSheet.create({
   totalValue: {
     fontSize: 15,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
   },
   addButton: {
     backgroundColor: GOLD,
@@ -251,7 +251,7 @@ export const clienteProductStyles = StyleSheet.create({
     maxWidth: 148,
   },
   addButtonText: {
-    color: NAVY,
+    color: '#FFF',
     fontSize: 11,
     fontWeight: '800',
   },

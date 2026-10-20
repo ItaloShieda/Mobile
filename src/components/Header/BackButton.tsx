@@ -6,6 +6,7 @@ import {
   StyleProp,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export const BACK_BUTTON_SIZE = 32;
 export const CHEVRON_SIZE = 18;
@@ -21,7 +22,7 @@ export function BackButton({
   onPress,
   style,
   accessibilityLabel = 'Voltar',
-  iconColor = '#F8B125',
+  iconColor = COMPANY_COLORS.primary,
 }: BackButtonProps) {
   return (
     <TouchableOpacity

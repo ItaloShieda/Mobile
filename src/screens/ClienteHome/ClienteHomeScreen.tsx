@@ -13,7 +13,7 @@ import { BottomTabBar } from '../../components/layout/BottomTabBar';
 import { getImageUrl } from '../../config/api';
 import { useAuth } from '../../context/AuthContext';
 import { useHeaderTopPadding } from '../../utils/safeArea';
-import { NAVY, styles } from './styles';
+import { PRIMARY, styles } from './styles';
 import { useClienteHome } from './useClienteHome';
 
 export function ClienteHomeScreen() {
@@ -72,15 +72,6 @@ export function ClienteHomeScreen() {
                 <Ionicons name="arrow-forward" size={14} color="#FFF" />
               </TouchableOpacity>
             </View>
-            <View style={styles.heroBlob} />
-            <View style={styles.heroCartWrap}>
-              <View style={styles.heroCansRow}>
-                <Ionicons name="water-outline" size={36} color="#4BA3D9" />
-                <Ionicons name="wine-outline" size={42} color="#E8A317" />
-                <Ionicons name="beer-outline" size={34} color="#E23B3B" />
-                <Ionicons name="pint-outline" size={32} color="#3CB371" />
-              </View>
-            </View>
           </View>
 
           <View style={styles.section}>
@@ -88,7 +79,7 @@ export function ClienteHomeScreen() {
             <View style={styles.actionsRow}>
               <TouchableOpacity style={styles.actionCard} onPress={abrirMarketplace} activeOpacity={0.85}>
                 <View style={styles.actionIconWrap}>
-                  <Ionicons name="search-outline" size={22} color={NAVY} />
+                  <Ionicons name="search-outline" size={22} color={PRIMARY} />
                 </View>
                 <Text style={styles.actionTitle}>Buscar</Text>
                 <Text style={styles.actionHint}>Bebidas e quiosques</Text>
@@ -96,7 +87,7 @@ export function ClienteHomeScreen() {
 
               <TouchableOpacity style={styles.actionCard} onPress={abrirSacola} activeOpacity={0.85}>
                 <View style={styles.actionIconWrap}>
-                  <Ionicons name="cart-outline" size={22} color={NAVY} />
+                  <Ionicons name="cart-outline" size={22} color={PRIMARY} />
                 </View>
                 <Text style={styles.actionTitle}>Carrinho</Text>
                 <Text style={styles.actionHint}>Itens do seu pedido</Text>
@@ -104,7 +95,7 @@ export function ClienteHomeScreen() {
 
               <TouchableOpacity style={styles.actionCard} onPress={abrirPedidos} activeOpacity={0.85}>
                 <View style={styles.actionIconWrap}>
-                  <Ionicons name="cube-outline" size={22} color={NAVY} />
+                  <Ionicons name="cube-outline" size={22} color={PRIMARY} />
                 </View>
                 <Text style={styles.actionTitle}>Pedidos</Text>
                 <Text style={styles.actionHint}>Acompanhe aqui</Text>
@@ -121,7 +112,7 @@ export function ClienteHomeScreen() {
             </View>
 
             {loading ? (
-              <ActivityIndicator color={NAVY} style={{ marginVertical: 16 }} />
+              <ActivityIndicator color={PRIMARY} style={{ marginVertical: 16 }} />
             ) : lojasEmDestaque.length === 0 ? (
               <Text style={styles.emptyStores}>Nenhum quiosque disponível no momento.</Text>
             ) : (

@@ -8,11 +8,11 @@ import {
   PARTNER_COVER_HEIGHT,
   SECTION_INSET,
 } from './cartLayout';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: '#FAFAFA' },
   container: { flex: 1, backgroundColor: '#FAFAFA' },
-  topGradient: { position: 'absolute', top: 0, left: 0, right: 0, height: 350 },
   scrollView: { flex: 1 },
   scrollContent: { flexGrow: 1 },
   searchContainer: {
@@ -142,9 +142,9 @@ export const styles = StyleSheet.create({
     marginRight: CARD_GAP,
     borderRadius: 16,
     overflow: 'hidden',
-    backgroundColor: '#FFFDF7',
+    backgroundColor: COMPANY_COLORS.primarySoft,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
     flexShrink: 0,
     alignSelf: 'flex-start',
   },
@@ -202,7 +202,7 @@ export const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
   },
   sectionSubtitle: {
     marginTop: 4,
@@ -212,22 +212,22 @@ export const styles = StyleSheet.create({
   emptyText: { color: '#666', fontSize: 13 },
   emptyBox: { alignItems: 'center', paddingVertical: 8 },
   errorText: { color: '#D64545', textAlign: 'center', marginBottom: 8 },
-  retryText: { color: '#F8B125', fontWeight: '600' },
+  retryText: { color: COMPANY_COLORS.primary, fontWeight: '600' },
   requestCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFDF7',
+    backgroundColor: COMPANY_COLORS.primarySoft,
     borderRadius: 16,
     paddingVertical: 12,
     paddingHorizontal: 12,
     marginBottom: 10,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
   },
   requestLogo: {
     marginRight: 10,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
     backgroundColor: '#FFF',
   },
   requestCopy: {
@@ -247,9 +247,9 @@ export const styles = StyleSheet.create({
     marginBottom: 0,
   },
   storeCard: {
-    backgroundColor: '#FFFDF7',
+    backgroundColor: COMPANY_COLORS.primarySoft,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
     borderRadius: 16,
     marginBottom: 12,
     overflow: 'hidden',
@@ -281,7 +281,7 @@ export const styles = StyleSheet.create({
   deliveryText: { fontSize: 11, color: '#333', marginTop: 8 },
   bottomBar: {
     position: 'absolute', bottom: 0, left: 0, right: 0, height: 70,
-    backgroundColor: '#F8B125', flexDirection: 'row', justifyContent: 'space-between',
+    backgroundColor: COMPANY_COLORS.primary, flexDirection: 'row', justifyContent: 'space-between',
     alignItems: 'center', paddingHorizontal: 15, borderTopLeftRadius: 15, borderTopRightRadius: 15,
   },
   tabItem: { flex: 1, justifyContent: 'center', alignItems: 'center' },
@@ -289,6 +289,6 @@ export const styles = StyleSheet.create({
   floatingButton: {
     width: 76, height: 76, borderRadius: 38, backgroundColor: '#FFF',
     justifyContent: 'center', alignItems: 'center', position: 'absolute', bottom: -15,
-    borderWidth: 2, borderColor: '#F8B125', elevation: 6,
+    borderWidth: 2, borderColor: COMPANY_COLORS.primary, elevation: 6,
   },
 });

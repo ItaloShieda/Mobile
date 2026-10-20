@@ -28,8 +28,9 @@ import {
 import { clienteStyles, styles } from './styles';
 import { TIPOS_DISPONIVEIS, hintForma, isFormaComDetalhes, isTipoCartao } from './formasHelpers';
 import { useFormasPagamento } from './useFormasPagamento';
+import { CLIENTE_COLORS } from '../../theme/theme';
 
-const NAVY = '#0E2A5C';
+const PRIMARY = CLIENTE_COLORS.primary;
 
 export function FormasPagamentoScreen() {
   const { perfilUso } = useAuth();
@@ -170,7 +171,7 @@ export function FormasPagamentoScreen() {
         >
           <View style={[clienteStyles.header, { paddingTop: topPadding }]}>
             <View style={clienteStyles.headerTop}>
-              <BackButton onPress={goBack} iconColor={NAVY} />
+              <BackButton onPress={goBack} iconColor={PRIMARY} />
               <View style={clienteStyles.brandRow}>
                 <Text style={clienteStyles.brandQuick}>Quick</Text>
                 <Text style={clienteStyles.brandStock}>Stock</Text>
@@ -185,12 +186,12 @@ export function FormasPagamentoScreen() {
 
           <View style={clienteStyles.sheet}>
             <TouchableOpacity style={clienteStyles.addButton} onPress={abrirModal} activeOpacity={0.85}>
-              <Ionicons name="add-circle" size={20} color={NAVY} />
+              <Ionicons name="add-circle" size={20} color="#FFF" />
               <Text style={clienteStyles.addButtonText}>Adicionar forma de pagamento</Text>
             </TouchableOpacity>
 
             {loading ? (
-              <ActivityIndicator color={NAVY} style={{ marginTop: 24 }} />
+              <ActivityIndicator color={PRIMARY} style={{ marginTop: 24 }} />
             ) : error ? (
               <View style={clienteStyles.emptyCard}>
                 <Text style={clienteStyles.errorText}>{error}</Text>
@@ -201,7 +202,7 @@ export function FormasPagamentoScreen() {
             ) : formas.length === 0 ? (
               <>
                 <View style={clienteStyles.emptyCard}>
-                  <Ionicons name="card-outline" size={48} color={NAVY} />
+                  <Ionicons name="card-outline" size={48} color={PRIMARY} />
                   <Text style={clienteStyles.emptyTitle}>Nenhuma forma cadastrada</Text>
                   <Text style={clienteStyles.emptyText}>
                     Adicione PIX, crédito, débito ou dinheiro para pagar seus pedidos.
@@ -209,7 +210,7 @@ export function FormasPagamentoScreen() {
                 </View>
                 <View style={clienteStyles.infoCard}>
                   <View style={clienteStyles.infoIcon}>
-                    <Ionicons name="information-circle" size={18} color={NAVY} />
+                    <Ionicons name="information-circle" size={18} color={PRIMARY} />
                   </View>
                   <Text style={clienteStyles.infoText}>
                     Depois de cadastrar, toque na forma para incluir chaves PIX ou dados do cartão.
@@ -227,7 +228,7 @@ export function FormasPagamentoScreen() {
                       disabled={!isFormaComDetalhes(forma.tipo)}
                     >
                       <View style={clienteStyles.formaIcon}>
-                        <Ionicons name={iconeTipoPagamento(forma.tipo)} size={20} color={NAVY} />
+                        <Ionicons name={iconeTipoPagamento(forma.tipo)} size={20} color={PRIMARY} />
                       </View>
                       <View style={clienteStyles.formaInfo}>
                         <Text style={clienteStyles.formaApelido}>{forma.apelido}</Text>

@@ -1,9 +1,14 @@
 import { StyleSheet } from 'react-native';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    backgroundColor: COMPANY_COLORS.pageBackground,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: COMPANY_COLORS.pageBackground,
   },
   scroll: {
     flex: 1,
@@ -18,10 +23,10 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderWidth: 1,
-    borderColor: '#F8B125',
+    borderColor: COMPANY_COLORS.primary,
   },
   headerButtonText: {
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     fontWeight: '700',
     fontSize: 12,
   },
@@ -34,7 +39,7 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 16,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -47,7 +52,7 @@ export const styles = StyleSheet.create({
   },
   primaryCard: {
     borderLeftWidth: 6,
-    borderLeftColor: '#F8B125',
+    borderLeftColor: COMPANY_COLORS.primary,
   },
   warningCard: {
     borderLeftWidth: 6,
@@ -74,7 +79,7 @@ export const styles = StyleSheet.create({
     padding: 16,
     marginTop: 18,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -103,7 +108,7 @@ export const styles = StyleSheet.create({
   },
   kpiNumber: {
     fontSize: 20,
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     fontWeight: '800',
   },
   kpiLabel: {

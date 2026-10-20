@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
+import { CLIENTE_COLORS } from '../../theme/theme';
 
-export const NAVY = '#0E2A5C';
+export const PRIMARY = CLIENTE_COLORS.primary;
 export const GOLD = '#F8B125';
 export const PAGE_BG = '#F3F5F8';
 export const GREEN = '#22A45A';
@@ -11,7 +12,7 @@ export const styles = StyleSheet.create({
     backgroundColor: PAGE_BG,
   },
   header: {
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
     paddingHorizontal: 20,
     paddingBottom: 88,
     borderBottomLeftRadius: 32,
@@ -33,7 +34,7 @@ export const styles = StyleSheet.create({
     fontWeight: '800',
   },
   brandStock: {
-    color: GOLD,
+    color: CLIENTE_COLORS.brandAccent,
     fontSize: 22,
     fontWeight: '800',
   },
@@ -67,7 +68,7 @@ export const styles = StyleSheet.create({
     overflow: 'hidden',
     flexDirection: 'row',
     elevation: 6,
-    shadowColor: '#0E2A5C',
+    shadowColor: '#000',
     shadowOpacity: 0.12,
     shadowRadius: 12,
     shadowOffset: { width: 0, height: 6 },
@@ -80,7 +81,7 @@ export const styles = StyleSheet.create({
   heroTitle: {
     fontSize: 22,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
     marginBottom: 8,
   },
   heroSubtitle: {
@@ -92,7 +93,7 @@ export const styles = StyleSheet.create({
   },
   heroButton: {
     alignSelf: 'flex-start',
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
     borderRadius: 16,
     paddingVertical: 8,
     paddingHorizontal: 14,
@@ -104,36 +105,6 @@ export const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 13,
     fontWeight: '700',
-  },
-  heroArt: {
-    position: 'absolute',
-    right: -8,
-    bottom: -6,
-    width: 150,
-    height: 150,
-  },
-  heroBlob: {
-    position: 'absolute',
-    right: -6,
-    bottom: -18,
-    width: 150,
-    height: 150,
-    borderRadius: 80,
-    backgroundColor: '#F6E27A',
-  },
-  heroCartWrap: {
-    position: 'absolute',
-    right: 10,
-    bottom: 16,
-    width: 120,
-    height: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  heroCansRow: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    gap: 2,
   },
   section: {
     marginTop: 22,
@@ -178,7 +149,7 @@ export const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 22,
-    backgroundColor: '#F3F6FB',
+    backgroundColor: CLIENTE_COLORS.primarySoft,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 8,
@@ -186,7 +157,7 @@ export const styles = StyleSheet.create({
   actionTitle: {
     fontSize: 13,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
     marginBottom: 2,
   },
   actionHint: {

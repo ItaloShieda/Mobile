@@ -402,6 +402,7 @@ function buildMainContent() {
     bullet("Implementar cadastro unificado de empresa e usuário com autenticação JWT."),
     bullet("Disponibilizar CRUD de produtos, quiosques e estoque por ponto de venda."),
     bullet("Construir marketplace B2B com vitrine, sacola, checkout e rastreamento de pedidos."),
+    bullet("Permitir que o cliente monte quiosques próprios para eventos a partir das compras recebidas."),
     bullet("Modelar e persistir dados em PostgreSQL com integridade referencial."),
     bullet("Documentar arquitetura, frontend, backend e modelagem de dados conforme normas ABNT."),
     heading2("1.3 Justificativa"),
@@ -410,7 +411,7 @@ function buildMainContent() {
     ),
     heading2("1.4 Escopo"),
     para(
-      "Este documento abrange a arquitetura do sistema, o frontend mobile, o backend API, a modelagem conceitual, lógica e física do banco de dados, além de limitações conhecidas e referências bibliográficas. Não inclui manual de implantação em produção nem testes automatizados formais."
+      "Este documento abrange a arquitetura do sistema, o frontend mobile, o backend API, a modelagem conceitual, lógica e física do banco de dados, além de limitações conhecidas e referências bibliográficas. Inclui testes unitários das regras de estoque dos quiosques do cliente. Não inclui manual de implantação em produção nem testes de integração ou ponta a ponta."
     ),
 
     // 2 METODOLOGIA
@@ -422,11 +423,12 @@ function buildMainContent() {
     makeTable(
       ["Camada", "Tecnologia", "Versão"],
       [
-        ["Mobile", "Expo / React Native / TypeScript", "54.0.6 / 0.83.2"],
+        ["Mobile", "Expo / React Native / TypeScript", "54 / 0.81 / 5.9"],
         ["Backend", "Spring Boot / Java", "3.4.0 / 17"],
         ["Banco de dados", "PostgreSQL", "18.x"],
         ["ORM", "Spring Data JPA / Hibernate", "6.6"],
         ["Autenticação", "JWT (jjwt) + BCrypt", "0.12.6"],
+        ["Testes (mobile)", "Jest + jest-expo", "29.7 / 54"],
       ]
     ),
     para("", { after: 200, noIndent: true }),
@@ -438,6 +440,7 @@ function buildMainContent() {
     ),
     heading2("2.3 Repositórios"),
     bullet("Mobile: https://github.com/LuanSantos26/Mobile"),
+    bullet("Mobile (versão com quiosques do cliente e novo layout): https://github.com/marcelo435/Mobile"),
     bullet("BackEnd: https://github.com/LuanSantos26/QuickStock-BackEnd"),
 
     // 3 DESENVOLVIMENTO
@@ -446,7 +449,7 @@ function buildMainContent() {
     // 3.1 FRONTEND
     heading2("3.1 Frontend mobile"),
     para(
-      "O frontend QuickStock é um aplicativo Expo 54 com React Native 0.83 e TypeScript. A navegação utiliza React Navigation (Native Stack) com gate de autenticação: usuários não autenticados acessam Welcome, Login e Register; autenticados acessam o stack principal com Home, marketplace, sacola e demais telas."
+      "O frontend QuickStock é um aplicativo Expo 54 com React Native 0.81 e TypeScript. A navegação utiliza React Navigation (Native Stack) com gate de autenticação: usuários não autenticados acessam Welcome, Login e Register; autenticados acessam o stack principal. O app atende dois perfis, escolhidos no cadastro: Cliente (comerciante que compra de fornecedores) e Fornecedor (distribuidora que vende e gerencia o catálogo). Cada perfil tem telas e barra inferior próprias, com o mesmo layout e cores diferentes."
     ),
     heading3("3.1.1 Estrutura de pastas"),
     makeTable(
@@ -457,7 +460,9 @@ function buildMainContent() {
         ["src/context/", "Estado global (Auth, Products, Quiosque, PurchaseCart)"],
         ["src/services/", "Integração REST com a API"],
         ["src/config/api.ts", "URL base e helper de imagens"],
-        ["src/theme/theme.ts", "Cores, fontes e espaçamentos"],
+        ["src/navigation/", "Rotas de autenticação e principais, e tipos das rotas"],
+        ["src/utils/", "Funções puras (regras de estoque dos quiosques, máscaras, datas) e testes em __tests__/"],
+        ["src/theme/theme.ts", "Paletas por perfil (CLIENTE_COLORS, COMPANY_COLORS), fontes e espaçamentos"],
       ]
     ),
     para("", { after: 200, noIndent: true }),
@@ -467,39 +472,72 @@ function buildMainContent() {
       [
         ["AuthContext", "Sessão JWT, login, logout, restore e updateUser"],
         ["ProductsContext", "Catálogo de produtos da empresa logada"],
-        ["QuiosqueContext", "Quiosque/filiais da empresa"],
+        ["QuiosqueContext", "Quiosques da empresa logada (fornecedor ou cliente)"],
         ["PurchaseCartContext", "Sacola B2B (um fornecedor por vez)"],
+        ["ConfirmDialogContext", "Diálogo de confirmação reutilizável (ex.: excluir quiosque)"],
       ]
     ),
     para("", { after: 200, noIndent: true }),
     heading3("3.1.3 Telas principais"),
+    para("Telas do perfil Fornecedor:", { noIndent: true, after: 80 }),
     makeTable(
       ["Rota", "Tela", "Função"],
       [
-        ["Welcome / Login / Register", "Autenticação", "Acesso e cadastro unificado"],
-        ["Home", "Dashboard", "Catálogo próprio e resumo visual"],
-        ["Cart", "Marketplace", "Lista de distribuidoras e pedidos recentes"],
-        ["StoreVitrine", "Vitrine", "Produtos de um fornecedor"],
-        ["ProductDetail", "Detalhe", "Quantidade e adição à sacola"],
-        ["Sacola", "Checkout", "Endereço, pagamento e finalização"],
+        ["Welcome / Login / Register", "Autenticação", "Acesso, cadastro unificado e escolha de perfil"],
+        ["Home", "Início", "Saudação, estoque, ações rápidas e resumo financeiro"],
+        ["Quiosque", "Quiosques", "CRUD de pontos de venda e estoque"],
+        ["AddItem", "Produtos", "CRUD do catálogo"],
+        ["EmpresaVendas / EmpresaGraficos", "Vendas", "Resumo de vendas e gráficos"],
+        ["Configuracoes", "Ajustes", "Edição de usuário, senha e empresa"],
+        ["Logistica / Camioneiros / CadastroCamioneiros", "Logística", "Entregas e caminhoneiros"],
+        ["Cart / StoreVitrine / ProductDetail / Sacola", "Compra B2B", "Marketplace, vitrine, detalhe e checkout"],
         ["PedidoAcompanhamento", "Tracking", "Timeline com polling a cada 5 s"],
-        ["AddItem", "Produtos", "CRUD do catálogo (botão + central)"],
-        ["Quiosque", "Filiais", "CRUD de pontos de venda e estoque"],
-        ["FormasPagamento", "Pagamentos", "CRUD de formas salvas"],
-        ["Configuracoes", "Perfil", "Edição de usuário e empresa"],
-        ["Cards", "Financeiro", "Estatísticas via API (aba mock em Carteira)"],
+        ["Cards / FormasPagamento / Enderecos", "Conta", "Financeiro, formas de pagamento e endereços"],
+      ]
+    ),
+    para("", { after: 200, noIndent: true }),
+    para("Telas do perfil Cliente:", { noIndent: true, after: 80 }),
+    makeTable(
+      ["Rota", "Tela", "Função"],
+      [
+        ["Home", "Início", "Destaque, ações rápidas e quiosques disponíveis"],
+        ["Explorar", "Produtos", "Categorias, produtos e quiosques de fornecedores"],
+        ["StoreVitrine / ProductDetail", "Vitrine e detalhe", "Produtos de um quiosque e adição ao carrinho"],
+        ["Reservas", "Carrinho", "Itens, endereço e finalização do pedido"],
+        ["Pedidos / PedidoAcompanhamento", "Pedidos", "Histórico e acompanhamento"],
+        ["ClienteQuiosques / ClienteQuiosqueForm", "Quiosques", "Quiosques próprios montados com as compras recebidas"],
+        ["Perfil / Configuracoes / Enderecos / FormasPagamento", "Perfil", "Dados, endereços e pagamentos"],
       ]
     ),
     para("", { after: 200, noIndent: true }),
     heading3("3.1.4 Componentes e navegação"),
     para(
-      "O ScreenHeader padroniza o cabeçalho autenticado (menu hambúrguer, calendário, notificações e sacola). A saudação e o calendário aparecem apenas na Home. O BottomTabBar customizado oferece sete ações e botão central (+) para cadastro de produtos. O menu lateral (HamburgerButton) abre modal com Quiosque, Formas de pagamento, Configurações e Sair."
+      "Os dois perfis seguem o mesmo layout: cabeçalho sólido na cor do perfil, com cantos inferiores arredondados, logo, título e subtítulo; cards brancos; botões em formato pílula; e barra inferior preenchida na cor do perfil, com ícones brancos. O Cliente usa amarelo (#F8B125, CLIENTE_COLORS) e o Fornecedor usa azul-marinho (#123B6D, COMPANY_COLORS). No Fornecedor, o ScreenHeader monta o cabeçalho das abas principais (menu, logo, notificações e saudação na Home), o BackTitleHeader monta o das telas internas (voltar e título) e o TabScreenLayout reúne cabeçalho e conteúdo. O BottomTabBar mostra cinco abas para o Fornecedor (Início, Quiosques, Produtos, Vendas e Ajustes) e delega ao ClienteTabBar as seis abas do Cliente (Início, Produtos, Carrinho, Pedidos, Quiosques e Perfil). O menu lateral do Fornecedor (HamburgerButton) abre Início, Quiosques, Endereços, Configurações e Sair."
     ),
     imageParagraph("fluxo-navegacao.png", 480, 360),
     caption("Figura 2 – Fluxo principal de navegação do aplicativo"),
     heading3("3.1.5 Integração com a API"),
     para(
       "Nove services encapsulam chamadas REST: authService, productService, barracaService, marketplaceService, enderecoService, formaPagamentoService, financeiroService, notificacaoService e sessionStorage (AsyncStorage). A URL base é resolvida em api.ts conforme o ambiente (localhost, 10.0.2.2 no Android ou IP do Expo Go). O token JWT é persistido na chave @quickstock_session."
+    ),
+
+    heading3("3.1.6 Quiosques do cliente"),
+    para(
+      "O cliente pode montar quiosques próprios para vender em eventos, usando como estoque o que comprou e recebeu pelo app. A funcionalidade foi feita só no aplicativo, reaproveitando a API existente: os quiosques são gravados em /api/barracas com o empresaId do cliente, e o estoque disponível vem dos produtos da empresa do cliente (ProductsContext), que o backend preenche quando um pedido é entregue."
+    ),
+    makeTable(
+      ["Regra", "Como funciona"],
+      [
+        ["Divisão do estoque", "A soma de um produto em todos os quiosques não pode passar do estoque comprado. Disponível = estoque − quantidade nos outros quiosques."],
+        ["Preço de venda", "Informado pelo cliente para cada produto com quantidade; gravado no produto (vale para todos os quiosques dele)."],
+        ["Preço pago (referência)", "Preço unitário do pedido entregue mais recente com item de mesmo nome; não aparece se não houver correspondência."],
+        ["Validação", "Nome obrigatório, ao menos um produto, quantidade dentro do disponível e preço maior que zero quando há quantidade."],
+        ["Aviso", "A lista sinaliza 'Estoque acima do disponível' quando um quiosque passa do que o cliente tem."],
+      ]
+    ),
+    para("", { after: 200, noIndent: true }),
+    para(
+      "As regras ficam em src/utils/estoqueQuiosque.ts, como funções puras, cobertas por 22 testes unitários (Jest). Duas premissas dependem do backend e não foram validadas sem o servidor: que os itens de pedidos entregues viram produtos da empresa compradora, com estoque, e que /api/barracas aceita quiosques de empresas do tipo cliente."
     ),
 
     // 3.2 BACKEND
@@ -581,10 +619,10 @@ function buildMainContent() {
     // 4 CONCLUSÃO
     heading1("4 Conclusão"),
     para(
-      "O QuickStock entrega uma solução funcional de gestão de estoque e marketplace B2B, integrando aplicativo mobile Expo, API Spring Boot e banco PostgreSQL. Foram implementados cadastro unificado, CRUD de produtos e quiosques, fluxo completo de compra (vitrine → sacola → pedido → acompanhamento), configurações de perfil, formas de pagamento e notificações."
+      "O QuickStock entrega uma solução funcional de gestão de estoque e marketplace B2B, integrando aplicativo mobile Expo, API Spring Boot e banco PostgreSQL. Foram implementados cadastro unificado com perfis Cliente e Fornecedor, CRUD de produtos e quiosques, quiosques do cliente montados a partir das compras recebidas, fluxo completo de compra (vitrine → sacola → pedido → acompanhamento), configurações de perfil, formas de pagamento e notificações, com identidade visual consistente entre os perfis."
     ),
     para(
-      "Como limitações conhecidas, destacam-se: autenticação JWT parcial (sem filtro global), dados mock na Home e aba Carteira do app, notificações geradas em tempo real sem tabela dedicada e resumo financeiro parcialmente sintético no backend. Trabalhos futuros incluem Spring Security completo, testes automatizados, push notifications e eliminação de dados mock."
+      "Como limitações conhecidas, destacam-se: autenticação JWT parcial (sem filtro global), dados mock na Home e aba Carteira do app, notificações geradas em tempo real sem tabela dedicada, resumo financeiro parcialmente sintético no backend e quiosques do cliente dependentes de o backend lançar as compras entregues no estoque do comprador. Trabalhos futuros incluem Spring Security completo, ampliação dos testes automatizados, push notifications e eliminação de dados mock."
     ),
 
     // REFERÊNCIAS

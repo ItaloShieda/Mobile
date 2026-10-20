@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
 import { ScreenHeader } from '../../components/Header/ScreenHeader';
 import { BottomTabBar } from '../../components/layout/BottomTabBar';
 import { Fornecedor, labelStatusPedido } from '../../services/marketplaceService';
@@ -24,6 +23,7 @@ import {
   StoreCard,
 } from './components/MarketplaceCards';
 import { useCart } from './useCart';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export function CartScreen() {
   const {
@@ -46,8 +46,6 @@ export function CartScreen() {
   return (
     <View style={styles.root}>
       <SafeAreaView style={styles.container} edges={['left', 'right']}>
-        <LinearGradient colors={['#F8B125', '#FAFAFA']} style={styles.topGradient} />
-
         <ScrollView
           style={styles.scrollView}
           contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollBottomPadding }]}
@@ -60,7 +58,7 @@ export function CartScreen() {
         />
 
         <View style={styles.searchContainer}>
-            <Ionicons name="search" size={18} color="#F8B125" />
+            <Ionicons name="search" size={18} color={COMPANY_COLORS.primary} />
             <TextInput
               style={styles.searchInput}
               placeholder="Buscar distribuidora..."
@@ -114,7 +112,7 @@ export function CartScreen() {
         ) : null}
 
         {loading ? (
-          <ActivityIndicator color="#F8B125" style={{ marginVertical: 24 }} />
+          <ActivityIndicator color={COMPANY_COLORS.primary} style={{ marginVertical: 24 }} />
         ) : error ? (
           <View style={styles.sectionCard}>
             <View style={styles.emptyBox}>

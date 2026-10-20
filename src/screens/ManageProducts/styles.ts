@@ -1,20 +1,21 @@
 import { StyleSheet } from 'react-native';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export const styles = StyleSheet.create({
   addButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#F8B125',
-    borderRadius: 10,
-    paddingVertical: 10,
+    backgroundColor: COMPANY_COLORS.primary,
+    borderRadius: 22,
+    paddingVertical: 12,
     marginHorizontal: 15,
     marginBottom: 16,
     gap: 6,
   },
   addButtonText: {
     color: '#FFF',
-    fontWeight: '700',
+    fontWeight: '800',
     fontSize: 14,
   },
   loader: {
@@ -38,7 +39,7 @@ export const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
   },
   sectionSubtitle: {
     marginTop: 4,
@@ -48,12 +49,12 @@ export const styles = StyleSheet.create({
   productCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFDF7',
+    backgroundColor: COMPANY_COLORS.primarySoft,
     borderRadius: 16,
     padding: 12,
     marginBottom: 10,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
   },
   productCardLast: {
     marginBottom: 0,
@@ -93,7 +94,7 @@ export const styles = StyleSheet.create({
   },
   productPrice: {
     fontSize: 14,
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     fontWeight: '700',
     marginTop: 4,
   },
@@ -104,12 +105,12 @@ export const styles = StyleSheet.create({
     gap: 8,
   },
   stockPill: {
-    backgroundColor: '#FFF6DE',
+    backgroundColor: COMPANY_COLORS.primarySoft,
     borderRadius: 12,
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
   },
   stockPillText: {
     fontSize: 11,
@@ -134,7 +135,7 @@ export const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#FFF6DE',
+    backgroundColor: COMPANY_COLORS.primarySoft,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
@@ -154,14 +155,22 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 18,
   },
+  errorTitle: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#1F2937',
+    textAlign: 'center',
+    marginTop: 10,
+    marginBottom: 4,
+  },
   errorText: {
-    color: '#D64545',
+    color: '#6B7280',
     textAlign: 'center',
     marginBottom: 8,
   },
   retryText: {
-    color: '#F8B125',
-    fontWeight: '600',
+    color: COMPANY_COLORS.primary,
+    fontWeight: '800',
     textAlign: 'center',
   },
 });

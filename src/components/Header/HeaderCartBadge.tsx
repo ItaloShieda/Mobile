@@ -2,6 +2,7 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { BACK_BUTTON_SIZE } from './BackButton';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 interface HeaderCartBadgeProps {
   itemCount: number;
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    backgroundColor: '#F8B125',
+    backgroundColor: COMPANY_COLORS.primary,
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 20,

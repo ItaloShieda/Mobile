@@ -8,6 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 const WEEKDAYS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 const MONTHS = [
@@ -191,18 +192,18 @@ const styles = StyleSheet.create({
   dayToday: {
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#F8B125',
+    borderColor: COMPANY_COLORS.primary,
   },
   daySelected: {
     borderRadius: 20,
-    backgroundColor: '#F8B125',
+    backgroundColor: COMPANY_COLORS.primary,
   },
   dayText: {
     fontSize: 14,
     color: '#333',
   },
   dayTextToday: {
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     fontWeight: '700',
   },
   dayTextSelected: {
@@ -224,7 +225,7 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   closeBtn: {
-    backgroundColor: '#F8B125',
+    backgroundColor: COMPANY_COLORS.primary,
     paddingHorizontal: 24,
     paddingVertical: 10,
     borderRadius: 12,

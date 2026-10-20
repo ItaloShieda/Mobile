@@ -8,19 +8,19 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../context/AuthContext';
 import { BackButton } from '../../components/Header/BackButton';
-import { BackTitleHeader } from '../../components/Header/BackTitleHeader';
+import { ScreenHeader } from '../../components/Header/ScreenHeader';
 import { BottomTabBar, useBottomTabBarHeight } from '../../components/layout/BottomTabBar';
 import { useAppGoBack } from '../../hooks/useAppGoBack';
 import { useHeaderTopPadding } from '../../utils/safeArea';
 import { atualizarEmpresa, atualizarUsuario } from '../../services/authService';
 import { formatarCnpjInput, formatarTelefoneInput, normalizarDocumento } from '../../utils/pixUtils';
 import { clienteStyles, styles } from './styles';
+import { CLIENTE_COLORS } from '../../theme/theme';
 
-const NAVY = '#0E2A5C';
+const PRIMARY = CLIENTE_COLORS.primary;
 
 function IconField({
   icon,
@@ -43,7 +43,7 @@ function IconField({
 }) {
   return (
     <View style={clienteStyles.field}>
-      <Ionicons name={icon} size={18} color={NAVY} />
+      <Ionicons name={icon} size={18} color={PRIMARY} />
       <TextInput
         style={clienteStyles.input}
         value={value}
@@ -175,7 +175,7 @@ export function ConfiguracoesScreen() {
         >
           <View style={[clienteStyles.header, { paddingTop: topPadding }]}>
             <View style={clienteStyles.headerTop}>
-              <BackButton onPress={goBack} iconColor={NAVY} />
+              <BackButton onPress={goBack} iconColor={PRIMARY} />
               <View style={clienteStyles.brandRow}>
                 <Text style={clienteStyles.brandQuick}>Quick</Text>
                 <Text style={clienteStyles.brandStock}>Stock</Text>
@@ -189,7 +189,7 @@ export function ConfiguracoesScreen() {
             <View style={clienteStyles.card}>
               <View style={clienteStyles.sectionHeader}>
                 <View style={clienteStyles.sectionIcon}>
-                  <Ionicons name="person-outline" size={18} color={NAVY} />
+                  <Ionicons name="person-outline" size={18} color={PRIMARY} />
                 </View>
                 <View>
                   <Text style={clienteStyles.sectionTitle}>Dados pessoais</Text>
@@ -218,7 +218,7 @@ export function ConfiguracoesScreen() {
             <View style={clienteStyles.card}>
               <View style={clienteStyles.sectionHeader}>
                 <View style={clienteStyles.sectionIcon}>
-                  <Ionicons name="business-outline" size={18} color={NAVY} />
+                  <Ionicons name="business-outline" size={18} color={PRIMARY} />
                 </View>
                 <View>
                   <Text style={clienteStyles.sectionTitle}>Dados do negócio</Text>
@@ -249,7 +249,7 @@ export function ConfiguracoesScreen() {
             <View style={clienteStyles.card}>
               <View style={clienteStyles.sectionHeader}>
                 <View style={clienteStyles.sectionIcon}>
-                  <Ionicons name="lock-closed-outline" size={18} color={NAVY} />
+                  <Ionicons name="lock-closed-outline" size={18} color={PRIMARY} />
                 </View>
                 <View>
                   <Text style={clienteStyles.sectionTitle}>Alterar senha</Text>
@@ -288,7 +288,7 @@ export function ConfiguracoesScreen() {
               activeOpacity={0.85}
             >
               {loading ? (
-                <ActivityIndicator color={NAVY} />
+                <ActivityIndicator color={PRIMARY} />
               ) : (
                 <Text style={clienteStyles.saveButtonText}>Salvar alterações</Text>
               )}
@@ -302,8 +302,8 @@ export function ConfiguracoesScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.container} edges={['left', 'right', 'bottom']}>
-      <LinearGradient colors={['#F8B125', '#FAFAFA']} style={styles.topGradient} />
+    <View style={styles.root}>
+    <SafeAreaView style={styles.container} edges={['left', 'right']}>
 
       <ScrollView
         style={styles.scroll}
@@ -311,7 +311,12 @@ export function ConfiguracoesScreen() {
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <BackTitleHeader title="Configurações da conta" onBack={goBack} />
+        <ScreenHeader
+          title="Ajustes"
+          subtitle="Dados da conta, senha e informações da empresa."
+          inset={16}
+          style={{ marginBottom: 16 }}
+        />
 
         <View style={styles.card}>
           <Text style={styles.sectionTitle}>Dados pessoais</Text>
@@ -400,12 +405,14 @@ export function ConfiguracoesScreen() {
           disabled={loading}
         >
           {loading ? (
-            <ActivityIndicator color="#333" />
+            <ActivityIndicator color="#FFF" />
           ) : (
             <Text style={styles.saveButtonText}>Salvar alterações</Text>
           )}
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
+    <BottomTabBar activeRoute="Configuracoes" />
+    </View>
   );
 }

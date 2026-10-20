@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { CLIENTE_COLORS } from '../../theme/theme';
 
 const GOLD = '#F8B125';
 const SUCCESS = '#2E7D32';
@@ -7,13 +8,6 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F4F4F5',
-  },
-  topGradient: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 260,
   },
   scroll: { flex: 1 },
   scrollContent: {
@@ -424,13 +418,13 @@ export const styles = StyleSheet.create({
   },
 });
 
-const NAVY = '#0E2A5C';
+const PRIMARY = CLIENTE_COLORS.primary;
 const PAGE_BG = '#F3F5F8';
 
 export const clientePedidoStyles = StyleSheet.create({
   root: { flex: 1, backgroundColor: PAGE_BG },
   header: {
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
     paddingHorizontal: 20,
     paddingBottom: 22,
     borderBottomLeftRadius: 28,
@@ -444,13 +438,13 @@ export const clientePedidoStyles = StyleSheet.create({
   },
   brandRow: { flex: 1, flexDirection: 'row', alignItems: 'baseline', justifyContent: 'center' },
   brandQuick: { color: '#FFF', fontSize: 20, fontWeight: '800' },
-  brandStock: { color: GOLD, fontSize: 20, fontWeight: '800' },
+  brandStock: { color: '#1F2937', fontSize: 20, fontWeight: '800' },
   title: { color: '#FFF', fontSize: 24, fontWeight: '800', textAlign: 'center', marginBottom: 6 },
   subtitle: { color: 'rgba(255,255,255,0.75)', fontSize: 13, textAlign: 'center' },
   sheet: { paddingHorizontal: 16, paddingTop: 16 },
   card: { backgroundColor: '#FFF', borderRadius: 22, padding: 16, marginBottom: 12 },
   idRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 },
-  code: { fontSize: 18, fontWeight: '800', color: NAVY },
+  code: { fontSize: 18, fontWeight: '800', color: PRIMARY },
   date: { fontSize: 12, color: '#8A93A3', marginTop: 2 },
   stepper: { flexDirection: 'row', alignItems: 'flex-start', marginBottom: 8 },
   stepCol: { flex: 1, alignItems: 'center' },
@@ -463,7 +457,7 @@ export const clientePedidoStyles = StyleSheet.create({
     justifyContent: 'center',
     zIndex: 1,
   },
-  stepCircleDone: { backgroundColor: NAVY },
+  stepCircleDone: { backgroundColor: PRIMARY },
   stepCircleActive: { backgroundColor: '#3B82F6' },
   stepLine: {
     position: 'absolute',
@@ -473,9 +467,9 @@ export const clientePedidoStyles = StyleSheet.create({
     height: 2,
     backgroundColor: '#E5E7EB',
   },
-  stepLineDone: { backgroundColor: NAVY },
+  stepLineDone: { backgroundColor: PRIMARY },
   stepLabel: { fontSize: 10, color: '#8A93A3', textAlign: 'center', marginTop: 6, fontWeight: '600' },
-  stepLabelActive: { color: NAVY, fontWeight: '800' },
+  stepLabelActive: { color: PRIMARY, fontWeight: '800' },
   storeRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 8 },
   storeIcon: {
     width: 40,
@@ -487,13 +481,13 @@ export const clientePedidoStyles = StyleSheet.create({
   },
   storeName: { fontSize: 15, fontWeight: '800', color: '#1F2937' },
   storeHint: { fontSize: 12, color: '#8A93A3', marginTop: 2 },
-  sectionTitle: { fontSize: 15, fontWeight: '800', color: NAVY, marginBottom: 10 },
+  sectionTitle: { fontSize: 15, fontWeight: '800', color: PRIMARY, marginBottom: 10 },
   itemRow: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 10 },
   itemImage: { width: 44, height: 44, borderRadius: 10, backgroundColor: '#F3F4F6' },
   itemName: { flex: 1, fontSize: 14, fontWeight: '700', color: '#1F2937' },
   itemUnit: { fontSize: 12, color: '#8A93A3', marginTop: 2 },
   itemQty: { fontSize: 12, color: '#6B7280', textAlign: 'right' },
-  itemSub: { fontSize: 14, fontWeight: '800', color: NAVY, textAlign: 'right' },
+  itemSub: { fontSize: 14, fontWeight: '800', color: PRIMARY, textAlign: 'right' },
   infoRow: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 6 },
   infoIcon: {
     width: 36,
@@ -503,14 +497,14 @@ export const clientePedidoStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  infoTitle: { fontSize: 14, fontWeight: '800', color: NAVY },
+  infoTitle: { fontSize: 14, fontWeight: '800', color: PRIMARY },
   infoText: { fontSize: 12, color: '#6B7280', marginTop: 2 },
   totalRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 8 },
-  totalLabel: { fontSize: 15, fontWeight: '800', color: NAVY },
+  totalLabel: { fontSize: 15, fontWeight: '800', color: PRIMARY },
   totalHint: { fontSize: 12, color: '#8A93A3', marginTop: 2 },
-  totalValue: { fontSize: 20, fontWeight: '800', color: NAVY },
+  totalValue: { fontSize: 20, fontWeight: '800', color: PRIMARY },
   helpRow: { flexDirection: 'row', alignItems: 'center', gap: 8, justifyContent: 'center', paddingVertical: 8 },
-  helpText: { fontSize: 14, fontWeight: '700', color: NAVY },
+  helpText: { fontSize: 14, fontWeight: '700', color: PRIMARY },
   chip: { borderRadius: 12, paddingHorizontal: 8, paddingVertical: 4 },
   loadingWrap: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 24 },
 });

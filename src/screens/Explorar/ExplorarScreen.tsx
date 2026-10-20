@@ -15,7 +15,7 @@ import { getImageUrl } from '../../config/api';
 import { useAuth } from '../../context/AuthContext';
 import { useHeaderTopPadding } from '../../utils/safeArea';
 import { CATEGORIAS } from './useExplorar';
-import { NAVY, styles } from './styles';
+import { PRIMARY, styles } from './styles';
 import { useExplorar } from './useExplorar';
 
 export function ExplorarScreen() {
@@ -101,11 +101,11 @@ export function ExplorarScreen() {
                   >
                     <View style={styles.categoryLeft}>
                       <View style={styles.categoryIconWrap}>
-                        <Ionicons name={item.icon} size={22} color={NAVY} />
+                        <Ionicons name={item.icon} size={22} color={PRIMARY} />
                       </View>
                       <Text style={styles.categoryLabel}>{item.label}</Text>
                     </View>
-                    <Ionicons name="chevron-forward" size={16} color={NAVY} />
+                    <Ionicons name="chevron-forward" size={16} color={PRIMARY} />
                   </TouchableOpacity>
                 );
               })}
@@ -120,7 +120,7 @@ export function ExplorarScreen() {
               </TouchableOpacity>
             </View>
             {loading ? (
-              <ActivityIndicator color={NAVY} style={{ marginVertical: 16 }} />
+              <ActivityIndicator color={PRIMARY} style={{ marginVertical: 16 }} />
             ) : produtosDestaque.length === 0 ? (
               <Text style={styles.empty}>Nenhum produto encontrado.</Text>
             ) : (

@@ -96,35 +96,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [restoreSession]);
 
   const signIn = useCallback(async (payload: LoginPayload) => {
-    const emailNormalized = payload.email.trim().toLowerCase();
-    const senhaNormalized = payload.senha;
-
-    if (emailNormalized === 'admin' && senhaNormalized === '1234') {
-      const adminUser: UsuarioLogado = {
-        id: 999,
-        nome: 'Administrador',
-        email: 'admin',
-        perfil: { id: 1, nome: 'admin', descricao: 'Administrador do sistema' },
-        empresa: { id: 1, nome: 'QuickStock Admin', cnpj: '00.000.000/0000-00', telefone: '(11) 99999-0000' },
-        ativo: 1,
-      };
-
-      const session: StoredSession = {
-        token: 'admin-token',
-        usuario: adminUser,
-        expiresAt: Date.now() + 86400000,
-      };
-
-      await saveSession(session);
-      await savePerfilUso('admin', 'ClienteFornecedor');
-      const applied = await applySession(session);
-
-      if (!applied) {
-        throw new Error('Sessão inválida. Tente novamente.');
-      }
-      return;
-    }
-
     const response = await loginRequest(payload);
 
     if (!response.token || !response.usuario) {

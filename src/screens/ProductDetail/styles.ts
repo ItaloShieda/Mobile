@@ -1,18 +1,12 @@
 import { StyleSheet } from 'react-native';
+import { COMPANY_COLORS } from '../../theme/theme';
 
-const GOLD = '#F8B125';
+const ACCENT = COMPANY_COLORS.primary;
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FAFAFA',
-  },
-  topGradient: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 280,
   },
   scrollContent: {
     paddingBottom: 130,
@@ -23,7 +17,7 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: 'hidden',
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
     marginBottom: 14,
     elevation: 8,
     shadowColor: '#000',
@@ -71,7 +65,7 @@ export const styles = StyleSheet.create({
   price: {
     fontSize: 24,
     fontWeight: '800',
-    color: GOLD,
+    color: ACCENT,
   },
   unitChip: {
     backgroundColor: '#FFF8E8',
@@ -107,7 +101,7 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 14,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
     marginBottom: 14,
     gap: 10,
     elevation: 8,
@@ -132,7 +126,7 @@ export const styles = StyleSheet.create({
   storeName: {
     fontSize: 15,
     fontWeight: '800',
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     marginTop: 2,
   },
   storeDesc: {
@@ -145,7 +139,7 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 16,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
     marginBottom: 14,
     elevation: 8,
     shadowColor: '#000',
@@ -156,7 +150,7 @@ export const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     marginBottom: 8,
   },
   description: {
@@ -173,19 +167,19 @@ export const styles = StyleSheet.create({
   observationTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
   },
   observationInput: {
     minHeight: 72,
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
     paddingHorizontal: 12,
     paddingVertical: 10,
     fontSize: 14,
     color: '#333',
     textAlignVertical: 'top',
-    backgroundColor: '#FFFDF7',
+    backgroundColor: COMPANY_COLORS.primarySoft,
   },
   feedbackText: {
     textAlign: 'center',
@@ -214,7 +208,7 @@ export const styles = StyleSheet.create({
     maxWidth: 140,
     height: 48,
     borderRadius: 24,
-    backgroundColor: GOLD,
+    backgroundColor: ACCENT,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -301,6 +295,6 @@ export const styles = StyleSheet.create({
   catalogPrice: {
     fontSize: 20,
     fontWeight: '800',
-    color: GOLD,
+    color: ACCENT,
   },
 });

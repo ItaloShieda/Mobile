@@ -7,7 +7,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useHeaderTopPadding } from '../../utils/safeArea';
 import { formatarPreco } from '../../services/productService';
 import { formatarDataCurta } from '../../utils/dateFormat';
-import { NAVY, styles } from './styles';
+import { PRIMARY, styles } from './styles';
 import {
   AbaPedidos,
   chipStatus,
@@ -25,7 +25,7 @@ const ABAS: { key: AbaPedidos; label: string }[] = [
 function chipStyle(tone: ReturnType<typeof chipStatus>['tone']) {
   switch (tone) {
     case 'blue':
-      return { wrap: styles.chipBlue, text: styles.chipTextBlue, icon: 'cube-outline' as const, color: NAVY };
+      return { wrap: styles.chipBlue, text: styles.chipTextBlue, icon: 'cube-outline' as const, color: PRIMARY };
     case 'gold':
       return { wrap: styles.chipGold, text: styles.chipTextGold, icon: 'car-outline' as const, color: '#C98912' };
     case 'green':
@@ -92,7 +92,7 @@ export function PedidosScreen() {
           </View>
 
           {loading ? (
-            <ActivityIndicator color={NAVY} style={{ marginTop: 24 }} />
+            <ActivityIndicator color={PRIMARY} style={{ marginTop: 24 }} />
           ) : error ? (
             <View style={styles.emptyCard}>
               <Text style={styles.errorText}>{error}</Text>
@@ -102,7 +102,7 @@ export function PedidosScreen() {
             </View>
           ) : lista.length === 0 ? (
             <View style={styles.emptyCard}>
-              <Ionicons name="receipt-outline" size={44} color={NAVY} />
+              <Ionicons name="receipt-outline" size={44} color={PRIMARY} />
               <Text style={styles.emptyTitle}>Nenhum pedido aqui</Text>
               <Text style={styles.emptyText}>
                 Quando você finalizar uma compra, o pedido aparece neste histórico.
@@ -136,7 +136,7 @@ export function PedidosScreen() {
                     </View>
                     <View style={styles.storeRow}>
                       <View style={styles.storeIcon}>
-                        <Ionicons name="storefront-outline" size={18} color={NAVY} />
+                        <Ionicons name="storefront-outline" size={18} color={PRIMARY} />
                       </View>
                       <View style={{ flex: 1 }}>
                         <Text style={styles.storeName} numberOfLines={1}>

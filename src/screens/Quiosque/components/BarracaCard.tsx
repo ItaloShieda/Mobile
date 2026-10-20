@@ -14,6 +14,7 @@ import { Quiosque, EstoqueItem, formatarQuantidade } from '../../../services/bar
 import { formatarPreco } from '../../../services/productService';
 import { useProdutos } from '../../../context/ProductsContext';
 import { formatarDiaSemana } from '../../../utils/dateFormat';
+import { COMPANY_COLORS } from '../../../theme/theme';
 
 interface BarracaCardProps {
   quiosque: Quiosque;
@@ -102,7 +103,7 @@ export function BarracaCard({ quiosque, onPress, onDelete }: BarracaCardProps) {
           </View>
           <View style={styles.datePillCard}>
             <Text style={styles.dateTextCard}>{dataLabel}</Text>
-            <Ionicons name="calendar-outline" size={13} color="#F8B125" />
+            <Ionicons name="calendar-outline" size={13} color={COMPANY_COLORS.primary} />
           </View>
         </View>
 
@@ -156,7 +157,7 @@ export function BarracaCard({ quiosque, onPress, onDelete }: BarracaCardProps) {
         <>
           <View style={styles.actionsRow}>
             <TouchableOpacity style={styles.actionButton} onPress={onPress}>
-              <Ionicons name="create-outline" size={18} color="#F8B125" />
+              <Ionicons name="create-outline" size={18} color={COMPANY_COLORS.primary} />
               <Text style={styles.actionButtonText}>Editar</Text>
             </TouchableOpacity>
             <Pressable
@@ -218,7 +219,7 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#F8B125',
+    backgroundColor: COMPANY_COLORS.primary,
     marginRight: 8,
   },
   cardTitle: {
@@ -239,7 +240,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   dateTextCard: {
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     fontSize: 10,
     fontWeight: '700',
   },
@@ -291,7 +292,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   actionButtonText: {
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     fontWeight: '600',
     fontSize: 13,
   },
@@ -373,7 +374,7 @@ const styles = StyleSheet.create({
   },
   stockItemPrice: {
     fontSize: 11,
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     fontWeight: '600',
     textAlign: 'center',
     marginTop: 2,
@@ -390,7 +391,7 @@ const styles = StyleSheet.create({
   qtyBadgeText: {
     fontSize: 10,
     fontWeight: '700',
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
   },
   stockItemTotal: {
     fontSize: 11,
@@ -399,7 +400,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   stockItemTotalNumber: {
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     fontWeight: '700',
   },
   emptyItemsText: {

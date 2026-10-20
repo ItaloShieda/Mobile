@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BackTitleHeader } from '../../components/Header/BackTitleHeader';
-import { ScreenTopGradient } from '../../components/layout/ScreenTopGradient';
 import { useAppGoBack } from '../../hooks/useAppGoBack';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 type Periodo = 'Dia' | 'Mês' | 'Ano';
 
@@ -50,7 +50,6 @@ export function EmpresaGraficosScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['left', 'right', 'bottom']}>
-      <ScreenTopGradient />
 
       <ScrollView
         style={styles.scroll}
@@ -143,7 +142,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   segmentButtonSelected: {
-    backgroundColor: '#F8B125',
+    backgroundColor: COMPANY_COLORS.primary,
   },
   segmentText: {
     color: '#666',
@@ -158,7 +157,7 @@ const styles = StyleSheet.create({
     padding: 16,
     marginTop: 18,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -177,7 +176,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     height: 220,
     borderTopWidth: 1,
-    borderTopColor: '#F3E3B1',
+    borderTopColor: COMPANY_COLORS.primaryBorder,
     paddingTop: 12,
   },
   barColumn: {
@@ -198,7 +197,7 @@ const styles = StyleSheet.create({
     width: 22,
     maxWidth: 32,
     minHeight: 28,
-    backgroundColor: '#F8B125',
+    backgroundColor: COMPANY_COLORS.primary,
     borderRadius: 10,
     marginHorizontal: 4,
   },
@@ -216,7 +215,7 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     padding: 16,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
   },
   metricLabel: {
     color: '#666',

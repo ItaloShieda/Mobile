@@ -25,8 +25,9 @@ import { formatarPreco, Produto, labelEstoque, corEstoque, normalizarEstoque } f
 import { styles } from './styles';
 import { useAuth } from '../../context/AuthContext';
 import { ClienteQuiosqueVitrine } from './ClienteQuiosqueVitrine';
+import { COMPANY_COLORS } from '../../theme/theme';
 
-const GOLD = '#F8B125';
+const ACCENT = COMPANY_COLORS.primary;
 
 export function StoreVitrineScreen() {
   const navigation = useNavigation<any>();
@@ -161,8 +162,6 @@ export function StoreVitrineScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['left', 'right', 'bottom']}>
-      <LinearGradient colors={['#F8B125', '#FAFAFA']} style={styles.topGradient} />
-
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
@@ -170,6 +169,7 @@ export function StoreVitrineScreen() {
         <BackTitleHeader
           title={fornecedorNome}
           onBack={goBack}
+          inset={0}
           rightSlot={
             itemCount > 0 ? (
               <HeaderCartBadge
@@ -181,7 +181,7 @@ export function StoreVitrineScreen() {
         />
 
         <View style={styles.searchContainer}>
-          <Ionicons name="search" size={18} color={GOLD} />
+          <Ionicons name="search" size={18} color={ACCENT} />
           <TextInput
             placeholder="Procure o produto"
             placeholderTextColor="#999"
@@ -201,7 +201,7 @@ export function StoreVitrineScreen() {
             />
           ) : (
             <LinearGradient
-              colors={['#F8B125', '#FFD76A']}
+              colors={[COMPANY_COLORS.primary, COMPANY_COLORS.primaryMuted]}
               style={styles.bannerImage}
             />
           )}
@@ -231,7 +231,7 @@ export function StoreVitrineScreen() {
         </View>
 
         {loading ? (
-          <ActivityIndicator color={GOLD} style={{ marginTop: 24 }} />
+          <ActivityIndicator color={ACCENT} style={{ marginTop: 24 }} />
         ) : error ? (
           <Text style={styles.errorText}>{error}</Text>
         ) : produtosFiltrados.length === 0 ? (

@@ -8,7 +8,6 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { BackTitleHeader } from '../../components/Header/BackTitleHeader';
-import { ScreenTopGradient } from '../../components/layout/ScreenTopGradient';
 import { useAppGoBack } from '../../hooks/useAppGoBack';
 import { styles } from './camioneirosStyles';
 
@@ -29,7 +28,6 @@ export function CamioneirosScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['left', 'right', 'bottom']}>
-      <ScreenTopGradient />
 
       <ScrollView
         style={styles.scroll}

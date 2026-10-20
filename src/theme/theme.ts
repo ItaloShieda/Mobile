@@ -15,6 +15,24 @@ export const COLORS = {
   backgroundtema: ['#F8B125', '#FAFAFA'] as const,
 };
 
+/** Identidade visual das telas operacionais do fornecedor. */
+export const COMPANY_COLORS = {
+  primary: '#123B6D',
+  primaryDark: '#0E2A5C',
+  primarySoft: '#EAF1F8',
+  primaryBorder: '#C8D8E8',
+  primaryMuted: '#53739A',
+  pageBackground: '#F6F8FB',
+  gradient: ['#123B6D', '#F6F8FB'] as const,
+};
+
+/** Identidade visual do fluxo do cliente (mesmo amarelo da área do fornecedor). */
+export const CLIENTE_COLORS = {
+  primary: '#F8B125',
+  primarySoft: '#FFF6DE',
+  brandAccent: '#1F2937',
+};
+
 export const SPACING = {
   xs: 4,
   sm: 8,

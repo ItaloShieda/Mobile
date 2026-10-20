@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { getImageUrl } from '../../../config/api';
 import { RemoteImage } from '../../../components/media/RemoteImage';
 import { Produto, corEstoque, formatarPreco, formatarQuantidadeEstoque, labelEstoque, normalizarEstoque } from '../../../services/productService';
+import { COMPANY_COLORS } from '../../../theme/theme';
 
 interface ProductCardProps { produto: Produto; onPress?: () => void; }
 
@@ -32,11 +33,11 @@ const styles = StyleSheet.create({
   card: {
     width: 148,
     marginRight: 12,
-    backgroundColor: '#FFFDF7',
+    backgroundColor: COMPANY_COLORS.primarySoft,
     borderRadius: 16,
     padding: 10,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
   },
   imageBox: {
     width: '100%',
@@ -54,12 +55,12 @@ const styles = StyleSheet.create({
   },
   stockPill: { position: 'absolute', bottom: 6, left: 6, right: 6, borderRadius: 8, paddingHorizontal: 6, paddingVertical: 3 },
   stockText: { color: '#FFF', fontSize: 10, fontWeight: '700', textAlign: 'center' },
-  price: { fontSize: 15, fontWeight: '800', color: '#F8B125' },
+  price: { fontSize: 15, fontWeight: '800', color: COMPANY_COLORS.primary },
   name: { fontSize: 12, fontWeight: '700', color: '#333', marginTop: 4, minHeight: 32 },
   code: { fontSize: 10, color: '#888', fontWeight: '600', marginTop: 2 },
   hint: { fontSize: 10, fontWeight: '600', marginTop: 2 },
-  horizontal: { width: 160, backgroundColor: '#FFF', borderRadius: 16, padding: 12, marginRight: 12, borderWidth: 1, borderColor: '#F0E6CC' },
+  horizontal: { width: 160, backgroundColor: '#FFF', borderRadius: 16, padding: 12, marginRight: 12, borderWidth: 1, borderColor: COMPANY_COLORS.primaryBorder },
   horizontalImage: { width: '100%', height: 80, borderRadius: 12, marginBottom: 8, backgroundColor: '#F5F5F5' },
   horizontalTitle: { fontSize: 14, fontWeight: 'bold', color: '#333' },
-  horizontalSubtitle: { fontSize: 12, color: '#F8B125', fontWeight: '600', marginTop: 4 },
+  horizontalSubtitle: { fontSize: 12, color: COMPANY_COLORS.primary, fontWeight: '600', marginTop: 4 },
 });

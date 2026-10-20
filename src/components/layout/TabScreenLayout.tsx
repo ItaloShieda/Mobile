@@ -7,11 +7,10 @@ import {
   StyleProp,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ScreenTopGradient } from './ScreenTopGradient';
 import { ScreenHeader } from '../Header/ScreenHeader';
-import { PageHeader } from './PageHeader';
 import { PageContent } from './PageContent';
 import { useTabBarScrollPadding } from './BottomTabBar';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 interface ScreenHeaderConfig {
   name?: string;
@@ -29,6 +28,8 @@ interface TabScreenLayoutProps {
   children: React.ReactNode;
   scrollContentStyle?: StyleProp<ViewStyle>;
   screenHeaderProps?: ScreenHeaderConfig;
+  /** Conteúdo extra dentro do cabeçalho (ex.: campo de busca), como nas telas do cliente. */
+  headerContent?: React.ReactNode;
   wrapContent?: boolean;
   footer?: React.ReactNode;
   tabBar?: React.ReactNode;
@@ -40,6 +41,7 @@ export function TabScreenLayout({
   children,
   scrollContentStyle,
   screenHeaderProps,
+  headerContent,
   wrapContent = true,
   footer,
   tabBar,
@@ -49,7 +51,6 @@ export function TabScreenLayout({
   return (
     <View style={styles.root}>
       <SafeAreaView style={styles.container} edges={['left', 'right']}>
-        <ScreenTopGradient />
 
         <ScrollView
           style={styles.scrollView}
@@ -60,9 +61,14 @@ export function TabScreenLayout({
           ]}
           showsVerticalScrollIndicator={false}
         >
-          <ScreenHeader {...screenHeaderProps} />
-          <PageHeader title={title} subtitle={subtitle} />
-          {wrapContent ? <PageContent>{children}</PageContent> : children}
+          <ScreenHeader {...screenHeaderProps} title={title} subtitle={subtitle}>
+            {headerContent}
+          </ScreenHeader>
+          {wrapContent ? (
+            <PageContent style={styles.content}>{children}</PageContent>
+          ) : (
+            <View style={styles.content}>{children}</View>
+          )}
         </ScrollView>
 
         {footer}
@@ -76,11 +82,14 @@ export function TabScreenLayout({
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: COMPANY_COLORS.pageBackground,
   },
   container: {
     flex: 1,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: COMPANY_COLORS.pageBackground,
+  },
+  content: {
+    paddingTop: 16,
   },
   scrollView: {
     flex: 1,

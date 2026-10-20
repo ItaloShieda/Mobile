@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
-import { Ionicons, Feather } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { usePurchaseCart } from '../../context/PurchaseCartContext';
 import { useAuth } from '../../context/AuthContext';
 import { useBottomInset } from '../../utils/safeArea';
 import { ClienteTabBar } from './ClienteTabBar';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export const TAB_BAR_HEIGHT = 68;
 
@@ -19,7 +19,24 @@ export function useBottomTabBarHeight(): number {
   return TAB_BAR_HEIGHT + bottomInset;
 }
 
-export type BottomTabRoute = 'Home' | 'Explorar' | 'Reservas' | 'Pedidos' | 'Perfil' | 'Quiosque' | 'Cart' | 'Sacola' | 'Cards' | 'FormasPagamento' | 'AddItem' | 'Configuracoes' | 'Enderecos' | 'PedidoAcompanhamento';
+export type BottomTabRoute = 'Home' | 'Explorar' | 'Reservas' | 'Pedidos' | 'Perfil' | 'Quiosque' | 'Cart' | 'Sacola' | 'Cards' | 'FormasPagamento' | 'AddItem' | 'Configuracoes' | 'Enderecos' | 'PedidoAcompanhamento' | 'EmpresaVendas' | 'ClienteQuiosques' | 'ClienteQuiosqueForm';
+
+type CompanyTab = {
+  route: Extract<BottomTabRoute, 'Home' | 'Quiosque' | 'AddItem' | 'EmpresaVendas' | 'Configuracoes'>;
+  label: string;
+  icon: keyof typeof Ionicons.glyphMap;
+  activeIcon: keyof typeof Ionicons.glyphMap;
+};
+
+const COMPANY_TABS: CompanyTab[] = [
+  { route: 'Home', label: 'Início', icon: 'home-outline', activeIcon: 'home' },
+  { route: 'Quiosque', label: 'Quiosques', icon: 'storefront-outline', activeIcon: 'storefront' },
+  { route: 'AddItem', label: 'Produtos', icon: 'cube-outline', activeIcon: 'cube' },
+  { route: 'EmpresaVendas', label: 'Vendas', icon: 'stats-chart-outline', activeIcon: 'stats-chart' },
+  { route: 'Configuracoes', label: 'Ajustes', icon: 'settings-outline', activeIcon: 'settings' },
+];
+
+const TAB_MUTED = 'rgba(255,255,255,0.72)';
 
 interface BottomTabBarProps {
   activeRoute?: BottomTabRoute;
@@ -28,84 +45,35 @@ interface BottomTabBarProps {
 export function BottomTabBar({ activeRoute }: BottomTabBarProps) {
   const navigation = useNavigation<any>();
   const { perfilUso } = useAuth();
-  const { itemCount } = usePurchaseCart();
   const bottomInset = useBottomInset();
 
   if (perfilUso === 'Cliente') {
     return <ClienteTabBar activeRoute={activeRoute} />;
   }
 
-  const iconColor = (route: BottomTabRoute) =>
-    activeRoute === route ? '#FFF' : 'rgba(255,255,255,0.85)';
-
   return (
     <View style={[styles.shell, { paddingBottom: bottomInset }]}>
       <View style={styles.bottomBar}>
-        <TouchableOpacity
-          style={styles.tabItem}
-          onPress={() => activeRoute !== 'Home' && navigation.navigate('Home')}
-        >
-          <Ionicons name={activeRoute === 'Home' ? 'home' : 'home-outline'} size={24} color={iconColor('Home')} />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.tabItem}
-          onPress={() => activeRoute !== 'Quiosque' && navigation.navigate('Quiosque')}
-        >
-          <Feather name="box" size={24} color={iconColor('Quiosque')} />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.tabItem}
-          onPress={() => activeRoute !== 'Cart' && navigation.navigate('Cart')}
-        >
-          <Ionicons name={activeRoute === 'Cart' ? 'cart' : 'cart-outline'} size={24} color={iconColor('Cart')} />
-        </TouchableOpacity>
-
-        <View style={styles.floatingButtonContainer}>
+        {COMPANY_TABS.map((tab) => {
+          const active = activeRoute === tab.route;
+          return (
           <TouchableOpacity
-            style={styles.floatingButton}
-            onPress={() => navigation.navigate('AddItem')}
+            key={tab.route}
+            style={styles.tabItem}
+            onPress={() => !active && navigation.navigate(tab.route)}
+            activeOpacity={0.8}
           >
-            <Ionicons name="add" size={34} color="#F8B125" />
-          </TouchableOpacity>
-        </View>
-
-        <TouchableOpacity
-          style={styles.tabItem}
-          onPress={() => activeRoute !== 'Sacola' && navigation.navigate('Sacola')}
-        >
-          <View>
             <Ionicons
-              name={activeRoute === 'Sacola' ? 'bag-handle' : 'bag-handle-outline'}
-              size={24}
-              color={iconColor('Sacola')}
+              name={active ? tab.activeIcon : tab.icon}
+              size={22}
+              color={active ? '#FFF' : TAB_MUTED}
             />
-            {itemCount > 0 ? (
-              <View style={styles.badge}>
-                <Text style={styles.badgeText}>{itemCount > 99 ? '99+' : itemCount}</Text>
-              </View>
-            ) : null}
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.tabItem}
-          onPress={() => activeRoute !== 'FormasPagamento' && navigation.navigate('FormasPagamento')}
-        >
-          <Ionicons
-            name={activeRoute === 'FormasPagamento' ? 'wallet' : 'wallet-outline'}
-            size={24}
-            color={iconColor('FormasPagamento')}
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.tabItem}
-          onPress={() => activeRoute !== 'Cards' && navigation.navigate('Cards')}
-        >
-          <Ionicons name={activeRoute === 'Cards' ? 'card' : 'card-outline'} size={24} color={iconColor('Cards')} />
-        </TouchableOpacity>
+            <Text style={[styles.tabLabel, active && styles.tabLabelActive]}>
+              {tab.label}
+            </Text>
+          </TouchableOpacity>
+          );
+        })}
       </View>
     </View>
   );
@@ -113,7 +81,7 @@ export function BottomTabBar({ activeRoute }: BottomTabBarProps) {
 
 const styles = StyleSheet.create({
   shell: {
-    backgroundColor: '#F8B125',
+    backgroundColor: COMPANY_COLORS.primary,
   },
   bottomBar: {
     height: TAB_BAR_HEIGHT,
@@ -126,44 +94,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    gap: 4,
+    paddingVertical: 7,
+    borderRadius: 12,
   },
-  floatingButtonContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  tabLabel: {
+    color: TAB_MUTED,
+    fontSize: 10,
+    fontWeight: '600',
   },
-  floatingButton: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: '#FFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: -12,
-    borderWidth: 2,
-    borderColor: '#F8B125',
-    elevation: 6,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-  },
-  badge: {
-    position: 'absolute',
-    top: -6,
-    right: -10,
-    minWidth: 16,
-    height: 16,
-    borderRadius: 8,
-    backgroundColor: '#D64545',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 3,
-  },
-  badgeText: {
+  tabLabelActive: {
     color: '#FFF',
-    fontSize: 9,
-    fontWeight: 'bold',
+    fontWeight: '800',
   },
 });

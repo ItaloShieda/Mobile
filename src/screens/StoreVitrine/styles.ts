@@ -1,18 +1,12 @@
 import { StyleSheet } from 'react-native';
+import { COMPANY_COLORS } from '../../theme/theme';
 
-const GOLD = '#F8B125';
+const ACCENT = COMPANY_COLORS.primary;
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FAFAFA',
-  },
-  topGradient: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 350,
   },
   searchContainer: {
     flexDirection: 'row',
@@ -58,7 +52,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
     paddingHorizontal: 16,
     paddingTop: 40,
     paddingBottom: 16,
@@ -85,7 +79,7 @@ export const styles = StyleSheet.create({
   storeTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     textAlign: 'center',
   },
 
@@ -120,7 +114,7 @@ export const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
   },
   sectionSubtitle: {
     marginTop: 4,
@@ -139,11 +133,11 @@ export const styles = StyleSheet.create({
   productSmall: {
     width: '48%',
     marginBottom: 12,
-    backgroundColor: '#FFFDF7',
+    backgroundColor: COMPANY_COLORS.primarySoft,
     borderRadius: 16,
     padding: 10,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
   },
   productFeatured: {
     width: 148,
@@ -194,7 +188,7 @@ export const styles = StyleSheet.create({
   price: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     marginTop: 8,
   },
 
@@ -221,7 +215,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     right: 15,
     bottom: 20,
-    backgroundColor: GOLD,
+    backgroundColor: ACCENT,
     height: 50,
     paddingHorizontal: 25,
     borderRadius: 25,

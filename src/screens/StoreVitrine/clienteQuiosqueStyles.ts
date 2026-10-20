@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { GOLD, GREEN, NAVY, PAGE_BG } from '../ClienteHome/styles';
+import { GOLD, GREEN, PRIMARY, PAGE_BG } from '../ClienteHome/styles';
 
-export { GOLD, GREEN, NAVY, PAGE_BG };
+export { GOLD, GREEN, PRIMARY, PAGE_BG };
 
 export const clienteQuiosqueStyles = StyleSheet.create({
   root: {
@@ -9,7 +9,7 @@ export const clienteQuiosqueStyles = StyleSheet.create({
     backgroundColor: PAGE_BG,
   },
   header: {
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
     paddingHorizontal: 16,
     paddingBottom: 14,
   },
@@ -33,7 +33,7 @@ export const clienteQuiosqueStyles = StyleSheet.create({
     fontWeight: '800',
   },
   brandStock: {
-    color: GOLD,
+    color: '#1F2937',
     fontSize: 20,
     fontWeight: '800',
   },
@@ -54,7 +54,7 @@ export const clienteQuiosqueStyles = StyleSheet.create({
   },
   banner: {
     height: 168,
-    backgroundColor: '#1B3A6B',
+    backgroundColor: PRIMARY,
     overflow: 'hidden',
   },
   bannerImage: {
@@ -92,14 +92,14 @@ export const clienteQuiosqueStyles = StyleSheet.create({
     width: 72,
     height: 72,
     borderRadius: 36,
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
     borderWidth: 4,
     borderColor: '#FFF',
   },
   storeTitle: {
     fontSize: 22,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
     textAlign: 'center',
     marginBottom: 6,
   },
@@ -175,7 +175,7 @@ export const clienteQuiosqueStyles = StyleSheet.create({
     justifyContent: 'center',
   },
   chipActive: {
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
   },
   chipText: {
     fontSize: 13,
@@ -223,14 +223,14 @@ export const clienteQuiosqueStyles = StyleSheet.create({
   productPrice: {
     fontSize: 11,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
     flex: 1,
   },
   addButton: {
     width: 22,
     height: 22,
     borderRadius: 11,
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -263,12 +263,12 @@ export const clienteQuiosqueStyles = StyleSheet.create({
     gap: 8,
   },
   cartBarText: {
-    color: NAVY,
+    color: '#FFF',
     fontSize: 15,
     fontWeight: '800',
   },
   cartBarCount: {
-    color: NAVY,
+    color: '#FFF',
     fontSize: 13,
     fontWeight: '700',
   },

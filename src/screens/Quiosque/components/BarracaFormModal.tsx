@@ -15,6 +15,7 @@ import { Feather } from '@expo/vector-icons';
 import { getImageUrl } from '../../../config/api';
 import { RemoteImage } from '../../../components/media/RemoteImage';
 import { useProdutos } from '../../../context/ProductsContext';
+import { COMPANY_COLORS } from '../../../theme/theme';
 import {
   Quiosque,
   QuiosquePayload,
@@ -270,7 +271,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   saveButton: {
-    backgroundColor: '#F8B125',
+    backgroundColor: COMPANY_COLORS.primary,
     borderRadius: 14,
     paddingVertical: 14,
     alignItems: 'center',
