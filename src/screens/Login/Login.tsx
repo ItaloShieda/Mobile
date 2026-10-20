@@ -10,11 +10,15 @@ import { RootStackParamList } from '../../navigation/types';
 import { AUTH_NAVY } from '../../theme/authTheme';
 import { styles } from './styles';
 
+// Login salvo só na máquina de quem desenvolve, via .env.local (fora do git).
+const LOGIN_SALVO_EMAIL = __DEV__ ? process.env.EXPO_PUBLIC_LOGIN_EMAIL ?? '' : '';
+const LOGIN_SALVO_SENHA = __DEV__ ? process.env.EXPO_PUBLIC_LOGIN_SENHA ?? '' : '';
+
 export default function LoginScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { signIn } = useAuth();
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [email, setEmail] = useState(LOGIN_SALVO_EMAIL);
+  const [senha, setSenha] = useState(LOGIN_SALVO_SENHA);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 

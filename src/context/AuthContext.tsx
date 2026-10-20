@@ -20,7 +20,13 @@ import {
   UsuarioLogado,
   isLegacyToken,
 } from '../services/authService';
-import { loadPerfilUso, savePerfilUso } from '../services/perfilStorage';
+import {
+  loadModoAtivo,
+  loadPerfilUso,
+  saveModoAtivo,
+  savePerfilUso,
+  ModoAtivo,
+} from '../services/perfilStorage';
 import type { PerfilCadastro } from '../types/auth';
 
 interface AuthContextValue {
@@ -28,11 +34,16 @@ interface AuthContextValue {
   token: string | null;
   isLoading: boolean;
   isAuthenticated: boolean;
+  /** Visão ativa das telas. Em contas "Cliente e fornecedor", é a visão escolhida. */
   perfilUso: PerfilCadastro | null;
+  /** Perfil da conta, que define quais visões ela pode usar. */
+  perfilConta: PerfilCadastro | null;
+  podeAlternarPerfil: boolean;
   signIn: (payload: LoginPayload) => Promise<void>;
   signOut: () => Promise<void>;
   updateUser: (usuario: UsuarioLogado) => Promise<void>;
   setPerfilUso: (perfil: PerfilCadastro) => Promise<void>;
+  alternarPerfil: (modo: ModoAtivo) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -42,17 +53,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [perfilUso, setPerfilUsoState] = useState<PerfilCadastro | null>(null);
+  const [perfilConta, setPerfilConta] = useState<PerfilCadastro | null>(null);
 
   const applySession = useCallback(async (session: StoredSession | null) => {
     if (!session || isSessionExpired(session.expiresAt)) {
       setUser(null);
       setToken(null);
       setPerfilUsoState(null);
+      setPerfilConta(null);
       return false;
     }
 
-    const perfil = await loadPerfilUso(session.usuario.email);
-    setPerfilUsoState(perfil);
+    // O perfil salvo no cadastro vale mais; sem ele (outro aparelho), usa o do servidor.
+    const email = session.usuario.email;
+    const perfil = (await loadPerfilUso(email)) ?? session.usuario.perfilUso ?? null;
+    setPerfilConta(perfil);
+    if (perfil === 'ClienteFornecedor') {
+      setPerfilUsoState((await loadModoAtivo(email)) ?? 'Fornecedor');
+    } else {
+      setPerfilUsoState(perfil);
+    }
     setUser(session.usuario);
     setToken(session.token);
     return true;
@@ -123,6 +143,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(null);
       setToken(null);
       setPerfilUsoState(null);
+      setPerfilConta(null);
     }
   }, []);
 
@@ -142,11 +163,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [applySession]);
 
   const setPerfilUso = useCallback(async (perfil: PerfilCadastro) => {
-    setPerfilUsoState(perfil);
+    setPerfilConta(perfil);
+    setPerfilUsoState(perfil === 'ClienteFornecedor' ? 'Fornecedor' : perfil);
     if (user?.email) {
       await savePerfilUso(user.email, perfil);
     }
   }, [user?.email]);
+
+  const podeAlternarPerfil = perfilConta === 'ClienteFornecedor';
+
+  const alternarPerfil = useCallback(async (modo: ModoAtivo) => {
+    if (!podeAlternarPerfil) return;
+    setPerfilUsoState(modo);
+    if (user?.email) {
+      await saveModoAtivo(user.email, modo);
+    }
+  }, [podeAlternarPerfil, user?.email]);
 
   const value = useMemo(
     () => ({
@@ -155,12 +187,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       isLoading,
       isAuthenticated: !!token && !!user,
       perfilUso,
+      perfilConta,
+      podeAlternarPerfil,
       signIn,
       signOut,
       updateUser,
       setPerfilUso,
+      alternarPerfil,
     }),
-    [user, token, isLoading, perfilUso, signIn, signOut, updateUser, setPerfilUso],
+    [
+      user, token, isLoading, perfilUso, perfilConta, podeAlternarPerfil,
+      signIn, signOut, updateUser, setPerfilUso, alternarPerfil,
+    ],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

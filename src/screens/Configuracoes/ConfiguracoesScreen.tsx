@@ -13,6 +13,7 @@ import { useAuth } from '../../context/AuthContext';
 import { BackButton } from '../../components/Header/BackButton';
 import { ScreenHeader } from '../../components/Header/ScreenHeader';
 import { BottomTabBar, useBottomTabBarHeight } from '../../components/layout/BottomTabBar';
+import { AlternarPerfilCard } from '../../components/Perfil/AlternarPerfilCard';
 import { useAppGoBack } from '../../hooks/useAppGoBack';
 import { useHeaderTopPadding } from '../../utils/safeArea';
 import { atualizarEmpresa, atualizarUsuario } from '../../services/authService';
@@ -186,6 +187,7 @@ export function ConfiguracoesScreen() {
           </View>
 
           <View style={clienteStyles.sheet}>
+            <AlternarPerfilCard />
             <View style={clienteStyles.card}>
               <View style={clienteStyles.sectionHeader}>
                 <View style={clienteStyles.sectionIcon}>
@@ -317,6 +319,8 @@ export function ConfiguracoesScreen() {
           inset={16}
           style={{ marginBottom: 16 }}
         />
+
+        <AlternarPerfilCard />
 
         <View style={styles.card}>
           <Text style={styles.sectionTitle}>Dados pessoais</Text>

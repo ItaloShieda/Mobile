@@ -21,6 +21,7 @@ export interface UsuarioLogado {
   perfil: { id: number; nome: string; descricao?: string };
   empresa: { id: number; nome: string; cnpj: string; telefone?: string };
   ativo: number;
+  perfilUso?: PerfilCadastro;
 }
 
 export type CadastroContaResponse = UsuarioLogado;
