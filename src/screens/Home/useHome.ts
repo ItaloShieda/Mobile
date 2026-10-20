@@ -80,12 +80,11 @@ export function useHome() {
     icon: 'cash-outline' | 'bus-outline' | 'person-add-outline' | 'cube-outline';
     screen: string;
     subtitle?: string;
-    wide?: boolean;
   }[] = [
-    { title: 'Vendas', icon: 'cash-outline' as const, screen: 'EmpresaVendas' },
-    { title: 'Caminhoneiros', icon: 'bus-outline' as const, screen: 'Camioneiros' },
-    { title: 'Cadastro', icon: 'person-add-outline' as const, screen: 'CadastroCamioneiros' },
-    { title: 'Logística', icon: 'cube-outline' as const, screen: 'Logistica', wide: true },
+    { title: 'Vendas', subtitle: 'Resumo e pedidos', icon: 'cash-outline' as const, screen: 'EmpresaVendas' },
+    { title: 'Caminhoneiros', subtitle: 'Sua frota', icon: 'bus-outline' as const, screen: 'Camioneiros' },
+    { title: 'Cadastro', subtitle: 'Novo motorista', icon: 'person-add-outline' as const, screen: 'CadastroCamioneiros' },
+    { title: 'Logística', subtitle: 'Status das entregas', icon: 'cube-outline' as const, screen: 'Logistica' },
   ];
 
   const scrollBottomPadding = useTabBarScrollPadding();

@@ -18,6 +18,7 @@ import { useQuiosques } from '../../context/QuiosqueContext';
 import { useProdutos } from '../../context/ProductsContext';
 import { Quiosque, removerQuiosque } from '../../services/barracaService';
 import { styles } from './styles';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export function QuiosqueScreen() {
   const { user } = useAuth();
@@ -77,17 +78,19 @@ export function QuiosqueScreen() {
         wrapContent={false}
         scrollContentStyle={styles.scrollContent}
         tabBar={<BottomTabBar activeRoute="Quiosque" />}
+        headerContent={
+          <View style={styles.searchContainer}>
+            <Ionicons name="search" size={18} color={COMPANY_COLORS.primary} />
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Pesquisar quiosque..."
+              placeholderTextColor="#999"
+              value={busca}
+              onChangeText={setBusca}
+            />
+          </View>
+        }
       >
-        <View style={styles.searchContainer}>
-          <Ionicons name="search" size={18} color="#F8B125" />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Pesquisar quiosque..."
-            placeholderTextColor="#999"
-            value={busca}
-            onChangeText={setBusca}
-          />
-        </View>
 
         <TouchableOpacity style={styles.addButton} onPress={abrirNova} activeOpacity={0.85}>
           <Ionicons name="add-circle-outline" size={18} color="#FFF" />
@@ -95,9 +98,11 @@ export function QuiosqueScreen() {
         </TouchableOpacity>
 
         {loading ? (
-          <ActivityIndicator color="#F8B125" style={styles.loader} />
+          <ActivityIndicator color={COMPANY_COLORS.primary} style={styles.loader} />
         ) : error ? (
           <View style={styles.emptyState}>
+            <Ionicons name="cloud-offline-outline" size={40} color={COMPANY_COLORS.primary} />
+            <Text style={styles.errorTitle}>Não foi possível carregar</Text>
             <Text style={styles.errorText}>{error}</Text>
             <TouchableOpacity onPress={refresh}>
               <Text style={styles.retryText}>Tentar novamente</Text>

@@ -26,6 +26,7 @@ Desenvolver e documentar um sistema mobile integrado a backend para gestão de e
 - Cadastro unificado com JWT
 - CRUD de produtos, quiosques e estoque
 - Marketplace B2B com checkout e rastreamento
+- Quiosques do cliente montados a partir das compras recebidas
 - Modelagem conceitual, lógica e física do banco
 - Documentação conforme ABNT NBR 14724
 
@@ -35,21 +36,23 @@ Unificar gestão interna e compras externas em um único app, aproximando a expe
 
 ### 1.4 Escopo
 
-Arquitetura, frontend, backend e modelagem de dados. Fora do escopo: deploy produção e testes automatizados formais.
+Arquitetura, frontend, backend e modelagem de dados, com testes unitários das regras de estoque dos quiosques do cliente. Fora do escopo: deploy produção e testes de integração ou ponta a ponta.
 
 ---
 
 ## 2 Metodologia e arquitetura
 
-- **Mobile:** Expo 54, React Native 0.83, TypeScript
+- **Mobile:** Expo 54, React Native 0.81, TypeScript 5.9
 - **Backend:** Spring Boot 3.4, Java 17
 - **Banco:** PostgreSQL 18
 - **Comunicação:** HTTP/JSON, porta 8080
+- **Testes (mobile):** Jest + jest-expo
 
 Diagramas em `diagramas/arquitetura-sistema.png` e `diagramas/fluxo-navegacao.png`.
 
 Repositórios:
 - https://github.com/LuanSantos26/Mobile
+- https://github.com/marcelo435/Mobile (versão com quiosques do cliente e novo layout)
 - https://github.com/LuanSantos26/QuickStock-BackEnd
 
 ---
@@ -58,11 +61,37 @@ Repositórios:
 
 ### 3.1 Frontend mobile
 
+- **Perfis:** Cliente (comerciante que compra de fornecedores) e Fornecedor (distribuidora), escolhidos no cadastro, cada um com telas e barra inferior próprias
 - **Navegação:** React Navigation Native Stack; gate auth em `App.tsx`
-- **Contexts:** AuthContext, ProductsContext, QuiosqueContext, PurchaseCartContext
+- **Contexts:** AuthContext, ProductsContext, QuiosqueContext, PurchaseCartContext, ConfirmDialogContext
 - **Services:** auth, product, barraca, marketplace, endereco, formaPagamento, financeiro, notificacao
-- **Telas:** Welcome, Login, Register, Home, Cart, StoreVitrine, ProductDetail, Sacola, PedidoAcompanhamento, AddItem, Quiosque, FormasPagamento, Configuracoes, Cards
-- **Componentes:** ScreenHeader, BottomTabBar, HamburgerButton, modais de formulário
+- **Telas do Fornecedor:** Home, Quiosque, AddItem, EmpresaVendas, EmpresaGraficos, Configuracoes, Logistica, Camioneiros, Cart, StoreVitrine, ProductDetail, Sacola, PedidoAcompanhamento, Cards, FormasPagamento, Enderecos
+- **Telas do Cliente:** Home, Explorar, StoreVitrine, ProductDetail, Reservas, Pedidos, PedidoAcompanhamento, ClienteQuiosques, ClienteQuiosqueForm, Perfil
+- **Componentes:** ScreenHeader e BackTitleHeader (Fornecedor), TabScreenLayout, BottomTabBar e ClienteTabBar, HamburgerButton, modais de formulário
+
+#### 3.1.1 Identidade visual
+
+Os dois perfis seguem o mesmo layout: cabeçalho sólido com cantos inferiores arredondados, cards brancos, botões em pílula e barra inferior preenchida com ícones brancos. A cor muda por perfil:
+
+| Perfil | Cor | Paleta em `theme.ts` | Abas |
+|---|---|---|---|
+| Cliente | Amarelo `#F8B125` | `CLIENTE_COLORS` | Início, Produtos, Carrinho, Pedidos, Quiosques, Perfil |
+| Fornecedor | Azul-marinho `#123B6D` | `COMPANY_COLORS` | Início, Quiosques, Produtos, Vendas, Ajustes |
+
+#### 3.1.2 Quiosques do cliente
+
+O cliente monta quiosques próprios para vender em eventos, usando como estoque o que comprou e recebeu pelo app. Feito só no aplicativo, sobre a API existente: os quiosques vão para `/api/barracas` com o `empresaId` do cliente, e o estoque vem dos produtos da empresa do cliente, que o backend preenche quando o pedido é entregue.
+
+| Regra | Como funciona |
+|---|---|
+| Divisão do estoque | A soma de um produto em todos os quiosques não passa do estoque comprado. Disponível = estoque − quantidade nos outros quiosques |
+| Preço de venda | Informado pelo cliente; gravado no produto (vale para todos os quiosques dele) |
+| Preço pago (referência) | Preço unitário do pedido entregue mais recente com item de mesmo nome; não aparece sem correspondência |
+| Validação | Nome, ao menos um produto, quantidade dentro do disponível, preço > 0 quando há quantidade |
+
+Regras em `src/utils/estoqueQuiosque.ts`, cobertas por 22 testes unitários. Premissas não validadas sem o backend: os pedidos entregues viram produtos da empresa compradora, e `/api/barracas` aceita quiosques de clientes.
+
+Especificação completa: `superpowers/specs/2026-10-03-quiosque-cliente-design.md`.
 
 ### 3.2 Backend API
 
@@ -95,7 +124,7 @@ Tabelas: `perfis`, `empresas`, `usuarios`, `produtos`, `eventos`, `barracas`, `e
 
 ## 4 Conclusão
 
-O QuickStock entrega gestão de estoque e marketplace B2B funcional. Limitações: JWT parcial, dados mock na Home/Carteira, notificações sem tabela, financeiro parcialmente sintético.
+O QuickStock entrega gestão de estoque, marketplace B2B e quiosques do cliente montados a partir das compras, com identidade visual consistente entre os perfis Cliente e Fornecedor. Limitações: JWT parcial, dados mock na Home/Carteira, notificações sem tabela, financeiro parcialmente sintético e quiosques do cliente dependentes de o backend lançar as compras entregues no estoque do comprador.
 
 ---
 

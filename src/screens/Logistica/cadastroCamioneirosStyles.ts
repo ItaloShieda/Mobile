@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -19,10 +20,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 8,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
   },
   summaryValue: {
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     fontWeight: '800',
     fontSize: 32,
   },
@@ -42,7 +43,7 @@ export const styles = StyleSheet.create({
     padding: 16,
     marginTop: 18,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -55,7 +56,7 @@ export const styles = StyleSheet.create({
     padding: 16,
     marginTop: 18,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
   },
   sectionTitle: {
     fontSize: 16,
@@ -81,7 +82,7 @@ export const styles = StyleSheet.create({
   },
   button: {
     marginTop: 18,
-    backgroundColor: '#F8B125',
+    backgroundColor: COMPANY_COLORS.primary,
     borderRadius: 12,
     paddingVertical: 12,
     alignItems: 'center',
@@ -135,7 +136,7 @@ export const styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: '#F8B125',
+    backgroundColor: COMPANY_COLORS.primary,
     marginTop: 6,
     marginRight: 10,
   },

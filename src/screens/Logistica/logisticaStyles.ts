@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -18,7 +19,7 @@ export const styles = StyleSheet.create({
     padding: 18,
     marginTop: 8,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -48,7 +49,7 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 16,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
   },
   stepRow: {
     flexDirection: 'row',
@@ -102,7 +103,7 @@ export const styles = StyleSheet.create({
     borderRadius: 18,
     padding: 16,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
   },
   metricLabel: {
     color: '#666',

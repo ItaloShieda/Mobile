@@ -17,8 +17,9 @@ import type { EtapaPedido, SolicitacaoCompra } from '../../services/marketplaceS
 import { chipStatus, codigoPedido, unidadesPedido } from '../Pedidos/usePedidos';
 import { styles as empresaStyles } from './styles';
 import { clientePedidoStyles as styles } from './styles';
+import { CLIENTE_COLORS } from '../../theme/theme';
 
-const NAVY = '#0E2A5C';
+const PRIMARY = CLIENTE_COLORS.primary;
 
 const STEP_LABELS: Record<string, string> = {
   pedido_efetuado: 'Pedido confirmado',
@@ -64,7 +65,7 @@ export function ClientePedidoDetail({ goBack, pedido, etapas, error }: Props) {
       >
         <View style={[styles.header, { paddingTop: topPadding }]}>
           <View style={styles.headerTop}>
-            <BackButton onPress={goBack} iconColor={NAVY} />
+            <BackButton onPress={goBack} iconColor={PRIMARY} />
             <View style={styles.brandRow}>
               <Text style={styles.brandQuick}>Quick</Text>
               <Text style={styles.brandStock}>Stock</Text>
@@ -98,7 +99,7 @@ export function ClientePedidoDetail({ goBack, pedido, etapas, error }: Props) {
                     fontSize: 11,
                     fontWeight: '700',
                     color:
-                      chip.tone === 'green' ? '#1B7A4A' : chip.tone === 'gold' ? '#C98912' : NAVY,
+                      chip.tone === 'green' ? '#1B7A4A' : chip.tone === 'gold' ? '#C98912' : PRIMARY,
                   }}
                 >
                   {chip.label}
@@ -139,7 +140,7 @@ export function ClientePedidoDetail({ goBack, pedido, etapas, error }: Props) {
 
             <View style={styles.storeRow}>
               <View style={styles.storeIcon}>
-                <Ionicons name="storefront-outline" size={18} color={NAVY} />
+                <Ionicons name="storefront-outline" size={18} color={PRIMARY} />
               </View>
               <View style={{ flex: 1 }}>
                 <Text style={styles.storeName}>{pedido.fornecedorNome}</Text>
@@ -173,7 +174,7 @@ export function ClientePedidoDetail({ goBack, pedido, etapas, error }: Props) {
           <View style={styles.card}>
             <View style={styles.infoRow}>
               <View style={styles.infoIcon}>
-                <Ionicons name="location-outline" size={18} color={NAVY} />
+                <Ionicons name="location-outline" size={18} color={PRIMARY} />
               </View>
               <View style={{ flex: 1 }}>
                 <Text style={styles.infoTitle}>Endereço de entrega</Text>
@@ -184,7 +185,7 @@ export function ClientePedidoDetail({ goBack, pedido, etapas, error }: Props) {
             </View>
             <View style={styles.infoRow}>
               <View style={styles.infoIcon}>
-                <Ionicons name="car-outline" size={18} color={NAVY} />
+                <Ionicons name="car-outline" size={18} color={PRIMARY} />
               </View>
               <View style={{ flex: 1 }}>
                 <Text style={styles.infoTitle}>Entrega</Text>
@@ -211,7 +212,7 @@ export function ClientePedidoDetail({ goBack, pedido, etapas, error }: Props) {
               )
             }
           >
-            <Ionicons name="help-circle-outline" size={18} color={NAVY} />
+            <Ionicons name="help-circle-outline" size={18} color={PRIMARY} />
             <Text style={styles.helpText}>Precisa de ajuda?</Text>
           </TouchableOpacity>
         </View>

@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { GREEN, NAVY, PAGE_BG } from '../ClienteHome/styles';
+import { GREEN, PRIMARY, PAGE_BG } from '../ClienteHome/styles';
 
-export { GREEN, NAVY, GOLD, PAGE_BG } from '../ClienteHome/styles';
+export { GREEN, PRIMARY, GOLD, PAGE_BG } from '../ClienteHome/styles';
 
 export const styles = StyleSheet.create({
   root: {
@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     backgroundColor: PAGE_BG,
   },
   header: {
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
     paddingHorizontal: 20,
     paddingBottom: 28,
     borderBottomLeftRadius: 28,
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     fontWeight: '800',
   },
   brandStock: {
-    color: '#F8B125',
+    color: '#1F2937',
     fontSize: 22,
     fontWeight: '800',
   },
@@ -122,11 +122,11 @@ export const styles = StyleSheet.create({
   categoryLabel: {
     fontSize: 15,
     fontWeight: '700',
-    color: NAVY,
+    color: PRIMARY,
   },
   categorySelected: {
     borderWidth: 2,
-    borderColor: NAVY,
+    borderColor: PRIMARY,
   },
   productsRow: {
     paddingRight: 8,
@@ -165,14 +165,14 @@ export const styles = StyleSheet.create({
   productPrice: {
     fontSize: 13,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
     flex: 1,
   },
   addButton: {
     width: 26,
     height: 26,
     borderRadius: 13,
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -229,7 +229,7 @@ export const styles = StyleSheet.create({
     marginRight: 8,
   },
   verQuiosque: {
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
     borderRadius: 12,
     paddingVertical: 5,
     paddingHorizontal: 10,

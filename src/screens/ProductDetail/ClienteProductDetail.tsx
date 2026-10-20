@@ -11,7 +11,7 @@ import { RemoteImage } from '../../components/media/RemoteImage';
 import { getImageUrl } from '../../config/api';
 import { formatarPreco } from '../../services/productService';
 import { useHeaderTopPadding, useBottomInset } from '../../utils/safeArea';
-import { GREEN, NAVY, clienteProductStyles as styles } from './clienteProductStyles';
+import { GREEN, PRIMARY, clienteProductStyles as styles } from './clienteProductStyles';
 
 interface Props {
   productName: string;
@@ -118,15 +118,15 @@ export function ClienteProductDetail({
 
         <View style={styles.statsRow}>
           <View style={styles.stat}>
-            <Ionicons name="cube-outline" size={20} color={NAVY} />
+            <Ionicons name="cube-outline" size={20} color={PRIMARY} />
             <Text style={styles.statLabel}>Unidade{'\n'}{unidade}</Text>
           </View>
           <View style={styles.stat}>
-            <Ionicons name="clipboard-outline" size={20} color={NAVY} />
+            <Ionicons name="clipboard-outline" size={20} color={PRIMARY} />
             <Text style={styles.statLabel}>Pedido mínimo{'\n'}1 unidade</Text>
           </View>
           <View style={styles.stat}>
-            <Ionicons name="bicycle-outline" size={20} color={NAVY} />
+            <Ionicons name="bicycle-outline" size={20} color={PRIMARY} />
             <Text style={styles.statLabel}>Retirada e{'\n'}Entrega</Text>
           </View>
         </View>
@@ -178,7 +178,7 @@ export function ClienteProductDetail({
             disabled={esgotado}
             onPress={() => setQuantity((q) => Math.max(1, q - 1))}
           >
-            <Ionicons name="remove" size={18} color={NAVY} />
+            <Ionicons name="remove" size={18} color={PRIMARY} />
           </TouchableOpacity>
           <Text style={styles.qtyText}>{quantity}</Text>
           <TouchableOpacity
@@ -186,7 +186,7 @@ export function ClienteProductDetail({
             disabled={esgotado || quantity >= estoqueRestante}
             onPress={() => setQuantity((q) => Math.min(estoqueRestante, q + 1))}
           >
-            <Ionicons name="add" size={18} color={NAVY} />
+            <Ionicons name="add" size={18} color={PRIMARY} />
           </TouchableOpacity>
         </View>
 
@@ -204,10 +204,10 @@ export function ClienteProductDetail({
           activeOpacity={0.85}
         >
           {adding ? (
-            <ActivityIndicator color={NAVY} size="small" />
+            <ActivityIndicator color="#FFF" size="small" />
           ) : (
             <>
-              <Ionicons name="cart-outline" size={14} color={NAVY} />
+              <Ionicons name="cart-outline" size={14} color="#FFF" />
               <Text style={styles.addButtonText} numberOfLines={1}>
                 {esgotado ? 'Esgotado' : 'Adicionar ao carrinho'}
               </Text>

@@ -3,6 +3,7 @@ import { TouchableOpacity, Text, StyleSheet, ViewStyle } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { formatarDiaSemana } from '../../utils/dateFormat';
 import { CalendarModal } from './CalendarModal';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 interface CalendarDatePillProps {
   compact?: boolean;
@@ -23,7 +24,7 @@ export function CalendarDatePill({ compact, style }: CalendarDatePillProps) {
         <Ionicons
           name="calendar-outline"
           size={compact ? 14 : 16}
-          color="#F8B125"
+          color={COMPANY_COLORS.primary}
           style={{ marginLeft: 4 }}
         />
       </TouchableOpacity>
@@ -49,6 +50,6 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     borderRadius: 16,
   },
-  text: { color: '#F8B125', fontSize: 12, fontWeight: 'bold' },
-  textCompact: { color: '#F8B125', fontSize: 11, fontWeight: 'bold' },
+  text: { color: COMPANY_COLORS.primary, fontSize: 12, fontWeight: 'bold' },
+  textCompact: { color: COMPANY_COLORS.primary, fontSize: 11, fontWeight: 'bold' },
 });

@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
-import { ScreenTopGradient } from '../../components/layout/ScreenTopGradient';
-import { BackTitleHeader } from '../../components/Header/BackTitleHeader';
-import { useAppGoBack } from '../../hooks/useAppGoBack';
+import { ScreenHeader } from '../../components/Header/ScreenHeader';
 import { styles } from './styles';
+import { BottomTabBar } from '../../components/layout/BottomTabBar';
 
 export function EmpresaVendasScreen() {
   const navigation = useNavigation<any>();
-  const goBack = useAppGoBack('Home');
 
   // Estado para armazenar vendas
   const [vendasRecentes, setVendasRecentes] = useState([
@@ -42,14 +40,16 @@ export function EmpresaVendasScreen() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container} edges={['left', 'right', 'bottom']}>
-      <ScreenTopGradient />
+    <View style={styles.root}>
+    <SafeAreaView style={styles.container} edges={['left', 'right']}>
       <ScrollView style={styles.scroll} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <BackTitleHeader
-          title="Vendas da empresa"
-          onBack={goBack}
+        <ScreenHeader
+          title="Vendas"
+          subtitle="Acompanhe o faturamento e os pedidos da empresa."
+          inset={16}
+          style={{ marginBottom: 16 }}
           rightSlot={
-            <TouchableOpacity style={styles.headerButton} onPress={() => navigation.navigate('')}>
+            <TouchableOpacity style={styles.headerButton} onPress={() => navigation.navigate('EmpresaGraficos')}>
               <Text style={styles.headerButtonText}>Gráficos</Text>
             </TouchableOpacity>
           }
@@ -93,5 +93,7 @@ export function EmpresaVendasScreen() {
         </View>
       </ScrollView>
     </SafeAreaView>
+    <BottomTabBar activeRoute="EmpresaVendas" />
+    </View>
   );
 }

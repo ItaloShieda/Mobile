@@ -18,7 +18,7 @@ import { useHeaderTopPadding } from '../../utils/safeArea';
 import { formatarPreco } from '../../services/productService';
 import { cartItemKey } from '../../services/purchaseCartStorage';
 import { useSacola } from '../Sacola/useSacola';
-import { NAVY, styles } from './styles';
+import { PRIMARY, styles } from './styles';
 
 export function ReservasScreen() {
   const topPadding = useHeaderTopPadding(8);
@@ -82,7 +82,7 @@ export function ReservasScreen() {
         <View style={styles.sheet}>
           {sacolaVazia ? (
             <View style={styles.emptyCard}>
-              <Ionicons name="cart-outline" size={48} color={NAVY} />
+              <Ionicons name="cart-outline" size={48} color={PRIMARY} />
               <Text style={styles.emptyTitle}>Seu carrinho está vazio</Text>
               <Text style={styles.emptyText}>
                 Explore os quiosques e adicione bebidas para montar seu pedido.
@@ -93,7 +93,7 @@ export function ReservasScreen() {
                 activeOpacity={0.85}
               >
                 <Text style={styles.ctaText}>Ver produtos</Text>
-                <Ionicons name="arrow-forward" size={16} color={NAVY} />
+                <Ionicons name="arrow-forward" size={16} color="#FFF" />
               </TouchableOpacity>
             </View>
           ) : (
@@ -102,7 +102,7 @@ export function ReservasScreen() {
                 <View key={grupo.fornecedorId} style={styles.sellerCard}>
                   <View style={styles.sellerHeader}>
                     <View style={styles.sellerLogo}>
-                      <Ionicons name="storefront-outline" size={18} color={NAVY} />
+                      <Ionicons name="storefront-outline" size={18} color={PRIMARY} />
                     </View>
                     <View style={styles.sellerCopy}>
                       <Text style={styles.sellerKicker}>Vendido por</Text>
@@ -146,7 +146,7 @@ export function ReservasScreen() {
                                 )
                               }
                             >
-                              <Ionicons name="remove" size={14} color={NAVY} />
+                              <Ionicons name="remove" size={14} color={PRIMARY} />
                             </TouchableOpacity>
                             <Text style={styles.stepperValue}>{item.quantidade}</Text>
                             <TouchableOpacity
@@ -159,7 +159,7 @@ export function ReservasScreen() {
                                 )
                               }
                             >
-                              <Ionicons name="add" size={14} color={NAVY} />
+                              <Ionicons name="add" size={14} color={PRIMARY} />
                             </TouchableOpacity>
                           </View>
                           <Text style={styles.itemSubtotal}>
@@ -179,7 +179,7 @@ export function ReservasScreen() {
                 activeOpacity={0.85}
               >
                 <View style={styles.addressIcon}>
-                  <Ionicons name="car-outline" size={20} color={NAVY} />
+                  <Ionicons name="car-outline" size={20} color={PRIMARY} />
                 </View>
                 <View style={styles.addressCopy}>
                   <Text style={styles.addressTitle}>Entrega ou retirada</Text>
@@ -218,11 +218,11 @@ export function ReservasScreen() {
                 activeOpacity={0.85}
               >
                 {loading ? (
-                  <ActivityIndicator color={NAVY} />
+                  <ActivityIndicator color="#FFF" />
                 ) : (
                   <>
                     <Text style={styles.checkoutText}>Finalizar pedido</Text>
-                    <Ionicons name="arrow-forward" size={18} color={NAVY} />
+                    <Ionicons name="arrow-forward" size={18} color="#FFF" />
                   </>
                 )}
               </TouchableOpacity>

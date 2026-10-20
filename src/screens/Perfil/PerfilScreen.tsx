@@ -9,7 +9,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useConfirmDialog } from '../../context/ConfirmDialogContext';
 import { useHeaderTopPadding } from '../../utils/safeArea';
 import { RootStackParamList } from '../../navigation/types';
-import { NAVY, styles } from './styles';
+import { PRIMARY, styles } from './styles';
 
 const MENU = [
   {
@@ -81,7 +81,7 @@ export function PerfilScreen() {
         <View style={styles.sheet}>
           <View style={styles.userCard}>
             <View style={styles.avatar}>
-              <Ionicons name="person-outline" size={24} color={NAVY} />
+              <Ionicons name="person-outline" size={24} color={PRIMARY} />
             </View>
             <View style={styles.userCopy}>
               <Text style={styles.userName} numberOfLines={1}>
@@ -102,7 +102,7 @@ export function PerfilScreen() {
                 activeOpacity={0.8}
               >
                 <View style={styles.menuIconWrap}>
-                  <Ionicons name={item.icon} size={20} color={NAVY} />
+                  <Ionicons name={item.icon} size={20} color={PRIMARY} />
                 </View>
                 <View style={styles.menuCopy}>
                   <Text style={styles.menuTitle}>{item.title}</Text>
@@ -118,7 +118,7 @@ export function PerfilScreen() {
               activeOpacity={0.8}
             >
               <View style={styles.menuIconWrap}>
-                <Ionicons name="notifications-outline" size={20} color={NAVY} />
+                <Ionicons name="notifications-outline" size={20} color={PRIMARY} />
               </View>
               <View style={styles.menuCopy}>
                 <Text style={styles.menuTitle}>Notificações</Text>
@@ -142,7 +142,7 @@ export function PerfilScreen() {
               activeOpacity={0.8}
             >
               <View style={styles.menuIconWrap}>
-                <Ionicons name="help-circle-outline" size={20} color={NAVY} />
+                <Ionicons name="help-circle-outline" size={20} color={PRIMARY} />
               </View>
               <View style={styles.menuCopy}>
                 <Text style={styles.menuTitle}>Ajuda</Text>

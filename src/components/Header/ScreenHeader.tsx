@@ -1,94 +1,130 @@
 import React from 'react';
 import { View, Text, StyleSheet, ViewStyle } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { HamburgerButton } from './HamburgerButton';
 import { HeaderActions } from './HeaderActions';
+import { BrandMark } from './BrandMark';
 import { useHeaderTopPadding } from '../../utils/safeArea';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 interface ScreenHeaderProps {
+  /** Nome exibido na saudação "Olá, {name}!" (tela inicial). */
   name?: string;
+  /** Texto de apoio abaixo da saudação. */
   greeting?: string;
   showGreeting?: boolean;
   showCartBadge?: boolean;
   cartItemCount?: number;
   onCartPress?: () => void;
+  title?: string;
+  subtitle?: string;
+  /** Ação extra à direita, antes do sino (ex.: botão "Gráficos"). */
+  rightSlot?: React.ReactNode;
+  /** Aumenta o espaço inferior para o primeiro card "subir" sobre o cabeçalho. */
+  overlap?: boolean;
+  /** Padding horizontal do contêiner pai, compensado para o cabeçalho ocupar a largura toda. */
+  inset?: number;
+  children?: React.ReactNode;
   style?: ViewStyle;
 }
 
+/** Cabeçalho das abas do fornecedor, com o mesmo layout das abas do cliente. */
 export function ScreenHeader({
   name,
-  greeting = 'Bom dia.',
+  greeting,
   showGreeting = false,
   showCartBadge,
   cartItemCount,
   onCartPress,
+  title,
+  subtitle,
+  rightSlot,
+  overlap = false,
+  inset = 0,
+  children,
   style,
 }: ScreenHeaderProps) {
   const topPadding = useHeaderTopPadding(8);
 
   return (
-    <View style={[styles.container, { paddingTop: topPadding }, style]}>
+    <View
+      style={[
+        styles.container,
+        { paddingTop: topPadding, marginHorizontal: -inset },
+        overlap && styles.overlap,
+        style,
+      ]}
+    >
       <View style={styles.topRow}>
-        <HamburgerButton />
-        <HeaderActions
-          showCalendar={showGreeting}
-          showCartBadge={showCartBadge}
-          cartItemCount={cartItemCount}
-          onCartPress={onCartPress}
-        />
+        <View style={styles.leftGroup}>
+          <HamburgerButton />
+          <BrandMark size={22} />
+        </View>
+        <View style={styles.rightGroup}>
+          {rightSlot}
+          <HeaderActions
+            showCartBadge={showCartBadge}
+            cartItemCount={cartItemCount}
+            onCartPress={onCartPress}
+          />
+        </View>
       </View>
 
       {showGreeting ? (
-        <View style={styles.greetingRow}>
-          <View style={styles.avatarPlaceholder}>
-            <Ionicons name="person" size={24} color="#F8B125" />
-          </View>
-          <View style={styles.textContainer}>
-            <Text style={styles.greetingText}>{greeting}</Text>
-            <Text style={styles.userName}>{name ?? 'Usuário'}</Text>
-          </View>
-        </View>
+        <>
+          <Text style={styles.greeting} numberOfLines={2}>Olá, {name ?? 'Usuário'}!</Text>
+          {greeting ? <Text style={styles.subtitle}>{greeting}</Text> : null}
+        </>
       ) : null}
+
+      {title ? <Text style={styles.title}>{title}</Text> : null}
+      {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
+      {children}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15,
-    paddingBottom: 8,
+    backgroundColor: COMPANY_COLORS.primary,
+    paddingHorizontal: 20,
+    paddingBottom: 22,
+    borderBottomLeftRadius: 32,
+    borderBottomRightRadius: 32,
+  },
+  overlap: {
+    paddingBottom: 88,
   },
   topRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginBottom: 22,
   },
-  greetingRow: {
+  leftGroup: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 10,
+    gap: 6,
   },
-  avatarPlaceholder: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'center',
+  rightGroup: {
+    flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 12,
+    gap: 8,
   },
-  textContainer: {
-    flex: 1,
-    justifyContent: 'center',
+  greeting: {
+    color: '#FFF',
+    fontSize: 32,
+    fontWeight: '800',
+    marginBottom: 6,
   },
-  greetingText: {
-    fontSize: 16,
-    color: '#FFFFFF',
-    opacity: 0.9,
+  title: {
+    color: '#FFF',
+    fontSize: 28,
+    fontWeight: '800',
+    marginBottom: 6,
   },
-  userName: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
+  subtitle: {
+    color: 'rgba(255,255,255,0.78)',
+    fontSize: 15,
+    lineHeight: 22,
   },
 });

@@ -18,8 +18,9 @@ import { useAppGoBack } from '../../hooks/useAppGoBack';
 import { useHeaderTopPadding } from '../../utils/safeArea';
 import { EnderecoEntrega, listarEnderecos } from '../../services/enderecoService';
 import { clienteStyles, styles } from './styles';
+import { CLIENTE_COLORS } from '../../theme/theme';
 
-const NAVY = '#0E2A5C';
+const PRIMARY = CLIENTE_COLORS.primary;
 
 function EmptyIllustration() {
   return (
@@ -27,9 +28,9 @@ function EmptyIllustration() {
       <View style={clienteStyles.illustrationBg} />
       <Ionicons name="business-outline" size={36} color="#C5D4E8" />
       <View style={clienteStyles.pinWrap}>
-        <Ionicons name="location" size={36} color={NAVY} />
+        <Ionicons name="location" size={36} color={PRIMARY} />
       </View>
-      <Ionicons name="car-outline" size={52} color={NAVY} style={{ marginTop: 28 }} />
+      <Ionicons name="car-outline" size={52} color={PRIMARY} style={{ marginTop: 28 }} />
     </View>
   );
 }
@@ -91,7 +92,7 @@ export function EnderecosScreen() {
         >
           <View style={[clienteStyles.header, { paddingTop: topPadding }]}>
             <View style={clienteStyles.headerTop}>
-              <BackButton onPress={goBack} iconColor={NAVY} />
+              <BackButton onPress={goBack} iconColor={PRIMARY} />
               <View style={clienteStyles.brandRow}>
                 <Text style={clienteStyles.brandQuick}>Quick</Text>
                 <Text style={clienteStyles.brandStock}>Stock</Text>
@@ -110,12 +111,12 @@ export function EnderecosScreen() {
               onPress={() => setModalVisible(true)}
               activeOpacity={0.85}
             >
-              <Ionicons name="add-circle" size={20} color={NAVY} />
+              <Ionicons name="add-circle" size={20} color="#FFF" />
               <Text style={clienteStyles.addButtonText}>Adicionar endereço</Text>
             </TouchableOpacity>
 
             {loading ? (
-              <ActivityIndicator color={NAVY} style={{ marginTop: 24 }} />
+              <ActivityIndicator color={PRIMARY} style={{ marginTop: 24 }} />
             ) : error ? (
               <View style={clienteStyles.emptyCard}>
                 <Text style={clienteStyles.errorText}>{error}</Text>
@@ -134,7 +135,7 @@ export function EnderecosScreen() {
                 </View>
                 <View style={clienteStyles.infoCard}>
                   <View style={clienteStyles.infoIcon}>
-                    <Ionicons name="information-circle" size={18} color={NAVY} />
+                    <Ionicons name="information-circle" size={18} color={PRIMARY} />
                   </View>
                   <Text style={clienteStyles.infoText}>
                     Você poderá escolher o endereço ao finalizar o pedido.
@@ -146,7 +147,7 @@ export function EnderecosScreen() {
                 {enderecos.map((endereco) => (
                   <View key={endereco.id} style={clienteStyles.enderecoRow}>
                     <View style={clienteStyles.enderecoIcon}>
-                      <Ionicons name="location-outline" size={20} color={NAVY} />
+                      <Ionicons name="location-outline" size={20} color={PRIMARY} />
                     </View>
                     <View style={clienteStyles.enderecoInfo}>
                       <Text style={clienteStyles.enderecoApelido}>{endereco.apelido}</Text>

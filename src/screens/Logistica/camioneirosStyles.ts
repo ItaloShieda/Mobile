@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -18,10 +19,10 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderWidth: 1,
-    borderColor: '#F8B125',
+    borderColor: COMPANY_COLORS.primary,
   },
   headerButtonText: {
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     fontWeight: '700',
     fontSize: 12,
   },
@@ -31,11 +32,11 @@ export const styles = StyleSheet.create({
     padding: 18,
     marginTop: 8,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
     alignItems: 'center',
   },
   summaryValue: {
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     fontSize: 32,
     fontWeight: '800',
   },
@@ -49,7 +50,7 @@ export const styles = StyleSheet.create({
     padding: 16,
     marginTop: 16,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },

@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { NAVY, PAGE_BG } from '../ClienteHome/styles';
+import { PRIMARY, PAGE_BG } from '../ClienteHome/styles';
 
-export { NAVY, PAGE_BG } from '../ClienteHome/styles';
+export { PRIMARY, PAGE_BG } from '../ClienteHome/styles';
 
 export const styles = StyleSheet.create({
   root: {
@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     backgroundColor: PAGE_BG,
   },
   header: {
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
     paddingHorizontal: 20,
     paddingBottom: 28,
     borderBottomLeftRadius: 28,
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     fontWeight: '800',
   },
   brandStock: {
-    color: '#F8B125',
+    color: '#1F2937',
     fontSize: 22,
     fontWeight: '800',
   },

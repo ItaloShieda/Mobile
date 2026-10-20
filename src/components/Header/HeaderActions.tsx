@@ -8,6 +8,7 @@ import { contarNaoLidas } from '../../utils/notificacoesStorage';
 import { formatarDiaSemana } from '../../utils/dateFormat';
 import { CalendarModal } from './CalendarModal';
 import { NotificationsModal } from '../Card/NotificationsModal';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 interface HeaderActionsProps {
   showCalendar?: boolean;
@@ -64,7 +65,7 @@ export function HeaderActions({
             activeOpacity={0.8}
           >
             <Text style={styles.dateText}>{formatarDiaSemana()}</Text>
-            <Ionicons name="calendar-outline" size={16} color="#F8B125" style={styles.calendarIcon} />
+            <Ionicons name="calendar-outline" size={16} color={COMPANY_COLORS.primary} style={styles.calendarIcon} />
           </TouchableOpacity>
         ) : null}
 
@@ -80,7 +81,7 @@ export function HeaderActions({
           onPress={() => setNotificationsOpen(true)}
           activeOpacity={0.8}
         >
-            <Ionicons name="notifications-outline" size={18} color="#F8B125" />
+            <Ionicons name="notifications-outline" size={22} color="#FFF" />
             {unreadCount > 0 ? (
               <View style={styles.badge}>
                 <Text style={styles.badgeText}>{unreadCount > 9 ? '9+' : unreadCount}</Text>
@@ -115,23 +116,22 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   dateText: {
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     fontSize: 12,
     fontWeight: 'bold',
   },
   calendarIcon: { marginLeft: 4 },
   iconButton: {
-    width: 32,
-    height: 32,
-    backgroundColor: '#FFF',
-    borderRadius: 16,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     justifyContent: 'center',
     alignItems: 'center',
   },
   badge: {
     position: 'absolute',
-    top: -1,
-    right: -1,
+    top: 2,
+    right: 2,
     minWidth: 16,
     height: 16,
     borderRadius: 8,
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    backgroundColor: '#F8B125',
+    backgroundColor: COMPANY_COLORS.primary,
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 20,

@@ -1,16 +1,14 @@
 import { StyleSheet } from 'react-native';
+import { CLIENTE_COLORS, COMPANY_COLORS } from '../../theme/theme';
 
 export const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    backgroundColor: COMPANY_COLORS.pageBackground,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#FAFAFA',
-  },
-  topGradient: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 350,
+    backgroundColor: COMPANY_COLORS.pageBackground,
   },
   scroll: {
     flex: 1,
@@ -22,7 +20,7 @@ export const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     marginBottom: 4,
   },
   sectionSubtitle: {
@@ -36,7 +34,7 @@ export const styles = StyleSheet.create({
     padding: 16,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
     elevation: 8,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
@@ -57,13 +55,13 @@ export const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
     borderRadius: 12,
     paddingHorizontal: 12,
     paddingVertical: 10,
     fontSize: 15,
     color: '#333',
-    backgroundColor: '#FFFDF7',
+    backgroundColor: COMPANY_COLORS.primarySoft,
   },
   errorText: {
     color: '#D64545',
@@ -78,7 +76,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   saveButton: {
-    backgroundColor: '#F8B125',
+    backgroundColor: COMPANY_COLORS.primary,
     borderRadius: 12,
     paddingVertical: 14,
     alignItems: 'center',
@@ -94,7 +92,7 @@ export const styles = StyleSheet.create({
   },
 });
 
-const NAVY = '#0E2A5C';
+const PRIMARY = CLIENTE_COLORS.primary;
 const GOLD = '#F8B125';
 const PAGE_BG = '#F3F5F8';
 
@@ -104,7 +102,7 @@ export const clienteStyles = StyleSheet.create({
     backgroundColor: PAGE_BG,
   },
   header: {
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
     paddingHorizontal: 20,
     paddingBottom: 22,
     borderBottomLeftRadius: 28,
@@ -128,7 +126,7 @@ export const clienteStyles = StyleSheet.create({
     fontWeight: '800',
   },
   brandStock: {
-    color: GOLD,
+    color: '#1F2937',
     fontSize: 20,
     fontWeight: '800',
   },
@@ -165,7 +163,7 @@ export const clienteStyles = StyleSheet.create({
   sectionTitle: {
     fontSize: 16,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
   },
   sectionSubtitle: {
     fontSize: 12,
@@ -175,7 +173,7 @@ export const clienteStyles = StyleSheet.create({
   label: {
     fontSize: 13,
     fontWeight: '700',
-    color: NAVY,
+    color: PRIMARY,
     marginBottom: 6,
   },
   field: {
@@ -208,7 +206,7 @@ export const clienteStyles = StyleSheet.create({
   saveButtonText: {
     fontSize: 16,
     fontWeight: '800',
-    color: NAVY,
+    color: '#FFF',
   },
   errorText: {
     color: '#C62828',

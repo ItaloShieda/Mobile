@@ -13,6 +13,7 @@ import {
   PARTNER_COVER_HEIGHT,
   STORE_COVER_WIDTH,
 } from '../cartLayout';
+import { COMPANY_COLORS } from '../../../theme/theme';
 
 export function LogoAvatar({
   nome,
@@ -67,7 +68,7 @@ export function CoverImage({
         />
       ) : (
         <LinearGradient
-          colors={['#F8B125', '#FFD76A']}
+          colors={[COMPANY_COLORS.primary, COMPANY_COLORS.primaryMuted]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={styles.coverImage}
@@ -116,7 +117,7 @@ export const FeaturedBanner = ({ fornecedor, onPress }: FeaturedBannerProps) => 
       </View>
       <View style={styles.featuredBadge}>
         <Text style={styles.featuredBadgeText}>Ver loja</Text>
-        <Ionicons name="chevron-forward" size={14} color="#F8B125" />
+        <Ionicons name="chevron-forward" size={14} color={COMPANY_COLORS.primary} />
       </View>
     </View>
   </TouchableOpacity>
@@ -205,7 +206,7 @@ export const StoreCard = ({ fornecedor, onPress }: StoreCardProps) => (
         <View style={styles.storeTextContainer}>
           <Text style={styles.storeName} numberOfLines={1}>{fornecedor.nome}</Text>
           <View style={styles.ratingContainer}>
-            <Ionicons name="storefront-outline" size={14} color="#F8B125" />
+            <Ionicons name="storefront-outline" size={14} color={COMPANY_COLORS.primary} />
             <Text style={styles.ratingText}>{labelTipoFornecedor(fornecedor.tipo)}</Text>
             <Text style={styles.reviewsText}>({fornecedor.totalProdutos} produtos)</Text>
           </View>

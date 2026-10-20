@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { NAVY, PAGE_BG } from '../ClienteHome/styles';
+import { PRIMARY, PAGE_BG } from '../ClienteHome/styles';
 
-export { GOLD, NAVY, PAGE_BG } from '../ClienteHome/styles';
+export { GOLD, PRIMARY, PAGE_BG } from '../ClienteHome/styles';
 
 export const styles = StyleSheet.create({
   root: {
@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     backgroundColor: PAGE_BG,
   },
   header: {
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
     paddingHorizontal: 20,
     paddingBottom: 22,
     borderBottomLeftRadius: 28,
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     fontWeight: '800',
   },
   brandStock: {
-    color: '#F8B125',
+    color: '#1F2937',
     fontSize: 20,
     fontWeight: '800',
   },
@@ -64,7 +64,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   tabActive: {
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
   },
   tabText: {
     fontSize: 11,
@@ -97,7 +97,7 @@ export const styles = StyleSheet.create({
   pedidoCode: {
     fontSize: 15,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
   },
   pedidoDate: {
     fontSize: 12,
@@ -120,7 +120,7 @@ export const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: '700',
   },
-  chipTextBlue: { color: NAVY },
+  chipTextBlue: { color: PRIMARY },
   chipTextGold: { color: '#C98912' },
   chipTextGreen: { color: '#1B7A4A' },
   chipTextGray: { color: '#6B7280' },
@@ -159,12 +159,12 @@ export const styles = StyleSheet.create({
   },
   pedidoTotal: {
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
   },
   detalhes: {
     fontSize: 13,
     fontWeight: '700',
-    color: NAVY,
+    color: PRIMARY,
   },
   emptyCard: {
     backgroundColor: '#FFF',
@@ -175,7 +175,7 @@ export const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 17,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
     marginTop: 12,
     textAlign: 'center',
   },
@@ -194,7 +194,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 22,
   },
   ctaText: {
-    color: NAVY,
+    color: '#FFF',
     fontSize: 15,
     fontWeight: '800',
   },

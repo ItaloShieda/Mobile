@@ -19,7 +19,7 @@ import { usePurchaseCart } from '../../context/PurchaseCartContext';
 import { useHeaderTopPadding } from '../../utils/safeArea';
 import { labelTipoFornecedor } from '../../services/marketplaceService';
 import { formatarPreco, Produto, normalizarEstoque } from '../../services/productService';
-import { NAVY, clienteQuiosqueStyles as styles } from './clienteQuiosqueStyles';
+import { PRIMARY, clienteQuiosqueStyles as styles } from './clienteQuiosqueStyles';
 
 const CATEGORIAS = [
   { id: 'todas', label: 'Todas', keywords: [] as string[] },
@@ -143,7 +143,7 @@ export function ClienteQuiosqueVitrine({
               resizeMode="cover"
             />
           ) : (
-            <LinearGradient colors={['#1B3A6B', '#4BA3D9']} style={styles.bannerImage} />
+            <LinearGradient colors={['#F8B125', '#FFD873']} style={styles.bannerImage} />
           )}
           <View style={styles.bannerOverlay}>
             <Text style={styles.bannerSlogan}>Tudo em bebidas para o seu negócio.</Text>
@@ -179,17 +179,17 @@ export function ClienteQuiosqueVitrine({
 
           <View style={styles.statsRow}>
             <View style={styles.stat}>
-              <Ionicons name="cube-outline" size={20} color={NAVY} />
+              <Ionicons name="cube-outline" size={20} color={PRIMARY} />
               <Text style={styles.statLabel}>
                 {produtos.length}{'\n'}Produtos
               </Text>
             </View>
             <View style={styles.stat}>
-              <Ionicons name="storefront-outline" size={20} color={NAVY} />
+              <Ionicons name="storefront-outline" size={20} color={PRIMARY} />
               <Text style={styles.statLabel}>Retirada{'\n'}na loja</Text>
             </View>
             <View style={styles.stat}>
-              <Ionicons name="bicycle-outline" size={20} color={NAVY} />
+              <Ionicons name="bicycle-outline" size={20} color={PRIMARY} />
               <Text style={styles.statLabel}>Entrega{'\n'}na região</Text>
             </View>
           </View>
@@ -212,7 +212,7 @@ export function ClienteQuiosqueVitrine({
           </ScrollView>
 
           {loading ? (
-            <ActivityIndicator color={NAVY} style={{ marginVertical: 20 }} />
+            <ActivityIndicator color={PRIMARY} style={{ marginVertical: 20 }} />
           ) : error ? (
             <Text style={styles.empty}>{error}</Text>
           ) : filtrados.length === 0 ? (
@@ -269,7 +269,7 @@ export function ClienteQuiosqueVitrine({
         onPress={() => navigation.navigate('Reservas')}
       >
         <View style={styles.cartBarLeft}>
-          <Ionicons name="cart-outline" size={20} color={NAVY} />
+          <Ionicons name="cart-outline" size={20} color="#FFF" />
           <Text style={styles.cartBarText}>Ver carrinho</Text>
         </View>
         <Text style={styles.cartBarCount}>{itemCount} {itemCount === 1 ? 'item' : 'itens'}</Text>

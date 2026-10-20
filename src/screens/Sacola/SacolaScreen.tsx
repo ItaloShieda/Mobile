@@ -20,6 +20,7 @@ import { iconeTipoPagamento } from '../../services/formaPagamentoService';
 import { cartItemKey } from '../../services/purchaseCartStorage';
 import { METODOS_PADRAO, useSacola } from './useSacola';
 import { styles } from './styles';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export function SacolaScreen() {
   const {
@@ -123,7 +124,7 @@ export function SacolaScreen() {
               onPress={() => navigation.navigate('Cart')}
             >
               <View style={styles.emptyActionIcon}>
-                <Ionicons name="storefront-outline" size={22} color="#F8B125" />
+                <Ionicons name="storefront-outline" size={22} color={COMPANY_COLORS.primary} />
               </View>
               <View style={styles.emptyActionCopy}>
                 <Text style={styles.emptyActionTitle}>Explorar lojas</Text>
@@ -137,7 +138,7 @@ export function SacolaScreen() {
               onPress={() => navigation.navigate('Home')}
             >
               <View style={styles.emptyActionIcon}>
-                <Ionicons name="home-outline" size={22} color="#F8B125" />
+                <Ionicons name="home-outline" size={22} color={COMPANY_COLORS.primary} />
               </View>
               <View style={styles.emptyActionCopy}>
                 <Text style={styles.emptyActionTitle}>Ir para o início</Text>
@@ -164,7 +165,7 @@ export function SacolaScreen() {
           <View key={grupo.fornecedorId} style={styles.grupoCard}>
             <View style={styles.grupoHeader}>
               <View style={styles.grupoNomeWrap}>
-                <Ionicons name="storefront-outline" size={16} color="#F8B125" />
+                <Ionicons name="storefront-outline" size={16} color={COMPANY_COLORS.primary} />
                 <Text style={styles.grupoNome} numberOfLines={1}>
                   {grupo.fornecedorNome}
                 </Text>
@@ -198,11 +199,11 @@ export function SacolaScreen() {
           disabled={loadingEnderecos}
         >
           {loadingEnderecos ? (
-            <ActivityIndicator color="#F8B125" />
+            <ActivityIndicator color={COMPANY_COLORS.primary} />
           ) : enderecoSelecionado ? (
             <>
               <View style={styles.addressIconWrap}>
-                <Ionicons name="location-outline" size={22} color="#F8B125" />
+                <Ionicons name="location-outline" size={22} color={COMPANY_COLORS.primary} />
               </View>
               <View style={styles.addressInfo}>
                 <Text style={styles.addressApelido}>{enderecoSelecionado.apelido}</Text>
@@ -213,7 +214,7 @@ export function SacolaScreen() {
           ) : (
             <>
               <View style={styles.addressIconWrap}>
-                <Ionicons name="add-circle-outline" size={24} color="#F8B125" />
+                <Ionicons name="add-circle-outline" size={24} color={COMPANY_COLORS.primary} />
               </View>
               <View style={styles.addressInfo}>
                 <Text style={styles.addressCadastroTitle}>Cadastrar endereço de entrega</Text>
@@ -237,7 +238,7 @@ export function SacolaScreen() {
           <Text style={styles.sectionSubtitle}>Escolha como deseja pagar</Text>
         </View>
         {loadingFormas ? (
-          <ActivityIndicator color="#F8B125" style={{ marginVertical: 12 }} />
+          <ActivityIndicator color={COMPANY_COLORS.primary} style={{ marginVertical: 12 }} />
         ) : (
           <View style={styles.paymentRow}>
             {(formasPagamento.length > 0
@@ -254,7 +255,7 @@ export function SacolaScreen() {
                   <Ionicons
                     name={iconeTipoPagamento(forma.id)}
                     size={16}
-                    color={selected ? '#FFF' : '#F8B125'}
+                    color={selected ? '#FFF' : COMPANY_COLORS.primary}
                   />
                   <Text style={[styles.paymentLabel, selected && styles.paymentLabelSelected]}>
                     {forma.label}
@@ -329,7 +330,7 @@ export function SacolaScreen() {
                 setModalCadastroEndereco(true);
               }}
             >
-              <Ionicons name="add" size={18} color="#F8B125" />
+              <Ionicons name="add" size={18} color={COMPANY_COLORS.primary} />
               <Text style={styles.modalAddBtnText}>Adicionar novo endereço</Text>
             </TouchableOpacity>
           </Pressable>

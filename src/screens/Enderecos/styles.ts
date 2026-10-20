@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { CLIENTE_COLORS } from '../../theme/theme';
 
 export const styles = StyleSheet.create({
   addButton: {
@@ -123,7 +124,7 @@ export const styles = StyleSheet.create({
   },
 });
 
-const NAVY = '#0E2A5C';
+const PRIMARY = CLIENTE_COLORS.primary;
 const GOLD = '#F8B125';
 const PAGE_BG = '#F3F5F8';
 
@@ -133,7 +134,7 @@ export const clienteStyles = StyleSheet.create({
     backgroundColor: PAGE_BG,
   },
   header: {
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
     paddingHorizontal: 20,
     paddingBottom: 22,
     borderBottomLeftRadius: 28,
@@ -157,7 +158,7 @@ export const clienteStyles = StyleSheet.create({
     fontWeight: '800',
   },
   brandStock: {
-    color: GOLD,
+    color: '#1F2937',
     fontSize: 20,
     fontWeight: '800',
   },
@@ -189,7 +190,7 @@ export const clienteStyles = StyleSheet.create({
     marginBottom: 14,
   },
   addButtonText: {
-    color: NAVY,
+    color: '#FFF',
     fontSize: 15,
     fontWeight: '800',
   },
@@ -283,7 +284,7 @@ export const clienteStyles = StyleSheet.create({
   enderecoApelido: {
     fontSize: 15,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
   },
   enderecoResumo: {
     fontSize: 12,
@@ -301,7 +302,7 @@ export const clienteStyles = StyleSheet.create({
   principalText: {
     fontSize: 11,
     fontWeight: '700',
-    color: NAVY,
+    color: PRIMARY,
   },
   errorText: {
     color: '#C62828',

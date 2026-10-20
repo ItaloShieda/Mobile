@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
 import { BackTitleHeader } from '../../components/Header/BackTitleHeader';
 import { HeaderCartBadge } from '../../components/Header/HeaderCartBadge';
 import { RemoteImage } from '../../components/media/RemoteImage';
@@ -78,8 +77,6 @@ export function ProductDetailScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['left', 'right', 'bottom']}>
-      <LinearGradient colors={['#F8B125', '#FAFAFA']} style={styles.topGradient} />
-
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}

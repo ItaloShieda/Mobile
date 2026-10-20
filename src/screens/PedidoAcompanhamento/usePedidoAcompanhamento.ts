@@ -12,11 +12,12 @@ import {
 } from '../../services/marketplaceService';
 import {
   ETAPAS_PADRAO,
-  GOLD,
+  ACCENT,
   POLL_INTERVAL_MS,
   SUCCESS,
   SUCCESS_LIGHT,
 } from './components/PedidoParts';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export function usePedidoAcompanhamento() {
   const navigation = useNavigation<any>();
@@ -102,8 +103,8 @@ export function usePedidoAcompanhamento() {
     bg: string;
   }>(() => {
     if (entregue) return { name: 'check-decagram', color: SUCCESS, bg: SUCCESS_LIGHT };
-    if (emRota) return { name: 'truck-fast', color: GOLD, bg: '#FFF8E7' };
-    return { name: 'timer-outline', color: GOLD, bg: '#FFF8E7' };
+    if (emRota) return { name: 'truck-fast', color: ACCENT, bg: COMPANY_COLORS.primarySoft };
+    return { name: 'timer-outline', color: ACCENT, bg: COMPANY_COLORS.primarySoft };
   }, [entregue, emRota]);
 
   return {
@@ -124,7 +125,7 @@ export function usePedidoAcompanhamento() {
     tituloHero,
     subtituloHero,
     heroIcon,
-    GOLD,
+    ACCENT,
     perfilUso,
   };
 }

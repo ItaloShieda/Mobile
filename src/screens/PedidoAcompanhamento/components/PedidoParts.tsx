@@ -3,8 +3,9 @@ import { View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import type { EtapaPedido } from '../../../services/marketplaceService';
 import { styles } from '../styles';
+import { COMPANY_COLORS } from '../../../theme/theme';
 
-export const GOLD = '#F8B125';
+export const ACCENT = COMPANY_COLORS.primary;
 export const SUCCESS = '#2E7D32';
 export const SUCCESS_LIGHT = '#E8F5E9';
 export const POLL_INTERVAL_MS = 5000;
@@ -64,7 +65,7 @@ export function TimelineStep({ etapa, isLast }: { etapa: EtapaPedido; isLast: bo
             <Ionicons
               name={iconeEtapa(etapa.codigo)}
               size={16}
-              color={ativa ? GOLD : '#BDBDBD'}
+              color={ativa ? ACCENT : '#BDBDBD'}
             />
           )}
         </View>
@@ -122,7 +123,7 @@ export function InfoRow({
   return (
     <View style={styles.infoRow}>
       <View style={styles.infoIconWrap}>
-        <Ionicons name={icon} size={18} color={GOLD} />
+        <Ionicons name={icon} size={18} color={ACCENT} />
       </View>
       <View style={styles.infoTextWrap}>
         <Text style={styles.infoLabel}>{label}</Text>

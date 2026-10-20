@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BackTitleHeader } from '../../components/Header/BackTitleHeader';
-import { ScreenTopGradient } from '../../components/layout/ScreenTopGradient';
 import { useAppGoBack } from '../../hooks/useAppGoBack';
 import { styles } from './cadastroCamioneirosStyles';
 
@@ -99,7 +98,6 @@ export function CadastroCamioneirosScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['left', 'right', 'bottom']}>
-      <ScreenTopGradient />
 
       <ScrollView
         style={styles.scroll}

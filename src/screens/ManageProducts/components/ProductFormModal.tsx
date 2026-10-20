@@ -16,6 +16,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Feather } from '@expo/vector-icons';
 import { getImageUrl } from '../../../config/api';
 import { NOME_PRODUTO_MAX, prepararImagemProduto } from '../../../utils/productImage';
+import { COMPANY_COLORS } from '../../../theme/theme';
 import {
   Produto,
   ProdutoPayload,
@@ -179,7 +180,7 @@ export function ProductFormModal({
                 <Image source={{ uri: previewUri }} style={styles.previewImage} resizeMode="cover" />
               ) : (
                 <View style={styles.imagePlaceholder}>
-                  <Feather name="camera" size={32} color="#F8B125" />
+                  <Feather name="camera" size={32} color={COMPANY_COLORS.primary} />
                   <Text style={styles.imagePlaceholderText}>Escolher imagem</Text>
                 </View>
               )}
@@ -304,7 +305,7 @@ const styles = StyleSheet.create({
     height: 120,
     borderRadius: 16,
     borderWidth: 1.5,
-    borderColor: '#F8B125',
+    borderColor: COMPANY_COLORS.primary,
     borderStyle: 'dashed',
     justifyContent: 'center',
     alignItems: 'center',
@@ -338,7 +339,7 @@ const styles = StyleSheet.create({
   priceHint: {
     marginTop: -8,
     marginBottom: 12,
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
     fontWeight: '600',
   },
   charHint: {
@@ -354,7 +355,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   saveButton: {
-    backgroundColor: '#F8B125',
+    backgroundColor: COMPANY_COLORS.primary,
     borderRadius: 14,
     paddingVertical: 14,
     alignItems: 'center',

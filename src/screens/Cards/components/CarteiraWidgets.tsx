@@ -9,6 +9,7 @@ import {
   extrairTotaisFinanceiros,
 } from '../../../services/financeiroService';
 import { styles } from '../styles';
+import { COMPANY_COLORS } from '../../../theme/theme';
 
 export type AbaCarteira = 'stockDia' | 'estatisticas';
 
@@ -122,7 +123,7 @@ export function StockDoDiaTab({
   if (loading) {
     return (
       <View style={styles.centerBox}>
-        <ActivityIndicator color="#F8B125" size="large" />
+        <ActivityIndicator color={COMPANY_COLORS.primary} size="large" />
         <Text style={styles.loadingHint}>Carregando stock do dia...</Text>
       </View>
     );
@@ -153,7 +154,7 @@ export function StockDoDiaTab({
   return (
     <View style={styles.stockSection}>
       <View style={styles.datePill}>
-        <Ionicons name="calendar-outline" size={16} color="#F8B125" />
+        <Ionicons name="calendar-outline" size={16} color={COMPANY_COLORS.primary} />
         <Text style={styles.datePillText}>{stock.dataLabel}</Text>
       </View>
 
@@ -186,7 +187,7 @@ export function StockDoDiaTab({
         <Text style={styles.movimentosTitle}>Movimentações do dia</Text>
         {stock.movimentos.length === 0 ? (
           <View style={styles.movimentosEmpty}>
-            <MaterialCommunityIcons name="package-variant" size={40} color="#F8B125" />
+            <MaterialCommunityIcons name="package-variant" size={40} color={COMPANY_COLORS.primary} />
             <Text style={styles.movimentosEmptyText}>
               Nenhuma compra ou venda registrada hoje.
             </Text>
@@ -215,7 +216,7 @@ export function EstatisticasTab({
   if (loading) {
     return (
       <View style={styles.centerBox}>
-        <ActivityIndicator color="#F8B125" size="large" />
+        <ActivityIndicator color={COMPANY_COLORS.primary} size="large" />
       </View>
     );
   }
@@ -276,7 +277,7 @@ export function EstatisticasTab({
         <ResumoCard
           label="Lucro total"
           value={formatarPreco(totais.lucroTotal)}
-          accent="#F8B125"
+          accent={COMPANY_COLORS.primary}
           icon="wallet-outline"
         />
         <ResumoCard
@@ -331,7 +332,7 @@ export function EstatisticasTab({
           <View key={forma.metodo} style={styles.pagamentoRow}>
             <View style={styles.pagamentoLeft}>
               <View style={styles.pagamentoIconWrap}>
-                <Ionicons name={iconePagamento(forma.metodo)} size={20} color="#F8B125" />
+                <Ionicons name={iconePagamento(forma.metodo)} size={20} color={COMPANY_COLORS.primary} />
               </View>
               <View style={styles.pagamentoInfo}>
                 <Text style={styles.pagamentoLabel}>{forma.label}</Text>

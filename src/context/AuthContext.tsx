@@ -99,24 +99,42 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const emailNormalized = payload.email.trim().toLowerCase();
     const senhaNormalized = payload.senha;
 
-    if (emailNormalized === 'admin' && senhaNormalized === '1234') {
-      const adminUser: UsuarioLogado = {
-        id: 999,
-        nome: 'Administrador',
-        email: 'admin',
-        perfil: { id: 1, nome: 'admin', descricao: 'Administrador do sistema' },
-        empresa: { id: 1, nome: 'QuickStock Admin', cnpj: '00.000.000/0000-00', telefone: '(11) 99999-0000' },
-        ativo: 1,
-      };
+    const localAccount = {
+      'fornecedor@teste.com': {
+        perfilUso: 'Fornecedor' as const,
+        usuario: {
+          id: 998,
+          nome: 'Fornecedor Teste',
+          email: 'fornecedor@teste.com',
+          perfil: { id: 2, nome: 'fornecedor', descricao: 'Fornecedor local para testes' },
+          empresa: { id: 998, nome: 'Distribuidora Teste', cnpj: '12.345.678/0001-90', telefone: '(11) 99999-0001' },
+          ativo: 1,
+        },
+      },
+      'cliente@teste.com': {
+        perfilUso: 'Cliente' as const,
+        usuario: {
+          id: 997,
+          nome: 'Cliente Teste',
+          email: 'cliente@teste.com',
+          perfil: { id: 3, nome: 'cliente', descricao: 'Cliente local para testes' },
+          empresa: { id: 997, nome: 'Mercado Teste', cnpj: '98.765.432/0001-10', telefone: '(11) 99999-0002' },
+          ativo: 1,
+        },
+      },
+    }[emailNormalized];
+
+    if (localAccount && senhaNormalized === '1234') {
+      const localUser: UsuarioLogado = localAccount.usuario;
 
       const session: StoredSession = {
-        token: 'admin-token',
-        usuario: adminUser,
+        token: `local-${localAccount.perfilUso.toLowerCase()}-token`,
+        usuario: localUser,
         expiresAt: Date.now() + 86400000,
       };
 
       await saveSession(session);
-      await savePerfilUso('admin', 'ClienteFornecedor');
+      await savePerfilUso(localUser.email, localAccount.perfilUso);
       const applied = await applySession(session);
 
       if (!applied) {

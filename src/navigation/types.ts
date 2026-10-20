@@ -26,7 +26,10 @@ export type RootStackParamList = {
   StoreVitrine: { fornecedorId: number; fornecedorNome: string; descricao?: string; logoUrl?: string; capaUrl?: string; tipo?: string };
   ProductDetail: { produtoId: number; fornecedorId: number; fornecedorNome: string; productName: string; price: string; descricao?: string; imagemUrl?: string; unidade?: string; precoVenda?: number; estoque?: number; codigo?: string; origem?: 'catalogo' | 'marketplace'; fornecedorDescricao?: string; fornecedorLogoUrl?: string; fornecedorTipo?: string };
   EmpresaVendas: undefined;
+  EmpresaGraficos: undefined;
   Camioneiros: undefined;
   CadastroCamioneiros: undefined;
   Logistica: undefined;
+  ClienteQuiosques: undefined;
+  ClienteQuiosqueForm: { quiosqueId?: number } | undefined;
 };

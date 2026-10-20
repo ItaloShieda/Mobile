@@ -15,8 +15,9 @@ import { formatarPreco } from '../../services/productService';
 import { formatarDataCurta } from '../../utils/dateFormat';
 import { styles } from './styles';
 import { ClientePedidoDetail } from './ClientePedidoDetail';
-import { GOLD, InfoRow, ProgressBar, TimelineStep } from './components/PedidoParts';
+import { ACCENT, InfoRow, ProgressBar, TimelineStep } from './components/PedidoParts';
 import { usePedidoAcompanhamento } from './usePedidoAcompanhamento';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export function PedidoAcompanhamentoScreen() {
   const {
@@ -44,7 +45,7 @@ export function PedidoAcompanhamentoScreen() {
     return (
       <SafeAreaView style={styles.container} edges={['left', 'right', 'bottom']}>
         <View style={styles.loadingWrap}>
-          <ActivityIndicator size="large" color={GOLD} />
+          <ActivityIndicator size="large" color={ACCENT} />
           <Text style={styles.loadingText}>Carregando acompanhamento...</Text>
         </View>
       </SafeAreaView>
@@ -80,8 +81,6 @@ export function PedidoAcompanhamentoScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['left', 'right', 'bottom']}>
-      <LinearGradient colors={[GOLD, '#FAFAFA']} style={styles.topGradient} />
-
       <ScrollView
         style={styles.scroll}
         contentContainerStyle={styles.scrollContent}
@@ -120,7 +119,7 @@ export function PedidoAcompanhamentoScreen() {
             />
           ) : (
             <LinearGradient
-              colors={['#FFF8E7', '#FFFFFF']}
+              colors={[COMPANY_COLORS.primarySoft, '#FFFFFF']}
               style={styles.heroAccentStrip}
             />
           )}
@@ -161,7 +160,7 @@ export function PedidoAcompanhamentoScreen() {
 
         <View style={styles.card}>
           <View style={styles.cardHeader}>
-            <Ionicons name="git-commit-outline" size={18} color={GOLD} />
+            <Ionicons name="git-commit-outline" size={18} color={ACCENT} />
             <Text style={styles.cardTitle}>Andamento</Text>
           </View>
           <View style={styles.timelineWrap}>
@@ -173,7 +172,7 @@ export function PedidoAcompanhamentoScreen() {
 
         <View style={styles.card}>
           <View style={styles.cardHeader}>
-            <Ionicons name="location-outline" size={18} color={GOLD} />
+            <Ionicons name="location-outline" size={18} color={ACCENT} />
             <Text style={styles.cardTitle}>Detalhes da entrega</Text>
           </View>
           {pedido.enderecoResumo ? (
@@ -193,7 +192,7 @@ export function PedidoAcompanhamentoScreen() {
 
         <View style={styles.card}>
           <View style={styles.cardHeader}>
-            <Ionicons name="bag-outline" size={18} color={GOLD} />
+            <Ionicons name="bag-outline" size={18} color={ACCENT} />
             <Text style={styles.cardTitle}>Itens ({pedido.itens.length})</Text>
           </View>
           {pedido.itens.map((item, index) => (
@@ -236,7 +235,7 @@ export function PedidoAcompanhamentoScreen() {
               style={styles.secondaryButton}
               onPress={() => navigation.navigate('Home')}
             >
-              <Ionicons name="home-outline" size={18} color={GOLD} />
+              <Ionicons name="home-outline" size={18} color={ACCENT} />
               <Text style={styles.secondaryButtonText}>Ir para início</Text>
             </TouchableOpacity>
           ) : null}

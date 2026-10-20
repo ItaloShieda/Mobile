@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export const styles = StyleSheet.create({
   scrollContent: {},
@@ -6,13 +7,10 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#FFF',
-    marginHorizontal: 15,
-    marginBottom: 10,
+    marginTop: 16,
     paddingHorizontal: 12,
-    height: 40,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#F0E6CC',
+    height: 42,
+    borderRadius: 21,
   },
   searchInput: {
     flex: 1,
@@ -25,16 +23,16 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#F8B125',
-    borderRadius: 10,
-    paddingVertical: 10,
+    backgroundColor: COMPANY_COLORS.primary,
+    borderRadius: 22,
+    paddingVertical: 12,
     marginHorizontal: 15,
     marginBottom: 16,
     gap: 6,
   },
   addButtonText: {
     color: '#FFF',
-    fontWeight: '700',
+    fontWeight: '800',
     fontSize: 14,
   },
   loader: {
@@ -42,8 +40,17 @@ export const styles = StyleSheet.create({
   },
   emptyState: {
     alignItems: 'center',
-    marginTop: 24,
+    marginTop: 8,
+    marginHorizontal: 15,
     paddingHorizontal: 20,
+    paddingVertical: 24,
+    backgroundColor: '#FFF',
+    borderRadius: 20,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 2 },
   },
   emptyText: {
     color: '#666',
@@ -51,15 +58,23 @@ export const styles = StyleSheet.create({
     marginBottom: 8,
     fontSize: 14,
   },
+  errorTitle: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#1F2937',
+    textAlign: 'center',
+    marginTop: 10,
+    marginBottom: 4,
+  },
   errorText: {
-    color: '#D64545',
+    color: '#6B7280',
     textAlign: 'center',
     marginBottom: 8,
     fontSize: 14,
   },
   retryText: {
-    color: '#F8B125',
-    fontWeight: '600',
+    color: COMPANY_COLORS.primary,
+    fontWeight: '800',
     fontSize: 14,
   },
 });

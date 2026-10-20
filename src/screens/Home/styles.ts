@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export const styles = StyleSheet.create({
   // ==========================================
@@ -6,21 +7,14 @@ export const styles = StyleSheet.create({
   // ==========================================
   container: { 
     flex: 1, 
-    backgroundColor: '#FAFAFA',
+    backgroundColor: COMPANY_COLORS.pageBackground,
   },
   root: {
     flex: 1,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: COMPANY_COLORS.pageBackground,
   },
   scrollView: {
     flex: 1,
-  },
-  topGradient: { 
-    position: 'absolute', 
-    top: 0, 
-    left: 0, 
-    right: 0, 
-    height: 350,
   },
   scrollContent: {
   },
@@ -39,14 +33,10 @@ export const styles = StyleSheet.create({
     flexDirection: 'row', 
     alignItems: 'center', 
     backgroundColor: '#FFF', 
-    marginHorizontal: 15, 
-    marginTop: 8, 
-    marginBottom: 16, 
+    marginTop: 16, 
     paddingHorizontal: 12, 
-    height: 40, 
-    borderRadius: 20, 
-    borderWidth: 1, 
-    borderColor: '#F0E6CC',
+    height: 42, 
+    borderRadius: 21, 
   },
   searchInput: { 
     flex: 1, 
@@ -71,6 +61,9 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.15, 
     shadowRadius: 10,
   },
+  mainCardOverlap: {
+    marginTop: -64,
+  },
   cardHeader: { 
     flexDirection: 'row', 
     justifyContent: 'space-between', 
@@ -94,7 +87,7 @@ export const styles = StyleSheet.create({
   cardTitle: { 
     fontSize: 18, 
     fontWeight: 'bold', 
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
   },
   cardSubtitle: {
     marginTop: 4,
@@ -111,9 +104,9 @@ export const styles = StyleSheet.create({
     marginBottom: 12,
   },
   tag: { 
-    backgroundColor: '#FFFDF7',
+    backgroundColor: COMPANY_COLORS.primarySoft,
     borderWidth: 1, 
-    borderColor: '#F3E3B1', 
+    borderColor: COMPANY_COLORS.primaryBorder,
     borderRadius: 16, 
     paddingHorizontal: 10, 
     paddingVertical: 5,
@@ -139,7 +132,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center', 
     backgroundColor: '#FFF', 
     borderWidth: 1.5, 
-    borderColor: '#F8B125', 
+    borderColor: COMPANY_COLORS.primary,
     borderRadius: 25, 
     padding: 10, 
     marginRight: 10, 
@@ -162,7 +155,7 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   stockItemTotalNumber: { 
-    color: '#F8B125', 
+    color: COMPANY_COLORS.primary,
     fontSize: 16,
   },
 
@@ -177,9 +170,9 @@ export const styles = StyleSheet.create({
   },
   financialBox: { 
     flex: 1,
-    backgroundColor: '#FFFDF7', 
+    backgroundColor: COMPANY_COLORS.primarySoft,
     borderWidth: 1, 
-    borderColor: '#F3E3B1', 
+    borderColor: COMPANY_COLORS.primaryBorder,
     borderRadius: 16, 
     paddingVertical: 12, 
     paddingHorizontal: 12, 
@@ -204,72 +197,55 @@ export const styles = StyleSheet.create({
     marginTop: 4,
   },
   quickActionsSection: {
-    backgroundColor: '#FFF',
     marginHorizontal: 15,
-    marginTop: 8,
     marginBottom: 18,
-    borderRadius: 20,
-    padding: 16,
-    elevation: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 10,
-  },
-  quickActionsHeader: {
-    marginBottom: 14,
   },
   quickActionsTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: '#F8B125',
-  },
-  quickActionsSubtitle: {
-    marginTop: 4,
-    fontSize: 12,
-    color: '#888',
+    fontWeight: '800',
+    color: '#1F2937',
+    marginBottom: 12,
+    paddingHorizontal: 4,
   },
   quickActionsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    rowGap: 10,
   },
   quickActionCard: {
-    width: '48%',
-    flexDirection: 'row',
+    width: '48.5%',
+    backgroundColor: '#FFF',
+    borderRadius: 18,
+    paddingVertical: 16,
+    paddingHorizontal: 8,
     alignItems: 'center',
-    backgroundColor: '#FFFDF7',
-    borderRadius: 16,
-    paddingVertical: 14,
-    paddingHorizontal: 12,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: '#F3E3B1',
-  },
-  quickActionCardWide: {
-    width: '100%',
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOpacity: 0.06,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 2 },
   },
   quickActionIconWrap: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#FFF6DE',
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: COMPANY_COLORS.primarySoft,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 10,
-  },
-  quickActionCopy: {
-    flex: 1,
+    marginBottom: 8,
   },
   quickActionText: {
-    color: '#333',
-    fontWeight: '700',
+    color: COMPANY_COLORS.primary,
+    fontWeight: '800',
     fontSize: 13,
+    marginBottom: 2,
   },
   quickActionHint: {
-    marginTop: 2,
-    color: '#999',
-    fontSize: 11,
+    color: '#8A93A3',
+    fontSize: 10,
+    textAlign: 'center',
+    lineHeight: 13,
   },
 
   // ==========================================
@@ -281,7 +257,7 @@ export const styles = StyleSheet.create({
     left: 0, 
     right: 0, 
     height: 70, 
-    backgroundColor: '#F8B125', 
+    backgroundColor: COMPANY_COLORS.primary,
     flexDirection: 'row', 
     justifyContent: 'space-between', 
     alignItems: 'center', 
@@ -307,7 +283,7 @@ export const styles = StyleSheet.create({
     position: 'absolute', 
     bottom: -15, 
     borderWidth: 2, 
-    borderColor: '#F8B125', 
+    borderColor: COMPANY_COLORS.primary,
     elevation: 6, 
     shadowColor: '#000', 
     shadowOffset: { width: 0, height: 4 }, 

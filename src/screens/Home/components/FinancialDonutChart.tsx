@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { formatarPreco } from '../../../services/productService';
+import { COMPANY_COLORS } from '../../../theme/theme';
 
 interface FinancialDonutChartProps {
   totalCompras: number;
@@ -52,7 +53,7 @@ export function FinancialDonutChart({
   if (loading) {
     return (
       <View style={styles.loadingWrap}>
-        <ActivityIndicator color="#F8B125" size="large" />
+        <ActivityIndicator color={COMPANY_COLORS.primary} size="large" />
       </View>
     );
   }
@@ -152,7 +153,7 @@ export function FinancialDonutChart({
 
           <View style={styles.detailRow}>
             <View style={styles.detailIconWrapGold}>
-              <Ionicons name="wallet-outline" size={18} color="#F8B125" />
+              <Ionicons name="wallet-outline" size={18} color={COMPANY_COLORS.primary} />
             </View>
             <View style={styles.detailInfo}>
               <Text style={styles.detailLabel}>Lucro total</Text>
@@ -254,11 +255,11 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     width: '100%',
     marginTop: 16,
-    backgroundColor: '#FFFDF7',
+    backgroundColor: COMPANY_COLORS.primarySoft,
     borderRadius: 16,
     padding: 14,
     borderWidth: 1,
-    borderColor: '#F3E3B1',
+    borderColor: COMPANY_COLORS.primaryBorder,
   },
   detailTitle: {
     fontSize: 15,
@@ -313,7 +314,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   detailValueProfit: {
-    color: '#F8B125',
+    color: COMPANY_COLORS.primary,
   },
   detailHint: {
     fontSize: 11,

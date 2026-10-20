@@ -16,6 +16,7 @@ import { CardsScreen } from '../screens/Cards/CardsScreen';
 import { StoreVitrineScreen } from '../screens/StoreVitrine/StoreVitrineScreen';
 import { ProductDetailScreen } from '../screens/ProductDetail/ProductDetailScreen';
 import { EmpresaVendasScreen } from '../screens/EmpresaVendas/EmpresaVendasScreen';
+import { EmpresaGraficosScreen } from '../screens/Graficos/Graficos';
 import { CamioneirosScreen } from '../screens/Logistica/CamioneirosScreen';
 import { CadastroCamioneirosScreen } from '../screens/Logistica/CadastroCamioneirosScreen';
 import { LogisticaScreen } from '../screens/Logistica/LogisticaScreen';
@@ -23,6 +24,8 @@ import { ExplorarScreen } from '../screens/Explorar/ExplorarScreen';
 import { ReservasScreen } from '../screens/Reservas/ReservasScreen';
 import { PedidosScreen } from '../screens/Pedidos/PedidosScreen';
 import { PerfilScreen } from '../screens/Perfil/PerfilScreen';
+import { ClienteQuiosquesScreen } from '../screens/ClienteQuiosques/ClienteQuiosquesScreen';
+import { ClienteQuiosqueFormScreen } from '../screens/ClienteQuiosques/ClienteQuiosqueFormScreen';
 import type { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -47,8 +50,11 @@ export function MainNavigator() {
     <Stack.Screen name="StoreVitrine" component={StoreVitrineScreen} />
     <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
     <Stack.Screen name="EmpresaVendas" component={EmpresaVendasScreen} />
+    <Stack.Screen name="EmpresaGraficos" component={EmpresaGraficosScreen} />
     <Stack.Screen name="Camioneiros" component={CamioneirosScreen} />
     <Stack.Screen name="CadastroCamioneiros" component={CadastroCamioneirosScreen} />
     <Stack.Screen name="Logistica" component={LogisticaScreen} />
+    <Stack.Screen name="ClienteQuiosques" component={ClienteQuiosquesScreen} />
+    <Stack.Screen name="ClienteQuiosqueForm" component={ClienteQuiosqueFormScreen} />
   </Stack.Navigator></QuiosqueProvider></ProductsProvider>;
 }

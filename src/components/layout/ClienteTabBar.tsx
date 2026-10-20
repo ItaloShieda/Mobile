@@ -4,12 +4,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useBottomInset } from '../../utils/safeArea';
 import { usePurchaseCart } from '../../context/PurchaseCartContext';
+import { CLIENTE_COLORS } from '../../theme/theme';
 
-const NAVY = '#0E2A5C';
-const GOLD = '#F8B125';
-const MUTED = '#9AA3B2';
+const PRIMARY = CLIENTE_COLORS.primary;
+const ACTIVE = '#FFFFFF';
+const MUTED = 'rgba(255,255,255,0.72)';
 
-type ClienteTab = 'Home' | 'Explorar' | 'Reservas' | 'Pedidos' | 'Perfil';
+type ClienteTab = 'Home' | 'Explorar' | 'Reservas' | 'Pedidos' | 'ClienteQuiosques' | 'Perfil';
 
 const TABS: {
   key: ClienteTab;
@@ -21,6 +22,7 @@ const TABS: {
   { key: 'Explorar', label: 'Produtos', icon: 'search-outline', iconActive: 'search' },
   { key: 'Reservas', label: 'Carrinho', icon: 'cart-outline', iconActive: 'cart' },
   { key: 'Pedidos', label: 'Pedidos', icon: 'receipt-outline', iconActive: 'receipt' },
+  { key: 'ClienteQuiosques', label: 'Quiosques', icon: 'storefront-outline', iconActive: 'storefront' },
   { key: 'Perfil', label: 'Perfil', icon: 'person-outline', iconActive: 'person' },
 ];
 
@@ -28,6 +30,7 @@ function resolveActive(activeRoute?: string): ClienteTab {
   if (activeRoute === 'Reservas' || activeRoute === 'Sacola') return 'Reservas';
   if (activeRoute === 'Explorar' || activeRoute === 'Cart') return 'Explorar';
   if (activeRoute === 'Pedidos' || activeRoute === 'PedidoAcompanhamento') return 'Pedidos';
+  if (activeRoute === 'ClienteQuiosques' || activeRoute === 'ClienteQuiosqueForm') return 'ClienteQuiosques';
   if (
     activeRoute === 'Perfil' ||
     activeRoute === 'Configuracoes' ||
@@ -55,7 +58,7 @@ export function ClienteTabBar({
       <View style={styles.bar}>
         {TABS.map((tab) => {
           const isActive = active === tab.key;
-          const color = isActive ? GOLD : MUTED;
+          const color = isActive ? ACTIVE : MUTED;
           return (
             <TouchableOpacity
               key={tab.key}
@@ -90,9 +93,7 @@ export function ClienteTabBar({
 
 const styles = StyleSheet.create({
   shell: {
-    backgroundColor: '#FFF',
-    borderTopWidth: 1,
-    borderTopColor: '#EEF1F6',
+    backgroundColor: PRIMARY,
   },
   bar: {
     height: 64,
@@ -119,13 +120,13 @@ const styles = StyleSheet.create({
     minWidth: 16,
     height: 16,
     borderRadius: 8,
-    backgroundColor: NAVY,
+    backgroundColor: '#FFF',
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 3,
   },
   badgeText: {
-    color: '#FFF',
+    color: PRIMARY,
     fontSize: 9,
     fontWeight: 'bold',
   },

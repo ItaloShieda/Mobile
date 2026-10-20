@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { NAVY, PAGE_BG } from '../ClienteHome/styles';
+import { PRIMARY, PAGE_BG } from '../ClienteHome/styles';
 
-export { GOLD, NAVY, PAGE_BG } from '../ClienteHome/styles';
+export { GOLD, PRIMARY, PAGE_BG } from '../ClienteHome/styles';
 
 export const styles = StyleSheet.create({
   root: {
@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     backgroundColor: PAGE_BG,
   },
   header: {
-    backgroundColor: NAVY,
+    backgroundColor: PRIMARY,
     paddingHorizontal: 20,
     paddingBottom: 28,
     borderBottomLeftRadius: 28,
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     fontWeight: '800',
   },
   brandStock: {
-    color: '#F8B125',
+    color: '#1F2937',
     fontSize: 22,
     fontWeight: '800',
   },
@@ -87,7 +87,7 @@ export const styles = StyleSheet.create({
   sellerName: {
     fontSize: 16,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
   },
   itemRow: {
     flexDirection: 'row',
@@ -153,12 +153,12 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 14,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
   },
   itemSubtotal: {
     fontSize: 14,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
     marginLeft: 8,
   },
   addressCard: {
@@ -184,7 +184,7 @@ export const styles = StyleSheet.create({
   addressTitle: {
     fontSize: 15,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
   },
   addressHint: {
     fontSize: 12,
@@ -200,7 +200,7 @@ export const styles = StyleSheet.create({
   summaryTitle: {
     fontSize: 16,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
     marginBottom: 12,
   },
   summaryRow: {
@@ -227,12 +227,12 @@ export const styles = StyleSheet.create({
   summaryTotalLabel: {
     fontSize: 16,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
   },
   summaryTotalValue: {
     fontSize: 18,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
   },
   checkoutBtn: {
     backgroundColor: '#F8B125',
@@ -248,7 +248,7 @@ export const styles = StyleSheet.create({
     opacity: 0.6,
   },
   checkoutText: {
-    color: NAVY,
+    color: '#FFF',
     fontSize: 16,
     fontWeight: '800',
   },
@@ -276,7 +276,7 @@ export const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 18,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
     textAlign: 'center',
     marginBottom: 8,
     marginTop: 12,
@@ -299,7 +299,7 @@ export const styles = StyleSheet.create({
     gap: 8,
   },
   ctaText: {
-    color: NAVY,
+    color: '#FFF',
     fontSize: 15,
     fontWeight: '800',
   },
@@ -318,7 +318,7 @@ export const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 18,
     fontWeight: '800',
-    color: NAVY,
+    color: PRIMARY,
     marginBottom: 16,
   },
   modalItem: {

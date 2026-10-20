@@ -12,7 +12,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { ScreenHeader } from '../../components/Header/ScreenHeader';
 import { CalendarDatePill } from '../../components/Header/CalendarDatePill';
 import { BottomTabBar } from '../../components/layout/BottomTabBar';
-import { ScreenTopGradient } from '../../components/layout/ScreenTopGradient';
 import { ProductStockCard } from './components/ProductCard';
 import { FinancialDonutChart } from './components/FinancialDonutChart';
 import { formatarPreco } from '../../services/productService';
@@ -20,6 +19,7 @@ import { styles } from './styles';
 import { useHome } from './useHome';
 import { useAuth } from '../../context/AuthContext';
 import { ClienteHomeScreen } from '../ClienteHome/ClienteHomeScreen';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export default function HomeScreen() {
   const { perfilUso } = useAuth();
@@ -52,7 +52,6 @@ function EmpresaHomeScreen() {
   return (
     <View style={styles.root}>
       <SafeAreaView style={styles.container} edges={['left', 'right']}>
-        <ScreenTopGradient />
 
         <ScrollView
           style={styles.scrollView}
@@ -63,22 +62,23 @@ function EmpresaHomeScreen() {
         {/* CABEÇALHO */}
         <ScreenHeader
           showGreeting
-          greeting="Bem vindo."
-          name={user?.nome?.split(' ')[0] ?? 'Usuário'}
-        />
-
-        {/* BARRA DE PESQUISA */}
-        <View style={styles.searchContainer}>
-          <Ionicons name="search" size={18} color="#F8B125" />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Pesquisar..."
-            placeholderTextColor="#999"
-          />
-        </View>
+          greeting="Gerencie seu estoque e suas vendas."
+          name={user?.empresa?.nome ?? user?.nome?.split(' ')[0] ?? 'Sua empresa'}
+          overlap
+        >
+          {/* BARRA DE PESQUISA */}
+          <View style={styles.searchContainer}>
+            <Ionicons name="search" size={18} color={COMPANY_COLORS.primary} />
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Pesquisar..."
+              placeholderTextColor="#999"
+            />
+          </View>
+        </ScreenHeader>
 
         {/* ÚLTIMO ESTOQUE */}
-        <View style={styles.mainCard}>
+        <View style={[styles.mainCard, styles.mainCardOverlap]}>
           <View style={styles.cardHeader}>
             <View style={styles.cardTitleBlock}>
               <View style={styles.cardTitleContainer}>
@@ -104,7 +104,7 @@ function EmpresaHomeScreen() {
             contentContainerStyle={styles.horizontalScrollContent}
           >
             {loading ? (
-              <ActivityIndicator color="#F8B125" style={{ marginVertical: 12 }} />
+              <ActivityIndicator color={COMPANY_COLORS.primary} style={{ marginVertical: 12 }} />
             ) : produtos.length === 0 ? (
               <Text style={styles.emptyProductsText}>Nenhum produto cadastrado.</Text>
             ) : (
@@ -117,6 +117,29 @@ function EmpresaHomeScreen() {
               ))
             )}
           </ScrollView>
+        </View>
+
+        {/* AÇÕES RÁPIDAS */}
+        <View style={styles.quickActionsSection}>
+          <Text style={styles.quickActionsTitle}>Ações rápidas</Text>
+          <View style={styles.quickActionsGrid}>
+            {quickActions.map((item) => (
+              <TouchableOpacity
+                key={item.screen}
+                style={styles.quickActionCard}
+                activeOpacity={0.85}
+                onPress={() => navigation.navigate(item.screen)}
+              >
+                <View style={styles.quickActionIconWrap}>
+                  <Ionicons name={item.icon} size={22} color={COMPANY_COLORS.primary} />
+                </View>
+                <Text style={styles.quickActionText} numberOfLines={1}>{item.title}</Text>
+                {item.subtitle ? (
+                  <Text style={styles.quickActionHint} numberOfLines={2}>{item.subtitle}</Text>
+                ) : null}
+              </TouchableOpacity>
+            ))}
+          </View>
         </View>
 
         {/* ESTOQUE ONLINE */}
@@ -184,34 +207,6 @@ function EmpresaHomeScreen() {
             margemPercentual={margemPercentual}
             loading={loadingFinanceiro}
           />
-        </View>
-
-        <View style={styles.quickActionsSection}>
-          <View style={styles.quickActionsHeader}>
-            <Text style={styles.quickActionsTitle}>Operação da empresa</Text>
-            <Text style={styles.quickActionsSubtitle}>Atalhos para o dia a dia</Text>
-          </View>
-          <View style={styles.quickActionsGrid}>
-            {quickActions.map((item) => (
-              <TouchableOpacity
-                key={item.screen}
-                style={[styles.quickActionCard, item.wide && styles.quickActionCardWide]}
-                activeOpacity={0.85}
-                onPress={() => navigation.navigate(item.screen)}
-              >
-                <View style={styles.quickActionIconWrap}>
-                  <Ionicons name={item.icon} size={22} color="#F8B125" />
-                </View>
-                <View style={styles.quickActionCopy}>
-                  <Text style={styles.quickActionText}>{item.title}</Text>
-                  {item.subtitle ? (
-                    <Text style={styles.quickActionHint}>{item.subtitle}</Text>
-                  ) : null}
-                </View>
-                <Ionicons name="chevron-forward" size={16} color="#D4B56A" />
-              </TouchableOpacity>
-            ))}
-          </View>
         </View>
 
       </ScrollView>

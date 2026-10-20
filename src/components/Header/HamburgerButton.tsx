@@ -11,6 +11,7 @@ import { Ionicons, Feather } from '@expo/vector-icons';
 // 1. IMPORTAR O HOOK DE NAVEGAÇÃO
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../context/AuthContext';
+import { COMPANY_COLORS } from '../../theme/theme';
 
 export function HamburgerButton() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -35,7 +36,7 @@ export function HamburgerButton() {
         onPress={() => setModalVisible(true)}
         activeOpacity={0.7}
       >
-        <Ionicons name="menu" size={28} color="#FFF" />
+        <Ionicons name="menu" size={26} color="#FFF" />
       </TouchableOpacity>
 
       {/* MENU MODAL */}
@@ -71,7 +72,7 @@ export function HamburgerButton() {
                     style={styles.menuOption}
                     onPress={() => handleNavigate('Home')}
                   >
-                    <Feather name="home" size={20} color="#F8B125" />
+                    <Feather name="home" size={20} color={COMPANY_COLORS.primary} />
                     <Text style={styles.menuOptionText}>Início</Text>
                   </TouchableOpacity>
 
@@ -79,7 +80,7 @@ export function HamburgerButton() {
                     style={styles.menuOption} 
                     onPress={() => handleNavigate('Quiosque')}
                   >
-                    <Feather name="box" size={20} color="#F8B125" />
+                    <Feather name="box" size={20} color={COMPANY_COLORS.primary} />
                     <Text style={styles.menuOptionText}>Quiosques</Text>
                   </TouchableOpacity>
 
@@ -87,7 +88,7 @@ export function HamburgerButton() {
                     style={styles.menuOption}
                     onPress={() => handleNavigate('Enderecos')}
                   >
-                    <Feather name="map-pin" size={20} color="#F8B125" />
+                    <Feather name="map-pin" size={20} color={COMPANY_COLORS.primary} />
                     <Text style={styles.menuOptionText}>Endereços</Text>
                   </TouchableOpacity>
 
@@ -95,7 +96,7 @@ export function HamburgerButton() {
                     style={styles.menuOption}
                     onPress={() => handleNavigate('Configuracoes')}
                   >
-                    <Feather name="settings" size={20} color="#F8B125" />
+                    <Feather name="settings" size={20} color={COMPANY_COLORS.primary} />
                     <Text style={styles.menuOptionText}>Configurações</Text>
                   </TouchableOpacity>
 
@@ -119,10 +120,8 @@ export function HamburgerButton() {
 
 const styles = StyleSheet.create({
   hamburgerMenu: {
-    width: 38,
-    height: 38,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: 19,
+    width: 32,
+    height: 36,
     justifyContent: 'center',
     alignItems: 'center',
   },
