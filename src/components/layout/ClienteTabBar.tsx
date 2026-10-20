@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useBottomInset } from '../../utils/safeArea';
 import { usePurchaseCart } from '../../context/PurchaseCartContext';
 import { CLIENTE_COLORS } from '../../theme/theme';
+import { useTrocarVisaoDemo } from './useTrocarVisaoDemo';
 
 const PRIMARY = CLIENTE_COLORS.primary;
 const ACTIVE = '#FFFFFF';
@@ -52,6 +53,7 @@ export function ClienteTabBar({
   const bottomInset = useBottomInset();
   const { itemCount } = usePurchaseCart();
   const active = resolveActive(activeRoute);
+  const trocaDemo = useTrocarVisaoDemo();
 
   return (
     <View style={[styles.shell, { paddingBottom: Math.max(bottomInset, 8) }]}>
@@ -86,6 +88,19 @@ export function ClienteTabBar({
             </TouchableOpacity>
           );
         })}
+        {trocaDemo.visivel ? (
+          <TouchableOpacity
+            style={styles.item}
+            onPress={trocaDemo.trocar}
+            activeOpacity={0.8}
+            accessibilityLabel={`Trocar para a visão de ${trocaDemo.label}`}
+          >
+            <View style={styles.iconWrap}>
+              <Ionicons name={trocaDemo.icon} size={22} color={MUTED} />
+            </View>
+            <Text style={[styles.label, { color: MUTED }]}>{trocaDemo.label}</Text>
+          </TouchableOpacity>
+        ) : null}
       </View>
     </View>
   );

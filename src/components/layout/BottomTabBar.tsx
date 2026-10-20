@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../context/AuthContext';
 import { useBottomInset } from '../../utils/safeArea';
 import { ClienteTabBar } from './ClienteTabBar';
+import { useTrocarVisaoDemo } from './useTrocarVisaoDemo';
 import { COMPANY_COLORS } from '../../theme/theme';
 
 export const TAB_BAR_HEIGHT = 68;
@@ -46,6 +47,7 @@ export function BottomTabBar({ activeRoute }: BottomTabBarProps) {
   const navigation = useNavigation<any>();
   const { perfilUso } = useAuth();
   const bottomInset = useBottomInset();
+  const trocaDemo = useTrocarVisaoDemo();
 
   if (perfilUso === 'Cliente') {
     return <ClienteTabBar activeRoute={activeRoute} />;
@@ -74,6 +76,17 @@ export function BottomTabBar({ activeRoute }: BottomTabBarProps) {
           </TouchableOpacity>
           );
         })}
+        {trocaDemo.visivel ? (
+          <TouchableOpacity
+            style={styles.tabItem}
+            onPress={trocaDemo.trocar}
+            activeOpacity={0.8}
+            accessibilityLabel={`Trocar para a visão de ${trocaDemo.label}`}
+          >
+            <Ionicons name={trocaDemo.icon} size={22} color={TAB_MUTED} />
+            <Text style={styles.tabLabel}>{trocaDemo.label}</Text>
+          </TouchableOpacity>
+        ) : null}
       </View>
     </View>
   );
