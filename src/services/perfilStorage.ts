@@ -11,6 +11,20 @@ export async function savePerfilUso(email: string, perfil: PerfilCadastro): Prom
   await AsyncStorage.setItem(storageKey(email), perfil);
 }
 
+const MODO_KEY = '@quickstock_modo_ativo';
+
+export type ModoAtivo = 'Cliente' | 'Fornecedor';
+
+/** Visão escolhida por contas "Cliente e fornecedor". */
+export async function saveModoAtivo(email: string, modo: ModoAtivo): Promise<void> {
+  await AsyncStorage.setItem(`${MODO_KEY}:${email.trim().toLowerCase()}`, modo);
+}
+
+export async function loadModoAtivo(email: string): Promise<ModoAtivo | null> {
+  const value = await AsyncStorage.getItem(`${MODO_KEY}:${email.trim().toLowerCase()}`);
+  return value === 'Cliente' || value === 'Fornecedor' ? value : null;
+}
+
 export async function loadPerfilUso(email: string): Promise<PerfilCadastro | null> {
   const value = await AsyncStorage.getItem(storageKey(email));
   if (value === 'Cliente' || value === 'Fornecedor' || value === 'ClienteFornecedor') {

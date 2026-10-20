@@ -64,6 +64,7 @@ export function FormasPagamentoScreen() {
     handleSelecionarTipo,
     handleSalvar,
     confirmarRemocao,
+    tornarPrincipal,
   } = useFormasPagamento();
 
   const extras = (
@@ -242,6 +243,14 @@ export function FormasPagamentoScreen() {
                         <Ionicons name="chevron-forward" size={16} color="#C5CAD3" />
                       ) : null}
                     </TouchableOpacity>
+                    {!forma.principal ? (
+                      <IconActionButton
+                        name="star-outline"
+                        size={20}
+                        accessibilityLabel="Tornar forma de pagamento principal"
+                        onPress={() => tornarPrincipal(forma)}
+                      />
+                    ) : null}
                     <IconActionButton
                       name="trash-outline"
                       size={20}
@@ -331,6 +340,14 @@ export function FormasPagamentoScreen() {
                     <Ionicons name="chevron-forward" size={16} color="#D4B56A" style={styles.chevron} />
                   ) : null}
                 </TouchableOpacity>
+                {!forma.principal ? (
+                  <IconActionButton
+                    name="star-outline"
+                    size={20}
+                    accessibilityLabel="Tornar forma de pagamento principal"
+                    onPress={() => tornarPrincipal(forma)}
+                  />
+                ) : null}
                 <IconActionButton
                   name="trash-outline"
                   size={20}

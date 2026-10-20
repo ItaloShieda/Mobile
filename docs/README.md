@@ -112,6 +112,17 @@ npm start
 * Pressione `w` para abrir no navegador.
 * Ou escaneie o QR Code com o Expo Go.
 
+### Conta de demonstração
+
+Com o backend rodando, entre com `demo@quickstock.com` / `demo1234`. A conta já tem endereço, cartão de crédito e chave PIX cadastrados, e acessa as telas de cliente e de fornecedor: troque de visão em **Ajustes → Alternar visão**.
+
+Para a tela de login já vir preenchida na sua máquina, crie um `.env.local` na raiz do projeto (ele não vai para o git) e reinicie o Expo:
+
+```bash
+EXPO_PUBLIC_LOGIN_EMAIL=demo@quickstock.com
+EXPO_PUBLIC_LOGIN_SENHA=demo1234
+```
+
 ---
 
 ## 📑 Scripts Disponíveis

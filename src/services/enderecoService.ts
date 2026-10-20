@@ -77,6 +77,50 @@ export async function criarEndereco(payload: EnderecoEntregaPayload): Promise<En
   return data as EnderecoEntrega;
 }
 
+export async function atualizarEndereco(
+  id: number,
+  payload: EnderecoEntregaPayload,
+): Promise<EnderecoEntrega> {
+  const response = await fetch(`${API_BASE_URL}/api/enderecos/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ...payload, cep: normalizarCep(payload.cep) }),
+  });
+  return parseResponse<EnderecoEntrega>(
+    response,
+    'Não foi possível atualizar o endereço.',
+    { treatOutdatedServer: true },
+  );
+}
+
+export async function definirEnderecoPrincipal(
+  id: number,
+  empresaId: number,
+): Promise<EnderecoEntrega> {
+  const response = await fetch(
+    `${API_BASE_URL}/api/enderecos/${id}/principal?empresaId=${empresaId}`,
+    { method: 'PATCH' },
+  );
+  return parseResponse<EnderecoEntrega>(
+    response,
+    'Não foi possível definir o endereço principal.',
+    { treatOutdatedServer: true },
+  );
+}
+
+export async function removerEndereco(id: number, empresaId: number): Promise<void> {
+  const response = await fetch(`${API_BASE_URL}/api/enderecos/${id}?empresaId=${empresaId}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok && response.status !== 204) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(
+      extractErrorMessage(data, 'Não foi possível remover o endereço.', { treatOutdatedServer: true }),
+    );
+  }
+}
+
 export async function salvarEnderecoSelecionado(enderecoId: number): Promise<void> {
   await AsyncStorage.setItem(ENDERECO_STORAGE_KEY, String(enderecoId));
 }

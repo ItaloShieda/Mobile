@@ -115,6 +115,60 @@ export async function buscarSolicitacao(
   return normalizeSolicitacao(await parseResponse<SolicitacaoCompra>(response));
 }
 
+/** Pedidos recebidos pelo fornecedor. */
+export async function listarSolicitacoesRecebidas(
+  empresaFornecedoraId: number,
+): Promise<SolicitacaoCompra[]> {
+  const response = await fetch(
+    `${API_BASE_URL}/api/solicitacoes-compra/recebidas?empresaFornecedoraId=${empresaFornecedoraId}`,
+  );
+  const lista = await parseResponse<SolicitacaoCompra[]>(
+    response,
+    'Não foi possível carregar os pedidos recebidos.',
+    { treatOutdatedServer: true },
+  );
+  return lista.map(normalizeSolicitacao);
+}
+
+export type StatusPedidoFornecedor = 'em_rota' | 'entregue' | 'cancelada';
+
+export async function atualizarStatusSolicitacao(
+  pedidoId: number,
+  empresaFornecedoraId: number,
+  status: StatusPedidoFornecedor,
+): Promise<SolicitacaoCompra> {
+  const response = await fetch(`${API_BASE_URL}/api/solicitacoes-compra/${pedidoId}/status`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ empresaFornecedoraId, status }),
+  });
+  return normalizeSolicitacao(
+    await parseResponse<SolicitacaoCompra>(
+      response,
+      'Não foi possível atualizar o pedido.',
+      { treatOutdatedServer: true },
+    ),
+  );
+}
+
+/** Comprador cancela enquanto o pedido ainda não saiu para entrega. */
+export async function cancelarSolicitacao(
+  pedidoId: number,
+  empresaCompradoraId: number,
+): Promise<SolicitacaoCompra> {
+  const response = await fetch(
+    `${API_BASE_URL}/api/solicitacoes-compra/${pedidoId}/cancelar?empresaCompradoraId=${empresaCompradoraId}`,
+    { method: 'PATCH' },
+  );
+  return normalizeSolicitacao(
+    await parseResponse<SolicitacaoCompra>(
+      response,
+      'Não foi possível cancelar o pedido.',
+      { treatOutdatedServer: true },
+    ),
+  );
+}
+
 export function labelStatusPedido(status: string): string {
   switch (status) {
     case 'aguardando_liberacao':

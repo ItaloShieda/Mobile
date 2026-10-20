@@ -1,4 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_BASE_URL } from '../config/api';
+import { extractErrorMessage, parseResponse } from './http';
 import {
   TipoChavePix,
   mascararChavePix,
@@ -9,45 +11,85 @@ import type { PixSalvo, PixSalvoPayload } from '../types/pagamento';
 
 export type { TipoChavePix, PixSalvo, PixSalvoPayload };
 
-const STORAGE_KEY_PREFIX = '@quickstock_pix_chaves';
+// Versões antigas do app guardavam as chaves só no aparelho.
+const LEGACY_STORAGE_KEY_PREFIX = '@quickstock_pix_chaves';
 
-function storageKey(empresaId: number): string {
-  return `${STORAGE_KEY_PREFIX}_${empresaId}`;
+function legacyStorageKey(empresaId: number): string {
+  return `${LEGACY_STORAGE_KEY_PREFIX}_${empresaId}`;
 }
 
-function gerarId(): string {
-  return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+async function migrarChavesLocais(empresaId: number): Promise<void> {
+  const raw = await AsyncStorage.getItem(legacyStorageKey(empresaId));
+  if (!raw) return;
+
+  let locais: PixSalvoPayload[] = [];
+  try {
+    const parsed = JSON.parse(raw);
+    locais = Array.isArray(parsed) ? parsed : [];
+  } catch {
+    locais = [];
+  }
+
+  // A lista local está do mais novo para o mais antigo; envia na ordem de criação.
+  for (const chave of [...locais].reverse()) {
+    await salvarChavePix({
+      empresaId,
+      apelido: chave.apelido,
+      tipoChave: chave.tipoChave,
+      chaveMascarada: chave.chaveMascarada,
+      ultimosDigitos: chave.ultimosDigitos,
+    });
+  }
+  await AsyncStorage.removeItem(legacyStorageKey(empresaId));
 }
 
 export async function listarChavesPix(empresaId: number): Promise<PixSalvo[]> {
-  const raw = await AsyncStorage.getItem(storageKey(empresaId));
-  if (!raw) return [];
-
-  try {
-    const parsed = JSON.parse(raw) as PixSalvo[];
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    await AsyncStorage.removeItem(storageKey(empresaId));
-    return [];
-  }
+  await migrarChavesLocais(empresaId);
+  const response = await fetch(`${API_BASE_URL}/api/chaves-pix?empresaId=${empresaId}`);
+  return parseResponse<PixSalvo[]>(
+    response,
+    'Não foi possível carregar as chaves PIX.',
+    { treatOutdatedServer: true },
+  );
 }
 
 export async function salvarChavePix(payload: PixSalvoPayload): Promise<PixSalvo> {
-  const chaves = await listarChavesPix(payload.empresaId);
-  const nova: PixSalvo = {
-    id: gerarId(),
-    ...payload,
-  };
+  let response: Response;
+  try {
+    response = await fetch(`${API_BASE_URL}/api/chaves-pix`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+  } catch {
+    throw new Error(
+      `Não foi possível conectar ao servidor (${API_BASE_URL}). Verifique se o backend está rodando.`,
+    );
+  }
 
-  chaves.unshift(nova);
-  await AsyncStorage.setItem(storageKey(payload.empresaId), JSON.stringify(chaves));
-  return nova;
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(
+      extractErrorMessage(data, 'Não foi possível salvar a chave PIX.', { treatOutdatedServer: true }),
+    );
+  }
+
+  return data as PixSalvo;
 }
 
-export async function removerChavePix(empresaId: number, chaveId: string): Promise<void> {
-  const chaves = await listarChavesPix(empresaId);
-  const filtradas = chaves.filter((chave) => chave.id !== chaveId);
-  await AsyncStorage.setItem(storageKey(empresaId), JSON.stringify(filtradas));
+export async function removerChavePix(empresaId: number, chaveId: number): Promise<void> {
+  const response = await fetch(
+    `${API_BASE_URL}/api/chaves-pix/${chaveId}?empresaId=${empresaId}`,
+    { method: 'DELETE' },
+  );
+
+  if (!response.ok && response.status !== 204) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(
+      extractErrorMessage(data, 'Não foi possível remover a chave PIX.', { treatOutdatedServer: true }),
+    );
+  }
 }
 
 export async function garantirChaveCnpjInicial(

@@ -118,11 +118,17 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   saleRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     paddingVertical: 12,
     borderBottomWidth: 1,
     borderBottomColor: '#F1F1F1',
+  },
+  saleTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 12,
+  },
+  saleLeft: {
+    flex: 1,
   },
   saleClient: {
     color: '#222',
@@ -155,5 +161,71 @@ export const styles = StyleSheet.create({
     color: '#A66B00',
     fontSize: 10,
     fontWeight: '700',
+  },
+  statusPillRota: {
+    backgroundColor: COMPANY_COLORS.primarySoft,
+    borderColor: COMPANY_COLORS.primaryBorder,
+  },
+  statusTextRota: {
+    color: COMPANY_COLORS.primary,
+  },
+  statusPillEntregue: {
+    backgroundColor: '#E6F7EE',
+    borderColor: '#9ADBB8',
+  },
+  statusTextEntregue: {
+    color: '#1E8A4F',
+  },
+  statusPillCancelada: {
+    backgroundColor: '#FDECEC',
+    borderColor: '#F2B1B1',
+  },
+  statusTextCancelada: {
+    color: '#C62828',
+  },
+  actionRow: {
+    flexDirection: 'row',
+    gap: 8,
+    marginTop: 10,
+  },
+  actionPrimary: {
+    flex: 1,
+    backgroundColor: COMPANY_COLORS.primary,
+    borderRadius: 12,
+    paddingVertical: 10,
+    alignItems: 'center',
+  },
+  actionPrimaryText: {
+    color: '#FFF',
+    fontWeight: '700',
+    fontSize: 13,
+  },
+  actionSecondary: {
+    borderWidth: 1,
+    borderColor: '#E0A3A3',
+    borderRadius: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    alignItems: 'center',
+  },
+  actionSecondaryText: {
+    color: '#C62828',
+    fontWeight: '700',
+    fontSize: 13,
+  },
+  actionLoader: {
+    marginVertical: 12,
+  },
+  emptyText: {
+    color: '#666',
+    fontSize: 13,
+    textAlign: 'center',
+    paddingVertical: 12,
+  },
+  errorText: {
+    color: '#C62828',
+    fontSize: 13,
+    textAlign: 'center',
+    paddingVertical: 12,
   },
 });

@@ -7,6 +7,7 @@ import {
   FormaPagamentoSalva,
   TipoPagamento,
   criarFormaPagamento,
+  definirFormaPagamentoPrincipal,
   listarFormasPagamento,
   removerFormaPagamento,
 } from '../../services/formaPagamentoService';
@@ -122,6 +123,16 @@ export function useFormasPagamento() {
     });
   };
 
+  const tornarPrincipal = async (forma: FormaPagamentoSalva) => {
+    if (!empresaId || forma.principal) return;
+    try {
+      await definirFormaPagamentoPrincipal(forma.id, empresaId);
+      await carregar();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Erro ao definir a forma principal.');
+    }
+  };
+
   return {
     user,
     empresaId,
@@ -149,5 +160,6 @@ export function useFormasPagamento() {
     handleSelecionarTipo,
     handleSalvar,
     confirmarRemocao,
+    tornarPrincipal,
   };
 }
