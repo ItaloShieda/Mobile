@@ -97,27 +97,20 @@ npm install
 
 **3. Confira o endereço da API**
 
-O endereço do backend é resolvido em `src/config/api.ts`: o app usa o IP da máquina que está rodando o Expo, `10.0.2.2` no emulador Android ou `localhost`, sempre na porta `8080`.
+O endereço do backend é resolvido em `src/config/api.ts`: o app usa o IP da máquina que está rodando o Expo, `10.0.2.2` no emulador Android ou `localhost`, sempre na porta `8081`.
 
 > **Dica:** num celular físico, ele precisa estar na mesma rede Wi-Fi da máquina que roda o backend.
 
 **4. Inicie o servidor do Expo**
 
 ```bash
-npx expo start
+npm start
 ```
 
 * Pressione `a` para abrir no emulador Android.
 * Pressione `i` para abrir no simulador iOS.
 * Pressione `w` para abrir no navegador.
 * Ou escaneie o QR Code com o Expo Go.
-
-### Contas de teste locais
-
-Para navegar pelas telas sem backend, use as contas abaixo (senha `1234`). Elas entram direto no app, mas as listas ficam vazias porque não há servidor:
-
-* `cliente@teste.com`: fluxo do Cliente
-* `fornecedor@teste.com`: fluxo do Fornecedor
 
 ---
 

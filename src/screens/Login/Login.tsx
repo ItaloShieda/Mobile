@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, ActivityIndicator, TouchableOpacity, View } from 'react-native';
+import { Text, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { AuthScreenShell } from '../../components/auth/AuthScreenShell';
 import { CustomInput } from '../../components/Input/CustomInput';
 import { CustomButton } from '../../components/Button/CustomButton';
@@ -39,12 +39,6 @@ export default function LoginScreen() {
     await performLogin(email.trim().toLowerCase(), senha.trim());
   };
 
-  const handleTestLogin = async (testEmail: string) => {
-    setEmail(testEmail);
-    setSenha('1234');
-    await performLogin(testEmail, '1234');
-  };
-
   return (
     <AuthScreenShell>
       <CustomInput
@@ -70,27 +64,6 @@ export default function LoginScreen() {
       ) : (
         <CustomButton title="Entrar" showArrow onPress={handleLogin} />
       )}
-
-      <View style={styles.testAccessSection}>
-        <Text style={styles.testAccessTitle}>Acessos locais para teste</Text>
-        <View style={styles.testAccessRow}>
-          <TouchableOpacity
-            style={styles.testAccessButton}
-            onPress={() => handleTestLogin('fornecedor@teste.com')}
-            disabled={loading}
-          >
-            <Text style={styles.testAccessButtonText}>Fornecedor</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.testAccessButton}
-            onPress={() => handleTestLogin('cliente@teste.com')}
-            disabled={loading}
-          >
-            <Text style={styles.testAccessButtonText}>Cliente</Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={styles.testAccessHint}>Senha dos dois acessos: 1234</Text>
-      </View>
 
       <TouchableOpacity
         onPress={() =>

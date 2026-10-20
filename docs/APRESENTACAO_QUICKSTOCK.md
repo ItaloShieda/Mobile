@@ -671,7 +671,6 @@ Seja transparente na apresentação sobre o que está 100% integrado e o que é 
 | Financeiro backend | Mix: compras reais + lucros/gastos sintéticos |
 | Notificações "lidas" | Só no dispositivo (AsyncStorage), backend não marca |
 | Chaves Pix | Guardadas só no aparelho (AsyncStorage) |
-| Contas `cliente@teste.com` / `fornecedor@teste.com` (senha `1234`) | Entram sem backend, só para navegar pelas telas |
 
 ---
 
@@ -834,12 +833,10 @@ mvn spring-boot:run
 ```bash
 cd Mobile
 npm install
-npx expo start
+npm start
 # Escanear QR code (Expo Go) ou pressionar 'a' (Android) / 'i' (iOS) / 'w' (navegador)
 npm test   # testes unitários
 ```
-
-Sem backend, dá para navegar pelas telas com `cliente@teste.com` ou `fornecedor@teste.com` (senha `1234`); as listas ficam vazias.
 
 ### Checklist antes da apresentação
 

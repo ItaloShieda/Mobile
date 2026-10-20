@@ -17,7 +17,7 @@ function resolveDevHost(): string {
   return 'localhost';
 }
 
-export const API_BASE_URL = `http://${resolveDevHost()}:8080`;
+export const API_BASE_URL = `http://${resolveDevHost()}:8081`;
 
 export function getImageUrl(path?: string | null): string | undefined {
   if (!path) return undefined;

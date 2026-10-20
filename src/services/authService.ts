@@ -43,7 +43,7 @@ function normalizeLoginResponse(data: Record<string, unknown>): LoginResponse {
 }
 
 export function isLegacyToken(token: string): boolean {
-  return token.startsWith('legacy:') || token.startsWith('local-');
+  return token.startsWith('legacy:');
 }
 
 export async function cadastrarConta(

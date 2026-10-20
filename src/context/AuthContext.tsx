@@ -96,53 +96,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [restoreSession]);
 
   const signIn = useCallback(async (payload: LoginPayload) => {
-    const emailNormalized = payload.email.trim().toLowerCase();
-    const senhaNormalized = payload.senha;
-
-    const localAccount = {
-      'fornecedor@teste.com': {
-        perfilUso: 'Fornecedor' as const,
-        usuario: {
-          id: 998,
-          nome: 'Fornecedor Teste',
-          email: 'fornecedor@teste.com',
-          perfil: { id: 2, nome: 'fornecedor', descricao: 'Fornecedor local para testes' },
-          empresa: { id: 998, nome: 'Distribuidora Teste', cnpj: '12.345.678/0001-90', telefone: '(11) 99999-0001' },
-          ativo: 1,
-        },
-      },
-      'cliente@teste.com': {
-        perfilUso: 'Cliente' as const,
-        usuario: {
-          id: 997,
-          nome: 'Cliente Teste',
-          email: 'cliente@teste.com',
-          perfil: { id: 3, nome: 'cliente', descricao: 'Cliente local para testes' },
-          empresa: { id: 997, nome: 'Mercado Teste', cnpj: '98.765.432/0001-10', telefone: '(11) 99999-0002' },
-          ativo: 1,
-        },
-      },
-    }[emailNormalized];
-
-    if (localAccount && senhaNormalized === '1234') {
-      const localUser: UsuarioLogado = localAccount.usuario;
-
-      const session: StoredSession = {
-        token: `local-${localAccount.perfilUso.toLowerCase()}-token`,
-        usuario: localUser,
-        expiresAt: Date.now() + 86400000,
-      };
-
-      await saveSession(session);
-      await savePerfilUso(localUser.email, localAccount.perfilUso);
-      const applied = await applySession(session);
-
-      if (!applied) {
-        throw new Error('Sessão inválida. Tente novamente.');
-      }
-      return;
-    }
-
     const response = await loginRequest(payload);
 
     if (!response.token || !response.usuario) {
