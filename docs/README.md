@@ -114,7 +114,7 @@ npm start
 
 ### Conta de demonstração
 
-Com o backend rodando, entre com `demo@quickstock.com` / `demo1234`. A conta já tem endereço, cartão de crédito e chave PIX cadastrados, e acessa as telas de cliente e de fornecedor: troque de visão em **Ajustes → Alternar visão**.
+Com o backend rodando, entre com `demo@quickstock.com` / `demo1234`. A conta já tem endereço, cartão de crédito e chave PIX cadastrados, e acessa as telas de cliente e de fornecedor: troque de visão pelo botão no fim da barra inferior ou em **Ajustes → Alternar visão**. Só essa conta tem a troca de visão.
 
 Para a tela de login já vir preenchida na sua máquina, crie um `.env.local` na raiz do projeto (ele não vai para o git) e reinicie o Expo:
 
