@@ -61,8 +61,8 @@ export function ClienteQuiosqueFormScreen() {
           <View style={styles.headerTop}>
             <BackButton onPress={goBack} iconColor={PRIMARY} />
             <View style={styles.brandRow}>
-              <Text style={styles.brandQuick}>Quick</Text>
-              <Text style={styles.brandStock}>Stock</Text>
+              <Text style={styles.brandQuick}>Stock</Text>
+              <Text style={styles.brandStock}>4event</Text>
             </View>
             <View style={styles.headerSide} />
           </View>

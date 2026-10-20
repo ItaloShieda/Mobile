@@ -16,8 +16,8 @@ export function AuthBrand({
 
   return (
     <View style={[styles.row, align === 'center' && styles.center]}>
-      <Text style={[styles.quick, { fontSize, color: quickColor }]}>Quick</Text>
-      <Text style={[styles.stock, { fontSize }]}>Stock</Text>
+      <Text style={[styles.quick, { fontSize, color: quickColor }]}>Stock</Text>
+      <Text style={[styles.stock, { fontSize }]}>4event</Text>
     </View>
   );
 }

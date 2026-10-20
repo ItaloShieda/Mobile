@@ -79,8 +79,8 @@ export function ClientePedidoDetail({
           <View style={styles.headerTop}>
             <BackButton onPress={goBack} iconColor={PRIMARY} />
             <View style={styles.brandRow}>
-              <Text style={styles.brandQuick}>Quick</Text>
-              <Text style={styles.brandStock}>Stock</Text>
+              <Text style={styles.brandQuick}>Stock</Text>
+              <Text style={styles.brandStock}>4event</Text>
             </View>
             <View style={{ width: 32 }} />
           </View>
@@ -220,7 +220,7 @@ export function ClientePedidoDetail({
             onPress={() =>
               Alert.alert(
                 'Ajuda',
-                'Dúvidas sobre o pedido: fale com a equipe QuickStock pelo e-mail da sua conta.',
+                'Dúvidas sobre o pedido: fale com a equipe Stock4event pelo e-mail da sua conta.',
               )
             }
           >

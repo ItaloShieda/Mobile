@@ -60,8 +60,8 @@ export function PedidosScreen() {
         <View style={[styles.header, { paddingTop: topPadding }]}>
           <View style={styles.headerTop}>
             <View style={styles.brandRow}>
-              <Text style={styles.brandQuick}>Quick</Text>
-              <Text style={styles.brandStock}>Stock</Text>
+              <Text style={styles.brandQuick}>Stock</Text>
+              <Text style={styles.brandStock}>4event</Text>
             </View>
             <TouchableOpacity
               style={{ width: 36, height: 36, alignItems: 'center', justifyContent: 'center' }}

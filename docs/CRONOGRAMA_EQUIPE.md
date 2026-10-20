@@ -1,6 +1,6 @@
-# QuickStock — Cronograma da equipe (8 semanas)
+# Stock4event — Cronograma da equipe (8 semanas)
 
-Documento de planejamento para conclusão, consolidação e apresentação do **QuickStock** (app mobile Expo + API Spring Boot + PostgreSQL).
+Documento de planejamento para conclusão, consolidação e apresentação do **Stock4event** (app mobile Expo + API Spring Boot + PostgreSQL).
 
 **Prazo total:** 8 semanas (2 meses)  
 **Início sugerido:** 21/09/2026  
@@ -131,7 +131,7 @@ Cada pessoa dedica **5 dias úteis por semana**. Tarefas da semana devem caber e
 | Líder | Congelar escopo de features novas; só correção | Lista do que entra / o que fica fora da banca |
 | Backend | Finalizar `recuperar-senha`; revisar endpoints de logística/caminhoneiros se no escopo | Reset de senha funcional + APIs restantes estáveis |
 | Frontend | Fechar Esqueceu a senha de ponta a ponta; telas de logística se já existirem | Sem botão morto no fluxo de auth |
-| Banco | Tabela/token de reset (ou atualização segura de senha); backup da base de apresentação | Backup `quickstock_demo.dump` |
+| Banco | Tabela/token de reset (ou atualização segura de senha); backup da base de apresentação | Backup `stock4event_demo.dump` |
 | Testes | Bateria completa dos fluxos M1–M3 + reset de senha | Relatório T6 (regressão) com bugs P0 zerados |
 
 ---

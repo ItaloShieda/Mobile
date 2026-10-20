@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { PerfilCadastro } from '../types/auth';
 
-const PERFIL_KEY = '@quickstock_perfil_uso';
+const PERFIL_KEY = '@stock4event_perfil_uso';
 
 function storageKey(email: string) {
   return `${PERFIL_KEY}:${email.trim().toLowerCase()}`;
@@ -11,7 +11,7 @@ export async function savePerfilUso(email: string, perfil: PerfilCadastro): Prom
   await AsyncStorage.setItem(storageKey(email), perfil);
 }
 
-const MODO_KEY = '@quickstock_modo_ativo';
+const MODO_KEY = '@stock4event_modo_ativo';
 
 export type ModoAtivo = 'Cliente' | 'Fornecedor';
 

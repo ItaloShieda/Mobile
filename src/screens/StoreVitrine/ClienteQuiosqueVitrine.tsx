@@ -111,8 +111,8 @@ export function ClienteQuiosqueVitrine({
               <Ionicons name="chevron-back" size={24} color="#FFF" />
             </TouchableOpacity>
             <View style={styles.brandRow}>
-              <Text style={styles.brandQuick}>Quick</Text>
-              <Text style={styles.brandStock}>Stock</Text>
+              <Text style={styles.brandQuick}>Stock</Text>
+              <Text style={styles.brandStock}>4event</Text>
             </View>
             <TouchableOpacity
               style={styles.headerSide}
