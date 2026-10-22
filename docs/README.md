@@ -85,8 +85,8 @@ O app tem dois fluxos, escolhidos no cadastro. Os dois seguem o mesmo layout, e 
 **1. Clone o repositório**
 
 ```bash
-git clone https://github.com/marcelo435/Mobile.git
-cd Mobile
+git clone https://github.com/LuanSantos26/Stock4Event-FrontEnd.git
+cd Stock4Event-FrontEnd
 ```
 
 **2. Instale as dependências**

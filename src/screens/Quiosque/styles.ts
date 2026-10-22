@@ -35,6 +35,15 @@ export const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: 14,
   },
+  secondaryButton: {
+    backgroundColor: '#FFF',
+    borderWidth: 1,
+    borderColor: COMPANY_COLORS.primary,
+    marginTop: -6,
+  },
+  secondaryButtonText: {
+    color: COMPANY_COLORS.primary,
+  },
   loader: {
     marginTop: 24,
   },

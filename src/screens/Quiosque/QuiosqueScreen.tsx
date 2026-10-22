@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { TabScreenLayout } from '../../components/layout/TabScreenLayout';
 import { BottomTabBar } from '../../components/layout/BottomTabBar';
 import { BarracaCard } from './components/BarracaCard';
@@ -21,6 +21,7 @@ import { styles } from './styles';
 import { COMPANY_COLORS } from '../../theme/theme';
 
 export function QuiosqueScreen() {
+  const navigation = useNavigation<any>();
   const { user } = useAuth();
   const { quiosques, loading, error, refresh } = useQuiosques();
   const { refresh: refreshProdutos } = useProdutos();
@@ -95,6 +96,15 @@ export function QuiosqueScreen() {
         <TouchableOpacity style={styles.addButton} onPress={abrirNova} activeOpacity={0.85}>
           <Ionicons name="add-circle-outline" size={18} color="#FFF" />
           <Text style={styles.addButtonText}>Adicionar Quiosque</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.addButton, styles.secondaryButton]}
+          onPress={() => navigation.navigate('QuiosquesDisponiveis')}
+          activeOpacity={0.85}
+        >
+          <Ionicons name="storefront-outline" size={18} color={COMPANY_COLORS.primary} />
+          <Text style={[styles.addButtonText, styles.secondaryButtonText]}>Quiosques disponíveis</Text>
         </TouchableOpacity>
 
         {loading ? (

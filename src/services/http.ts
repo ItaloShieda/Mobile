@@ -43,9 +43,31 @@ export async function parseResponse<T>(
   return data as T;
 }
 
+// Token da sessão atual, definido pelo AuthContext. Todas as rotas da API, exceto login,
+// cadastro e recuperação de senha, exigem "Authorization: Bearer <token>".
+let authToken: string | null = null;
+let onUnauthorized: (() => void) | null = null;
+
+export function setAuthToken(token: string | null): void {
+  authToken = token;
+}
+
+/** Chamado quando o servidor recusa o token (401): sessão expirada, revogada ou inválida. */
+export function setUnauthorizedHandler(handler: (() => void) | null): void {
+  onUnauthorized = handler;
+}
+
 export async function apiFetch(
   path: string,
   init?: RequestInit,
 ): Promise<Response> {
-  return fetch(`${API_BASE_URL}${path}`, init);
+  const headers = new Headers(init?.headers);
+  if (authToken && !headers.has('Authorization')) {
+    headers.set('Authorization', `Bearer ${authToken}`);
+  }
+  const response = await fetch(`${API_BASE_URL}${path}`, { ...init, headers });
+  if (response.status === 401 && authToken && onUnauthorized) {
+    onUnauthorized();
+  }
+  return response;
 }

@@ -1,6 +1,5 @@
-import { API_BASE_URL } from '../config/api';
 import { Produto } from './productService';
-import { parseResponse } from './http';
+import { apiFetch, parseResponse } from './http';
 import type {
   Fornecedor,
   ItemSolicitacao,
@@ -10,7 +9,9 @@ import type {
   ItemSolicitacaoPayload,
   SolicitacaoCompraPayload,
 } from '../types';
+import type { ProdutoRecente, QuiosqueDisponivel } from '../types/marketplace';
 
+export type { ProdutoRecente, QuiosqueDisponivel };
 export type {
   Fornecedor,
   ItemSolicitacao,
@@ -20,6 +21,28 @@ export type {
   ItemSolicitacaoPayload,
   SolicitacaoCompraPayload,
 };
+
+/** Produtos das distribuidoras (exceto a própria empresa), dos cadastrados mais recentemente. */
+export async function listarProdutosRecentes(limite = 20): Promise<ProdutoRecente[]> {
+  const response = await apiFetch(`/api/marketplace/produtos-recentes?limite=${limite}`);
+  const lista = await parseResponse<ProdutoRecente[]>(response, 'Não foi possível carregar os produtos.');
+  return lista.map((p) => ({
+    ...p,
+    precoVenda: Number(p.precoVenda),
+    estoque: p.estoque != null ? Number(p.estoque) : undefined,
+  }));
+}
+
+/** Quiosques ativos das outras contas, com o que está à venda. */
+export async function listarQuiosquesDisponiveis(busca = ''): Promise<QuiosqueDisponivel[]> {
+  const query = busca.trim() ? `?busca=${encodeURIComponent(busca.trim())}` : '';
+  const response = await apiFetch(`/api/marketplace/quiosques${query}`);
+  const lista = await parseResponse<QuiosqueDisponivel[]>(response, 'Não foi possível carregar os quiosques.');
+  return lista.map((q) => ({
+    ...q,
+    produtos: q.produtos.map((p) => ({ ...p, precoVenda: Number(p.precoVenda) })),
+  }));
+}
 
 function normalizeProduto(data: Produto): Produto {
   return {
@@ -72,13 +95,12 @@ export function calcularProgressoPedido(pedido: SolicitacaoCompra): number {
 
 export async function listarFornecedores(empresaCompradoraId?: number): Promise<Fornecedor[]> {
   const query = empresaCompradoraId ? `?empresaCompradoraId=${empresaCompradoraId}` : '';
-  const response = await fetch(`${API_BASE_URL}/api/marketplace/fornecedores${query}`);
+  const response = await apiFetch(`/api/marketplace/fornecedores${query}`);
   return parseResponse<Fornecedor[]>(response);
 }
 
 export async function listarProdutosFornecedor(fornecedorId: number): Promise<Produto[]> {
-  const response = await fetch(
-    `${API_BASE_URL}/api/marketplace/fornecedores/${fornecedorId}/produtos`,
+  const response = await apiFetch(`/api/marketplace/fornecedores/${fornecedorId}/produtos`,
   );
   const lista = await parseResponse<Produto[]>(response);
   return lista.map(normalizeProduto);
@@ -87,7 +109,7 @@ export async function listarProdutosFornecedor(fornecedorId: number): Promise<Pr
 export async function criarSolicitacaoCompra(
   payload: SolicitacaoCompraPayload,
 ): Promise<SolicitacaoCompra> {
-  const response = await fetch(`${API_BASE_URL}/api/solicitacoes-compra`, {
+  const response = await apiFetch(`/api/solicitacoes-compra`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -98,8 +120,7 @@ export async function criarSolicitacaoCompra(
 export async function listarSolicitacoes(
   empresaCompradoraId: number,
 ): Promise<SolicitacaoCompra[]> {
-  const response = await fetch(
-    `${API_BASE_URL}/api/solicitacoes-compra?empresaCompradoraId=${empresaCompradoraId}`,
+  const response = await apiFetch(`/api/solicitacoes-compra?empresaCompradoraId=${empresaCompradoraId}`,
   );
   const lista = await parseResponse<SolicitacaoCompra[]>(response);
   return lista.map(normalizeSolicitacao);
@@ -109,8 +130,7 @@ export async function buscarSolicitacao(
   pedidoId: number,
   empresaCompradoraId: number,
 ): Promise<SolicitacaoCompra> {
-  const response = await fetch(
-    `${API_BASE_URL}/api/solicitacoes-compra/${pedidoId}?empresaCompradoraId=${empresaCompradoraId}`,
+  const response = await apiFetch(`/api/solicitacoes-compra/${pedidoId}?empresaCompradoraId=${empresaCompradoraId}`,
   );
   return normalizeSolicitacao(await parseResponse<SolicitacaoCompra>(response));
 }
@@ -119,8 +139,7 @@ export async function buscarSolicitacao(
 export async function listarSolicitacoesRecebidas(
   empresaFornecedoraId: number,
 ): Promise<SolicitacaoCompra[]> {
-  const response = await fetch(
-    `${API_BASE_URL}/api/solicitacoes-compra/recebidas?empresaFornecedoraId=${empresaFornecedoraId}`,
+  const response = await apiFetch(`/api/solicitacoes-compra/recebidas?empresaFornecedoraId=${empresaFornecedoraId}`,
   );
   const lista = await parseResponse<SolicitacaoCompra[]>(
     response,
@@ -137,7 +156,7 @@ export async function atualizarStatusSolicitacao(
   empresaFornecedoraId: number,
   status: StatusPedidoFornecedor,
 ): Promise<SolicitacaoCompra> {
-  const response = await fetch(`${API_BASE_URL}/api/solicitacoes-compra/${pedidoId}/status`, {
+  const response = await apiFetch(`/api/solicitacoes-compra/${pedidoId}/status`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ empresaFornecedoraId, status }),
@@ -156,8 +175,7 @@ export async function cancelarSolicitacao(
   pedidoId: number,
   empresaCompradoraId: number,
 ): Promise<SolicitacaoCompra> {
-  const response = await fetch(
-    `${API_BASE_URL}/api/solicitacoes-compra/${pedidoId}/cancelar?empresaCompradoraId=${empresaCompradoraId}`,
+  const response = await apiFetch(`/api/solicitacoes-compra/${pedidoId}/cancelar?empresaCompradoraId=${empresaCompradoraId}`,
     { method: 'PATCH' },
   );
   return normalizeSolicitacao(

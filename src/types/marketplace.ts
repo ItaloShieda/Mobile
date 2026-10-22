@@ -81,3 +81,52 @@ export interface CartItem {
 export interface StoredPurchaseCart {
   itens: CartItem[];
 }
+
+/** Produto cadastrado por uma distribuidora (vitrine "Adicionados pelos fornecedores"). */
+export interface ProdutoRecente {
+  id: number;
+  empresaId: number;
+  nome: string;
+  precoVenda: number;
+  unidade: string;
+  descricao?: string;
+  imagemUrl?: string;
+  ativo: number;
+  estoque?: number;
+  codigo?: string;
+  fornecedorNome: string;
+  fornecedorLogoUrl?: string | null;
+  fornecedorCapaUrl?: string | null;
+  fornecedorDescricao?: string | null;
+  fornecedorTipo?: string | null;
+  criadoEm?: string | null;
+  /** Produto da própria empresa: aparece na vitrine, mas não dá para comprar de si mesmo. */
+  proprio?: boolean;
+}
+
+/** Quiosque de outra empresa (vitrine "Quiosques disponíveis"). */
+export interface QuiosqueDisponivel {
+  id: number;
+  nome: string;
+  eventoNome: string;
+  dataInicio?: string | null;
+  dataFim?: string | null;
+  empresaId: number;
+  empresaNome: string;
+  empresaTipo?: string | null;
+  empresaDescricao?: string | null;
+  empresaLogoUrl?: string | null;
+  empresaCapaUrl?: string | null;
+  /** A dona também vende no marketplace: dá para abrir a loja dela. */
+  distribuidora: boolean;
+  totalProdutos: number;
+  produtosDisponiveis: number;
+  produtos: {
+    produtoId: number;
+    nome: string;
+    unidade: string;
+    precoVenda: number;
+    imagemUrl?: string | null;
+    disponivel: boolean;
+  }[];
+}

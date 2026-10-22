@@ -17,12 +17,14 @@ export const GOLD = '#FFAD19';
 export function useProductDetail() {
 
   const navigation = useNavigation<any>();
-  const { perfilUso } = useAuth();
+  const { perfilUso, user } = useAuth();
   const goBack = useAppGoBack(perfilUso === 'Cliente' ? 'Explorar' : 'Cart');
   const route = useRoute<any>();
   const { addItem, itemCount, itens } = usePurchaseCart();
 
   const fornecedorId = route.params?.fornecedorId as number;
+  /** Produto da própria empresa (conta cliente e fornecedor): não dá para comprar de si mesmo. */
+  const produtoProprio = !!fornecedorId && fornecedorId === user?.empresa?.id;
   const fornecedorNome = route.params?.fornecedorNome as string ?? 'Distribuidora';
   const fornecedorDescricao = route.params?.fornecedorDescricao as string | undefined;
   const fornecedorLogoUrl = route.params?.fornecedorLogoUrl as string | undefined;
@@ -101,6 +103,11 @@ export function useProductDetail() {
   const handleAddToCart = async () => {
     if (!fornecedorId || !produtoId) {
       setFeedback('Produto ou fornecedor inválido.');
+      return;
+    }
+
+    if (produtoProprio) {
+      setFeedback('Este produto é da sua empresa: não é possível comprar de si mesmo.');
       return;
     }
 

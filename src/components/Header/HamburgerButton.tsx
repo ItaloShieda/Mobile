@@ -86,6 +86,14 @@ export function HamburgerButton() {
 
                   <TouchableOpacity
                     style={styles.menuOption}
+                    onPress={() => handleNavigate('Pdv')}
+                  >
+                    <Feather name="shopping-cart" size={20} color={COMPANY_COLORS.primary} />
+                    <Text style={styles.menuOptionText}>PDV</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={styles.menuOption}
                     onPress={() => handleNavigate('Enderecos')}
                   >
                     <Feather name="map-pin" size={20} color={COMPANY_COLORS.primary} />

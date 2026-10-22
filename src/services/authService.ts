@@ -1,5 +1,4 @@
-import { API_BASE_URL } from '../config/api';
-import { NETWORK_ERROR_MESSAGE, parseResponse } from './http';
+import { apiFetch, NETWORK_ERROR_MESSAGE, parseResponse } from './http';
 import type {
   CadastroContaPayload,
   CadastroContaResponse,
@@ -49,7 +48,7 @@ export function isLegacyToken(token: string): boolean {
 export async function cadastrarConta(
   payload: CadastroContaPayload,
 ): Promise<CadastroContaResponse> {
-  const response = await fetch(`${API_BASE_URL}/api/cadastro`, {
+  const response = await apiFetch(`/api/cadastro`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -62,7 +61,7 @@ export async function login(payload: LoginPayload): Promise<LoginResponse> {
   let response: Response;
 
   try {
-    response = await fetch(`${API_BASE_URL}/api/usuarios/login`, {
+    response = await apiFetch(`/api/usuarios/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -91,7 +90,7 @@ export async function recuperarSenha(payload: RecuperarSenhaPayload): Promise<vo
   let response: Response;
 
   try {
-    response = await fetch(`${API_BASE_URL}/api/usuarios/recuperar-senha`, {
+    response = await apiFetch(`/api/usuarios/recuperar-senha`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -107,7 +106,7 @@ export async function recuperarSenha(payload: RecuperarSenhaPayload): Promise<vo
 }
 
 export async function obterUsuarioAtual(token: string): Promise<UsuarioLogado> {
-  const response = await fetch(`${API_BASE_URL}/api/usuarios/me`, {
+  const response = await apiFetch(`/api/usuarios/me`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -120,7 +119,7 @@ export async function atualizarUsuario(
   id: number,
   payload: AtualizarUsuarioPayload,
 ): Promise<UsuarioLogado> {
-  const response = await fetch(`${API_BASE_URL}/api/usuarios/${id}`, {
+  const response = await apiFetch(`/api/usuarios/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -133,7 +132,7 @@ export async function atualizarEmpresa(
   id: number,
   payload: AtualizarEmpresaPayload,
 ): Promise<UsuarioLogado['empresa']> {
-  const response = await fetch(`${API_BASE_URL}/api/empresas/${id}`, {
+  const response = await apiFetch(`/api/empresas/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),

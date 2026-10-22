@@ -786,7 +786,7 @@ def make_doc():
         "EXPO. Documentation. Disponível em: https://docs.expo.dev. Acesso em: 27 set. 2026.",
         "META PLATFORMS. React Native. Disponível em: https://reactnative.dev. Acesso em: 27 set. 2026.",
         "REACT NAVIGATION. Native stack navigator. Disponível em: https://reactnavigation.org. Acesso em: 27 set. 2026.",
-        "STOCK4EVENT. Repositório do aplicativo móvel. Disponível em: https://github.com/LuanSantos26/Mobile. Acesso em: 27 set. 2026.",
+        "STOCK4EVENT. Repositório do aplicativo móvel. Disponível em: https://github.com/LuanSantos26/Stock4Event-FrontEnd. Acesso em: 27 set. 2026.",
         "STOCK4EVENT. Repositório do backend. Disponível em: https://github.com/LuanSantos26/QuickStock-BackEnd. Acesso em: 27 set. 2026.",
     ]
     for r in refs:

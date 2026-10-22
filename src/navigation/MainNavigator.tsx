@@ -26,6 +26,9 @@ import { PedidosScreen } from '../screens/Pedidos/PedidosScreen';
 import { PerfilScreen } from '../screens/Perfil/PerfilScreen';
 import { ClienteQuiosquesScreen } from '../screens/ClienteQuiosques/ClienteQuiosquesScreen';
 import { ClienteQuiosqueFormScreen } from '../screens/ClienteQuiosques/ClienteQuiosqueFormScreen';
+import { PdvScreen } from '../screens/Pdv/PdvScreen';
+import { QuiosquesDisponiveisScreen } from '../screens/QuiosquesDisponiveis/QuiosquesDisponiveisScreen';
+import { ExplorarListaScreen } from '../screens/ExplorarLista/ExplorarListaScreen';
 import type { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -56,5 +59,8 @@ export function MainNavigator() {
     <Stack.Screen name="Logistica" component={LogisticaScreen} />
     <Stack.Screen name="ClienteQuiosques" component={ClienteQuiosquesScreen} />
     <Stack.Screen name="ClienteQuiosqueForm" component={ClienteQuiosqueFormScreen} />
+    <Stack.Screen name="Pdv" component={PdvScreen} />
+    <Stack.Screen name="QuiosquesDisponiveis" component={QuiosquesDisponiveisScreen} />
+    <Stack.Screen name="ExplorarLista" component={ExplorarListaScreen} />
   </Stack.Navigator></QuiosqueProvider></ProductsProvider>;
 }

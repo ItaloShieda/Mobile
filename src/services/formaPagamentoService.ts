@@ -1,5 +1,5 @@
 import { API_BASE_URL } from '../config/api';
-import { extractErrorMessage, parseResponse } from './http';
+import { apiFetch, extractErrorMessage, parseResponse } from './http';
 import type {
   TipoPagamento,
   FormaPagamentoSalva,
@@ -37,7 +37,7 @@ export function iconeTipoPagamento(tipo: string): 'phone-portrait-outline' | 'ca
 }
 
 export async function listarFormasPagamento(empresaId: number): Promise<FormaPagamentoSalva[]> {
-  const response = await fetch(`${API_BASE_URL}/api/formas-pagamento?empresaId=${empresaId}`);
+  const response = await apiFetch(`/api/formas-pagamento?empresaId=${empresaId}`);
   return parseResponse<FormaPagamentoSalva[]>(
     response,
     'Não foi possível carregar formas de pagamento.',
@@ -48,7 +48,7 @@ export async function listarFormasPagamento(empresaId: number): Promise<FormaPag
 export async function criarFormaPagamento(payload: FormaPagamentoPayload): Promise<FormaPagamentoSalva> {
   let response: Response;
   try {
-    response = await fetch(`${API_BASE_URL}/api/formas-pagamento`, {
+    response = await apiFetch(`/api/formas-pagamento`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
@@ -73,8 +73,7 @@ export async function criarFormaPagamento(payload: FormaPagamentoPayload): Promi
 }
 
 export async function removerFormaPagamento(id: number, empresaId: number): Promise<void> {
-  const response = await fetch(
-    `${API_BASE_URL}/api/formas-pagamento/${id}?empresaId=${empresaId}`,
+  const response = await apiFetch(`/api/formas-pagamento/${id}?empresaId=${empresaId}`,
     { method: 'DELETE' },
   );
 
@@ -92,8 +91,7 @@ export async function definirFormaPagamentoPrincipal(
   id: number,
   empresaId: number,
 ): Promise<FormaPagamentoSalva> {
-  const response = await fetch(
-    `${API_BASE_URL}/api/formas-pagamento/${id}/principal?empresaId=${empresaId}`,
+  const response = await apiFetch(`/api/formas-pagamento/${id}/principal?empresaId=${empresaId}`,
     { method: 'PATCH' },
   );
   return parseResponse<FormaPagamentoSalva>(

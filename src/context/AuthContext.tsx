@@ -29,6 +29,7 @@ import {
 } from '../services/perfilStorage';
 import type { PerfilCadastro } from '../types/auth';
 import { isContaDemo } from '../config/demo';
+import { setAuthToken, setUnauthorizedHandler } from '../services/http';
 
 interface AuthContextValue {
   user: UsuarioLogado | null;
@@ -59,6 +60,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const applySession = useCallback(async (session: StoredSession | null) => {
     if (!session || isSessionExpired(session.expiresAt)) {
+      setAuthToken(null);
       setUser(null);
       setToken(null);
       setPerfilUsoState(null);
@@ -77,6 +79,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } else {
       setPerfilUsoState(perfil);
     }
+    setAuthToken(session.token);
     setUser(session.usuario);
     setToken(session.token);
     return true;
@@ -141,6 +144,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [applySession]);
 
   const signOut = useCallback(async () => {
+    setAuthToken(null);
     try {
       await clearSession();
     } finally {
@@ -150,6 +154,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setPerfilConta(null);
     }
   }, []);
+
+  // Se o servidor recusar o token (expirado ou revogado), volta para o login.
+  useEffect(() => {
+    setUnauthorizedHandler(() => {
+      void signOut();
+    });
+    return () => setUnauthorizedHandler(null);
+  }, [signOut]);
 
   const updateUser = useCallback(async (usuario: UsuarioLogado) => {
     const session = await loadSession();
