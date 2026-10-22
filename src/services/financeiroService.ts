@@ -1,7 +1,6 @@
-import { API_BASE_URL } from '../config/api';
 import { listarSolicitacoes } from './marketplaceService';
 import { formatarDiaSemana } from '../utils/dateFormat';
-import { extractErrorMessage, parseResponse } from './http';
+import { apiFetch, extractErrorMessage, parseResponse } from './http';
 import type {
   MesValor,
   MesLucro,
@@ -95,8 +94,7 @@ function normalizeResumo(data: FinanceiroResumo): FinanceiroResumo {
 export async function buscarResumoFinanceiro(
   empresaCompradoraId: number,
 ): Promise<FinanceiroResumo> {
-  const response = await fetch(
-    `${API_BASE_URL}/api/financeiro/resumo?empresaCompradoraId=${empresaCompradoraId}`,
+  const response = await apiFetch(`/api/financeiro/resumo?empresaCompradoraId=${empresaCompradoraId}`,
   );
   const data = await parseResponse<FinanceiroResumo>(
     response,
@@ -185,8 +183,7 @@ async function montarStockDiaLocal(empresaCompradoraId: number): Promise<StockDi
 
 export async function buscarStockDia(empresaCompradoraId: number): Promise<StockDia> {
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/api/financeiro/stock-dia?empresaCompradoraId=${empresaCompradoraId}`,
+    const response = await apiFetch(`/api/financeiro/stock-dia?empresaCompradoraId=${empresaCompradoraId}`,
     );
     const data = await response.json().catch(() => ({}));
 

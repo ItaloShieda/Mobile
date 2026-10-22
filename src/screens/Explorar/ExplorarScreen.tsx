@@ -29,7 +29,8 @@ export function ExplorarScreen() {
     setBusca,
     categoria,
     toggleCategoria,
-    limparFiltros,
+    verTodosProdutos,
+    verTodasDistribuidoras,
     produtosDestaque,
     lojasDestaque,
     tabBarHeight,
@@ -67,7 +68,7 @@ export function ExplorarScreen() {
             <Ionicons name="search-outline" size={18} color="#9AA3B2" />
             <TextInput
               style={styles.searchInput}
-              placeholder="Buscar bebidas ou quiosques"
+              placeholder="Buscar bebidas ou distribuidoras"
               placeholderTextColor="#9AA3B2"
               value={busca}
               onChangeText={setBusca}
@@ -79,7 +80,7 @@ export function ExplorarScreen() {
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Categorias</Text>
-              <TouchableOpacity onPress={limparFiltros} activeOpacity={0.8}>
+              <TouchableOpacity onPress={() => verTodosProdutos()} activeOpacity={0.8}>
                 <Text style={styles.seeAll}>Ver todas</Text>
               </TouchableOpacity>
             </View>
@@ -112,19 +113,20 @@ export function ExplorarScreen() {
 
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>Produtos em destaque</Text>
-              <TouchableOpacity onPress={limparFiltros} activeOpacity={0.8}>
-                <Text style={styles.seeAll}>Ver todas</Text>
+              <Text style={styles.sectionTitle}>Adicionados pelos fornecedores</Text>
+              <TouchableOpacity onPress={verTodosProdutos} activeOpacity={0.8}>
+                <Text style={styles.seeAll}>Ver todos</Text>
               </TouchableOpacity>
             </View>
             {loading ? (
               <ActivityIndicator color={PRIMARY} style={{ marginVertical: 16 }} />
             ) : produtosDestaque.length === 0 ? (
-              <Text style={styles.empty}>Nenhum produto encontrado.</Text>
+              <Text style={styles.empty}>Nenhum produto cadastrado pelos fornecedores ainda.</Text>
             ) : (
               <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.productsRow}>
                 {produtosDestaque.map((produto) => {
                   const emEstoque = normalizarEstoque(produto.estoque) > 0;
+                  const podeComprar = emEstoque && !produto.proprio;
                   return (
                     <TouchableOpacity
                       key={`${produto.empresaId}-${produto.id}`}
@@ -149,15 +151,15 @@ export function ExplorarScreen() {
                           {formatarPreco(produto.precoVenda)}
                         </Text>
                         <TouchableOpacity
-                          style={[styles.addButton, !emEstoque && { opacity: 0.4 }]}
+                          style={[styles.addButton, !podeComprar && { opacity: 0.4 }]}
                           onPress={() => adicionarProduto(produto)}
-                          disabled={!emEstoque}
+                          disabled={!podeComprar}
                         >
                           <Ionicons name="add" size={16} color="#FFF" />
                         </TouchableOpacity>
                       </View>
-                      <Text style={[styles.stockLabel, !emEstoque && { color: '#C62828' }]}>
-                        {emEstoque ? 'Em estoque' : 'Esgotado'}
+                      <Text style={[styles.stockLabel, !emEstoque && { color: '#C62828' }, produto.proprio && { color: '#53739A' }]}>
+                        {produto.proprio ? 'Seu produto' : emEstoque ? 'Em estoque' : 'Esgotado'}
                       </Text>
                     </TouchableOpacity>
                   );
@@ -168,13 +170,13 @@ export function ExplorarScreen() {
 
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>Quiosques de fornecedores</Text>
-              <TouchableOpacity onPress={limparFiltros} activeOpacity={0.8}>
+              <Text style={styles.sectionTitle}>Distribuidoras Parceiras</Text>
+              <TouchableOpacity onPress={verTodasDistribuidoras} activeOpacity={0.8}>
                 <Text style={styles.seeAll}>Ver todas</Text>
               </TouchableOpacity>
             </View>
             {lojasDestaque.length === 0 ? (
-              <Text style={styles.empty}>Nenhum quiosque disponível no momento.</Text>
+              <Text style={styles.empty}>Nenhuma distribuidora disponível no momento.</Text>
             ) : (
               <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.storesRow}>
                 {lojasDestaque.map((loja, index) => (
@@ -195,13 +197,13 @@ export function ExplorarScreen() {
                         {loja.nome}
                       </Text>
                       <Text style={styles.storeHint} numberOfLines={1}>
-                        {loja.descricao || 'Bebidas e quiosque'}
+                        {loja.descricao || 'Distribuidora de bebidas'}
                       </Text>
                       <View style={styles.storeMeta}>
                         <Ionicons name="location-outline" size={12} color="#8A93A3" />
                         <Text style={styles.storeDistance}>{distanciaDaLoja(index)}</Text>
                         <View style={styles.verQuiosque}>
-                          <Text style={styles.verQuiosqueText}>Ver quiosque</Text>
+                          <Text style={styles.verQuiosqueText}>Ver distribuidora</Text>
                         </View>
                       </View>
                     </View>

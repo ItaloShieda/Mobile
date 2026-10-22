@@ -46,12 +46,22 @@ export function ClienteQuiosquesScreen() {
           </View>
           <Text style={styles.title}>Meus quiosques</Text>
           <Text style={styles.subtitle}>Monte o estoque dos seus eventos com o que você comprou.</Text>
-          {!semProdutos && !error ? (
-            <TouchableOpacity style={styles.headerButton} onPress={novoQuiosque} activeOpacity={0.85}>
-              <Ionicons name="add" size={16} color={PRIMARY} />
-              <Text style={styles.headerButtonText}>Novo quiosque</Text>
+          <View style={styles.headerButtons}>
+            {!semProdutos && !error ? (
+              <TouchableOpacity style={styles.headerButton} onPress={novoQuiosque} activeOpacity={0.85}>
+                <Ionicons name="add" size={16} color={PRIMARY} />
+                <Text style={styles.headerButtonText}>Novo quiosque</Text>
+              </TouchableOpacity>
+            ) : null}
+            <TouchableOpacity
+              style={styles.headerButton}
+              onPress={() => navigation.navigate('QuiosquesDisponiveis')}
+              activeOpacity={0.85}
+            >
+              <Ionicons name="storefront-outline" size={16} color={PRIMARY} />
+              <Text style={styles.headerButtonText}>Quiosques disponíveis</Text>
             </TouchableOpacity>
-          ) : null}
+          </View>
         </View>
 
         <View style={styles.sheet}>

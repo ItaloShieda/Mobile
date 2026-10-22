@@ -14,6 +14,13 @@ import { BrandLogo } from '../../components/brand/BrandLogo';
 
 const MENU = [
   {
+    key: 'pdv',
+    icon: 'calculator-outline' as const,
+    title: 'PDV',
+    hint: 'Vender nos seus quiosques',
+    screen: 'Pdv' as const,
+  },
+  {
     key: 'cliente',
     icon: 'person-outline' as const,
     title: 'Dados do cliente',

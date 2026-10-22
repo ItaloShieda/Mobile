@@ -5,7 +5,7 @@ import { usePurchaseCart } from '../../context/PurchaseCartContext';
 import {
   Fornecedor,
   listarFornecedores,
-  listarProdutosFornecedor,
+  listarProdutosRecentes,
 } from '../../services/marketplaceService';
 import { formatarPreco, Produto, normalizarEstoque } from '../../services/productService';
 import { useBottomTabBarHeight } from '../../components/layout/BottomTabBar';
@@ -38,7 +38,8 @@ export const CATEGORIAS: {
     label: 'Sucos',
     icon: 'wine-outline',
     color: '#F8E7B0',
-    keywords: ['suco', 'néctar', 'nectar', 'laranja', 'uva', 'maracujá', 'maracuja'],
+    // Só termos de suco: 'laranja' sozinho colocava a Fanta Laranja (SaborViva) em Sucos.
+    keywords: ['suco', 'néctar', 'nectar'],
   },
   {
     id: 'cervejas',
@@ -53,10 +54,18 @@ const DISTANCIAS = ['1,0 km', '1,2 km', '2,4 km', '0,8 km', '3,1 km'];
 
 export interface ProdutoExplorar extends Produto {
   fornecedorNome: string;
+  /** Produto da própria empresa (conta cliente e fornecedor). */
+  proprio?: boolean;
 }
 
 function textoProduto(produto: Produto) {
   return `${produto.nome} ${produto.descricao ?? ''} ${produto.unidade}`.toLowerCase();
+}
+
+/** Se o produto pertence à categoria (pelas palavras-chave do nome, descrição e unidade). */
+export function produtoDaCategoria(produto: Produto, categoria: CategoriaId): boolean {
+  const keywords = CATEGORIAS.find((c) => c.id === categoria)?.keywords ?? [];
+  return keywords.some((palavra) => textoProduto(produto).includes(palavra));
 }
 
 export function useExplorar() {
@@ -76,21 +85,13 @@ export function useExplorar() {
     if (!empresaId) return;
     setLoading(true);
     try {
-      const listaLojas = await listarFornecedores(empresaId);
+      // Produtos cadastrados pelas contas fornecedoras (exceto a própria), mais recentes primeiro.
+      const [listaLojas, recentes] = await Promise.all([
+        listarFornecedores(empresaId),
+        listarProdutosRecentes(60).catch(() => [] as ProdutoExplorar[]),
+      ]);
       setLojas(listaLojas);
-
-      const destaques = listaLojas.slice(0, 5);
-      const listas = await Promise.all(
-        destaques.map(async (loja) => {
-          try {
-            const itens = await listarProdutosFornecedor(loja.id);
-            return itens.map((item) => ({ ...item, fornecedorNome: loja.nome }));
-          } catch {
-            return [] as ProdutoExplorar[];
-          }
-        }),
-      );
-      setProdutos(listas.flat());
+      setProdutos(recentes);
     } catch {
       setLojas([]);
       setProdutos([]);
@@ -110,10 +111,7 @@ export function useExplorar() {
   const produtosFiltrados = useMemo(() => {
     let lista = produtos;
     if (categoria) {
-      const keywords = CATEGORIAS.find((c) => c.id === categoria)?.keywords ?? [];
-      const porCategoria = lista.filter((p) =>
-        keywords.some((palavra) => textoProduto(p).includes(palavra)),
-      );
+      const porCategoria = lista.filter((p) => produtoDaCategoria(p, categoria));
       if (porCategoria.length > 0) lista = porCategoria;
     }
     if (!termo) return lista;
@@ -168,13 +166,16 @@ export function useExplorar() {
   };
 
   const adicionarProduto = async (produto: ProdutoExplorar) => {
-    if (normalizarEstoque(produto.estoque) <= 0) return;
+    if (produto.proprio || normalizarEstoque(produto.estoque) <= 0) return;
     await addItem(produto, { id: produto.empresaId, nome: produto.fornecedorNome });
   };
 
   const toggleCategoria = (id: CategoriaId) => {
     setCategoria((atual) => (atual === id ? null : id));
   };
+
+  const verTodosProdutos = () => navigation.navigate('ExplorarLista', { tipo: 'produtos', categoria });
+  const verTodasDistribuidoras = () => navigation.navigate('ExplorarLista', { tipo: 'distribuidoras' });
 
   const limparFiltros = () => {
     setCategoria(null);
@@ -188,6 +189,8 @@ export function useExplorar() {
     categoria,
     toggleCategoria,
     limparFiltros,
+    verTodosProdutos,
+    verTodasDistribuidoras,
     produtosDestaque,
     lojasDestaque,
     tabBarHeight,

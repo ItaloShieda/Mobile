@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_BASE_URL } from '../config/api';
-import { extractErrorMessage, parseResponse } from './http';
+import { apiFetch, extractErrorMessage, parseResponse } from './http';
 import {
   TipoChavePix,
   mascararChavePix,
@@ -45,7 +45,7 @@ async function migrarChavesLocais(empresaId: number): Promise<void> {
 
 export async function listarChavesPix(empresaId: number): Promise<PixSalvo[]> {
   await migrarChavesLocais(empresaId);
-  const response = await fetch(`${API_BASE_URL}/api/chaves-pix?empresaId=${empresaId}`);
+  const response = await apiFetch(`/api/chaves-pix?empresaId=${empresaId}`);
   return parseResponse<PixSalvo[]>(
     response,
     'Não foi possível carregar as chaves PIX.',
@@ -56,7 +56,7 @@ export async function listarChavesPix(empresaId: number): Promise<PixSalvo[]> {
 export async function salvarChavePix(payload: PixSalvoPayload): Promise<PixSalvo> {
   let response: Response;
   try {
-    response = await fetch(`${API_BASE_URL}/api/chaves-pix`, {
+    response = await apiFetch(`/api/chaves-pix`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
@@ -79,8 +79,7 @@ export async function salvarChavePix(payload: PixSalvoPayload): Promise<PixSalvo
 }
 
 export async function removerChavePix(empresaId: number, chaveId: number): Promise<void> {
-  const response = await fetch(
-    `${API_BASE_URL}/api/chaves-pix/${chaveId}?empresaId=${empresaId}`,
+  const response = await apiFetch(`/api/chaves-pix/${chaveId}?empresaId=${empresaId}`,
     { method: 'DELETE' },
   );
 

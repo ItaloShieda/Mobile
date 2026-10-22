@@ -1,12 +1,10 @@
-import { API_BASE_URL } from '../config/api';
-import { parseResponse } from './http';
+import { apiFetch, parseResponse } from './http';
 import type { TipoNotificacao, Notificacao } from '../types/notificacao';
 
 export type { TipoNotificacao, Notificacao };
 
 export async function listarNotificacoes(empresaCompradoraId: number): Promise<Notificacao[]> {
-  const response = await fetch(
-    `${API_BASE_URL}/api/notificacoes?empresaCompradoraId=${empresaCompradoraId}`,
+  const response = await apiFetch(`/api/notificacoes?empresaCompradoraId=${empresaCompradoraId}`,
   );
   return parseResponse<Notificacao[]>(response, 'Não foi possível carregar notificações.');
 }

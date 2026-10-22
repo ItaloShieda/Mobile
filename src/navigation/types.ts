@@ -32,4 +32,7 @@ export type RootStackParamList = {
   Logistica: undefined;
   ClienteQuiosques: undefined;
   ClienteQuiosqueForm: { quiosqueId?: number } | undefined;
+  Pdv: undefined;
+  QuiosquesDisponiveis: undefined;
+  ExplorarLista: { tipo: 'produtos' | 'distribuidoras'; categoria?: 'aguas' | 'refrigerantes' | 'sucos' | 'cervejas' | null };
 };

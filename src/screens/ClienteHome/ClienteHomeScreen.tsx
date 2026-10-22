@@ -27,6 +27,7 @@ export function ClienteHomeScreen() {
     tabBarHeight,
     distanciaDaLoja,
     abrirMarketplace,
+    verTodasDistribuidoras,
     abrirSacola,
     abrirPedidos,
     abrirLoja,
@@ -103,9 +104,9 @@ export function ClienteHomeScreen() {
 
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Text style={[styles.sectionTitle, { marginBottom: 0 }]}>Quiosques disponíveis</Text>
-              <TouchableOpacity onPress={abrirMarketplace} activeOpacity={0.8}>
-                <Text style={styles.seeAll}>Ver todos</Text>
+              <Text style={[styles.sectionTitle, { marginBottom: 0 }]}>Distribuidoras disponíveis</Text>
+              <TouchableOpacity onPress={verTodasDistribuidoras} activeOpacity={0.8}>
+                <Text style={styles.seeAll}>Ver todas</Text>
               </TouchableOpacity>
             </View>
 

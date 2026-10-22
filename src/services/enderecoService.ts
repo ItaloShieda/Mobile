@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_BASE_URL } from '../config/api';
 import { normalizarCep } from '../utils/cepUtils';
-import { extractErrorMessage, parseResponse } from './http';
+import { apiFetch, extractErrorMessage, parseResponse } from './http';
 import type {
   EnderecoEntrega,
   EnderecoEntregaPayload,
@@ -13,7 +13,7 @@ export type { EnderecoEntrega, EnderecoEntregaPayload, DadosCep };
 const ENDERECO_STORAGE_KEY = 'sacola:enderecoId';
 
 export async function listarEnderecos(empresaId: number): Promise<EnderecoEntrega[]> {
-  const response = await fetch(`${API_BASE_URL}/api/enderecos?empresaId=${empresaId}`);
+  const response = await apiFetch(`/api/enderecos?empresaId=${empresaId}`);
   return parseResponse<EnderecoEntrega[]>(
     response,
     'Não foi possível carregar endereços.',
@@ -27,7 +27,7 @@ export async function consultarCep(cep: string): Promise<DadosCep | null> {
 
   let response: Response;
   try {
-    response = await fetch(`${API_BASE_URL}/api/enderecos/cep/${digits}`);
+    response = await apiFetch(`/api/enderecos/cep/${digits}`);
   } catch {
     throw new Error(
       `Não foi possível conectar ao servidor (${API_BASE_URL}). Verifique se o backend está rodando.`,
@@ -55,7 +55,7 @@ export async function criarEndereco(payload: EnderecoEntregaPayload): Promise<En
 
   let response: Response;
   try {
-    response = await fetch(`${API_BASE_URL}/api/enderecos`, {
+    response = await apiFetch(`/api/enderecos`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
@@ -81,7 +81,7 @@ export async function atualizarEndereco(
   id: number,
   payload: EnderecoEntregaPayload,
 ): Promise<EnderecoEntrega> {
-  const response = await fetch(`${API_BASE_URL}/api/enderecos/${id}`, {
+  const response = await apiFetch(`/api/enderecos/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ ...payload, cep: normalizarCep(payload.cep) }),
@@ -97,8 +97,7 @@ export async function definirEnderecoPrincipal(
   id: number,
   empresaId: number,
 ): Promise<EnderecoEntrega> {
-  const response = await fetch(
-    `${API_BASE_URL}/api/enderecos/${id}/principal?empresaId=${empresaId}`,
+  const response = await apiFetch(`/api/enderecos/${id}/principal?empresaId=${empresaId}`,
     { method: 'PATCH' },
   );
   return parseResponse<EnderecoEntrega>(
@@ -109,7 +108,7 @@ export async function definirEnderecoPrincipal(
 }
 
 export async function removerEndereco(id: number, empresaId: number): Promise<void> {
-  const response = await fetch(`${API_BASE_URL}/api/enderecos/${id}?empresaId=${empresaId}`, {
+  const response = await apiFetch(`/api/enderecos/${id}?empresaId=${empresaId}`, {
     method: 'DELETE',
   });
 

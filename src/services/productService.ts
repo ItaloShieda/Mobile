@@ -1,6 +1,5 @@
 import { Platform } from 'react-native';
-import { API_BASE_URL } from '../config/api';
-import { extractErrorMessage, parseResponse } from './http';
+import { apiFetch, extractErrorMessage, parseResponse } from './http';
 import type { Produto, ProdutoPayload } from '../types/produto';
 
 export type { Produto, ProdutoPayload };
@@ -15,20 +14,19 @@ export function normalizarProduto(data: Produto): Produto {
 }
 
 export async function listarProdutos(empresaId: number): Promise<Produto[]> {
-  const response = await fetch(
-    `${API_BASE_URL}/api/produtos?empresaId=${empresaId}`,
+  const response = await apiFetch(`/api/produtos?empresaId=${empresaId}`,
   );
   const lista = await parseResponse<Produto[]>(response);
   return lista.map(normalizarProduto);
 }
 
 export async function buscarProduto(id: number): Promise<Produto> {
-  const response = await fetch(`${API_BASE_URL}/api/produtos/${id}`);
+  const response = await apiFetch(`/api/produtos/${id}`);
   return normalizarProduto(await parseResponse<Produto>(response));
 }
 
 export async function criarProduto(payload: ProdutoPayload): Promise<Produto> {
-  const response = await fetch(`${API_BASE_URL}/api/produtos`, {
+  const response = await apiFetch(`/api/produtos`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -40,7 +38,7 @@ export async function atualizarProduto(
   id: number,
   payload: ProdutoPayload,
 ): Promise<Produto> {
-  const response = await fetch(`${API_BASE_URL}/api/produtos/${id}`, {
+  const response = await apiFetch(`/api/produtos/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -50,7 +48,7 @@ export async function atualizarProduto(
 
 export async function removerProduto(id: number, empresaId?: number): Promise<void> {
   const query = empresaId != null ? `?empresaId=${empresaId}` : '';
-  const response = await fetch(`${API_BASE_URL}/api/produtos/${id}${query}`, {
+  const response = await apiFetch(`/api/produtos/${id}${query}`, {
     method: 'DELETE',
   });
 
@@ -100,7 +98,7 @@ export async function uploadImagemProduto(
     } as unknown as Blob);
   }
 
-  const response = await fetch(`${API_BASE_URL}/api/produtos/upload`, {
+  const response = await apiFetch(`/api/produtos/upload`, {
     method: 'POST',
     body: formData,
   });

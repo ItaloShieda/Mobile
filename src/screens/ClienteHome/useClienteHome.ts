@@ -39,6 +39,7 @@ export function useClienteHome() {
   const distanciaDaLoja = (index: number) => DISTANCIAS[index % DISTANCIAS.length];
 
   const abrirMarketplace = () => navigation.navigate('Explorar');
+  const verTodasDistribuidoras = () => navigation.navigate('ExplorarLista', { tipo: 'distribuidoras' });
   const abrirSacola = () => navigation.navigate('Reservas');
   const abrirPedidos = () => navigation.navigate('Pedidos');
 
@@ -59,6 +60,7 @@ export function useClienteHome() {
     tabBarHeight,
     distanciaDaLoja,
     abrirMarketplace,
+    verTodasDistribuidoras,
     abrirSacola,
     abrirPedidos,
     abrirLoja,

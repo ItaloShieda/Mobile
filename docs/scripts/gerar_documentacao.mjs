@@ -439,7 +439,7 @@ function buildMainContent() {
       "O aplicativo mobile organiza-se em telas (screens), contexts para estado global, services para chamadas HTTP e componentes reutilizáveis. O backend segue camadas Controller → Service → Repository → Entity. O PostgreSQL armazena dados persistentes; imagens de produtos ficam em uploads/produtos/ no servidor."
     ),
     heading2("2.3 Repositórios"),
-    bullet("Mobile: https://github.com/LuanSantos26/Mobile"),
+    bullet("FrontEnd (app mobile): https://github.com/LuanSantos26/Stock4Event-FrontEnd"),
     bullet("Mobile (versão com quiosques do cliente e novo layout): https://github.com/marcelo435/Mobile"),
     bullet("BackEnd: https://github.com/LuanSantos26/QuickStock-BackEnd"),
 

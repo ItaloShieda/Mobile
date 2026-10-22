@@ -1,5 +1,4 @@
-import { API_BASE_URL } from '../config/api';
-import { extractErrorMessage, parseResponse } from './http';
+import { apiFetch, extractErrorMessage, parseResponse } from './http';
 import type {
   EstoqueItem,
   Quiosque,
@@ -23,13 +22,13 @@ function normalizeQuiosque(data: Quiosque): Quiosque {
 }
 
 export async function listarQuiosques(empresaId: number): Promise<Quiosque[]> {
-  const response = await fetch(`${API_BASE_URL}/api/barracas?empresaId=${empresaId}`);
+  const response = await apiFetch(`/api/barracas?empresaId=${empresaId}`);
   const lista = await parseResponse<Quiosque[]>(response);
   return lista.map(normalizeQuiosque);
 }
 
 export async function criarQuiosque(payload: QuiosquePayload): Promise<Quiosque> {
-  const response = await fetch(`${API_BASE_URL}/api/barracas`, {
+  const response = await apiFetch(`/api/barracas`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -41,7 +40,7 @@ export async function atualizarQuiosque(
   id: number,
   payload: QuiosquePayload,
 ): Promise<Quiosque> {
-  const response = await fetch(`${API_BASE_URL}/api/barracas/${id}`, {
+  const response = await apiFetch(`/api/barracas/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -53,7 +52,7 @@ export async function atualizarEstoque(
   id: number,
   itens: EstoqueItemPayload[],
 ): Promise<Quiosque> {
-  const response = await fetch(`${API_BASE_URL}/api/barracas/${id}/estoque`, {
+  const response = await apiFetch(`/api/barracas/${id}/estoque`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ itens }),
@@ -62,8 +61,7 @@ export async function atualizarEstoque(
 }
 
 export async function removerQuiosque(id: number, empresaId: number): Promise<void> {
-  const response = await fetch(
-    `${API_BASE_URL}/api/barracas/${id}?empresaId=${empresaId}`,
+  const response = await apiFetch(`/api/barracas/${id}?empresaId=${empresaId}`,
     { method: 'DELETE' },
   );
 

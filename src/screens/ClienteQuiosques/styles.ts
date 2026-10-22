@@ -37,9 +37,14 @@ export const styles = StyleSheet.create({
     gap: 6,
   },
   primaryButtonText: { color: '#FFF', fontSize: 14, fontWeight: '800' },
+  headerButtons: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginTop: 14,
+  },
   headerButton: {
     alignSelf: 'flex-start',
-    marginTop: 14,
     backgroundColor: '#FFF',
     borderRadius: 18,
     paddingVertical: 9,

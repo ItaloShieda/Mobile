@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useAppGoBack } from '../../hooks/useAppGoBack';
 import { useAuth } from '../../context/AuthContext';
+import { useConfirmDialog } from '../../context/ConfirmDialogContext';
 import { useProdutos } from '../../context/ProductsContext';
 import {
   SolicitacaoCompra,
@@ -77,30 +77,34 @@ export function usePedidoAcompanhamento() {
     };
   }, [carregarPedido, pedidoAtivoId, user?.empresa?.id]);
 
+  const { confirm } = useConfirmDialog();
   const [cancelando, setCancelando] = useState(false);
   const podeCancelar = pedido?.status === 'aguardando_liberacao';
 
+  // Diálogo do próprio app: o Alert.alert com botões não aparece no navegador (Expo web).
   const confirmarCancelamento = useCallback(() => {
-    if (!pedido || !user?.empresa?.id) return;
+    if (!pedido || !user?.empresa?.id || cancelando) return;
     const empresaId = user.empresa.id;
-    Alert.alert('Cancelar pedido', `Cancelar o pedido #${pedido.id}?`, [
-      { text: 'Voltar', style: 'cancel' },
-      {
-        text: 'Cancelar pedido',
-        style: 'destructive',
-        onPress: async () => {
-          setCancelando(true);
-          try {
-            setPedido(await cancelarSolicitacao(pedido.id, empresaId));
-          } catch (err) {
-            Alert.alert('Pedido', err instanceof Error ? err.message : 'Não foi possível cancelar o pedido.');
-          } finally {
-            setCancelando(false);
-          }
-        },
+    const pedidoId = pedido.id;
+    confirm({
+      title: 'Cancelar pedido',
+      message: `Cancelar o pedido #${pedidoId}?`,
+      confirmText: 'Cancelar pedido',
+      cancelText: 'Voltar',
+      destructive: true,
+      onConfirm: async () => {
+        setCancelando(true);
+        try {
+          setPedido(await cancelarSolicitacao(pedidoId, empresaId));
+        } catch (err) {
+          void carregarPedido(true); // o status pode ter mudado (ex.: saiu para entrega)
+          throw err; // o diálogo mostra a mensagem de erro
+        } finally {
+          setCancelando(false);
+        }
       },
-    ]);
-  }, [pedido, user?.empresa?.id]);
+    });
+  }, [pedido, user?.empresa?.id, cancelando, confirm, carregarPedido]);
 
   const etapas = pedido?.etapas?.length ? pedido.etapas : ETAPAS_PADRAO;
   const previsaoLabel = pedido ? obterPrevisaoEntrega(pedido) : '';
