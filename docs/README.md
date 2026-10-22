@@ -1,3 +1,4 @@
+[documenta_o_do_projeto.md](https://github.com/user-attachments/files/33797113/documenta_o_do_projeto.md)
 # 📱 Stock4event - Mobile App
 
 [![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactnative.dev/)
