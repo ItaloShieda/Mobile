@@ -23,20 +23,6 @@ export const clienteQuiosqueStyles = StyleSheet.create({
     width: 36,
     alignItems: 'center',
   },
-  brandRow: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-  },
-  brandQuick: {
-    color: '#FFF',
-    fontSize: 20,
-    fontWeight: '800',
-  },
-  brandStock: {
-    color: '#1F2937',
-    fontSize: 20,
-    fontWeight: '800',
-  },
   searchBox: {
     height: 42,
     backgroundColor: '#FFF',

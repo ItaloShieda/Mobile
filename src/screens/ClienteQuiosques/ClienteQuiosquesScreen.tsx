@@ -9,6 +9,7 @@ import { formatarPreco } from '../../services/productService';
 import { useHeaderTopPadding } from '../../utils/safeArea';
 import { quiosqueExcedeEstoque, resumoEstoque } from '../../utils/estoqueQuiosque';
 import { PRIMARY, styles } from './styles';
+import { BrandLogo } from '../../components/brand/BrandLogo';
 
 export function ClienteQuiosquesScreen() {
   const navigation = useNavigation<any>();
@@ -41,10 +42,7 @@ export function ClienteQuiosquesScreen() {
       >
         <View style={[styles.header, { paddingTop: topPadding }]}>
           <View style={styles.headerTop}>
-            <View style={styles.brandRow}>
-              <Text style={styles.brandQuick}>Stock</Text>
-              <Text style={styles.brandStock}>4event</Text>
-            </View>
+            <BrandLogo variant="azul" height={34} />
           </View>
           <Text style={styles.title}>Meus quiosques</Text>
           <Text style={styles.subtitle}>Monte o estoque dos seus eventos com o que você comprou.</Text>

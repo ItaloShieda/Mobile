@@ -19,6 +19,7 @@ import { formatarPreco } from '../../services/productService';
 import { cartItemKey } from '../../services/purchaseCartStorage';
 import { useSacola } from '../Sacola/useSacola';
 import { PRIMARY, styles } from './styles';
+import { BrandLogo } from '../../components/brand/BrandLogo';
 
 export function ReservasScreen() {
   const topPadding = useHeaderTopPadding(8);
@@ -62,10 +63,7 @@ export function ReservasScreen() {
       >
         <View style={[styles.header, { paddingTop: topPadding }]}>
           <View style={styles.headerTop}>
-            <View style={styles.brandRow}>
-              <Text style={styles.brandQuick}>Stock</Text>
-              <Text style={styles.brandStock}>4event</Text>
-            </View>
+            <BrandLogo variant="azul" height={34} />
             <TouchableOpacity
               style={styles.bellButton}
               onPress={() => setNotificationsOpen(true)}
@@ -266,7 +264,7 @@ export function ReservasScreen() {
                 setModalCadastroEndereco(true);
               }}
             >
-              <Ionicons name="add" size={18} color="#F8B125" />
+              <Ionicons name="add" size={18} color="#FFAD19" />
               <Text style={styles.modalAddBtnText}>Adicionar novo endereço</Text>
             </TouchableOpacity>
           </Pressable>

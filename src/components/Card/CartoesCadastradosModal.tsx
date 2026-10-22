@@ -84,10 +84,10 @@ export function CartoesCadastradosModal({
             </Text>
 
             {loading ? (
-              <ActivityIndicator color="#F8B125" style={styles.loader} />
+              <ActivityIndicator color="#FFAD19" style={styles.loader} />
             ) : cartoes.length === 0 ? (
               <View style={styles.emptyState}>
-                <Ionicons name="card-outline" size={48} color="#F8B125" />
+                <Ionicons name="card-outline" size={48} color="#FFAD19" />
                 <Text style={styles.emptyTitle}>Nenhum cartão cadastrado</Text>
                 <Text style={styles.emptyText}>
                   Adicione um cartão para vincular a esta forma de pagamento.
@@ -97,7 +97,7 @@ export function CartoesCadastradosModal({
               cartoes.map((cartao) => (
                 <View key={cartao.id} style={styles.cartaoCard}>
                   <View style={styles.cartaoIconWrap}>
-                    <Ionicons name="card-outline" size={22} color="#F8B125" />
+                    <Ionicons name="card-outline" size={22} color="#FFAD19" />
                   </View>
                   <View style={styles.cartaoInfo}>
                     <Text style={styles.cartaoApelido}>{labelCartao(cartao)}</Text>
@@ -118,7 +118,7 @@ export function CartoesCadastradosModal({
             )}
 
             <TouchableOpacity style={styles.addBtn} onPress={() => setFormVisible(true)}>
-              <Ionicons name="add-circle-outline" size={20} color="#F8B125" />
+              <Ionicons name="add-circle-outline" size={20} color="#FFAD19" />
               <Text style={styles.addBtnText}>Adicionar cartão</Text>
             </TouchableOpacity>
 
@@ -232,11 +232,11 @@ const styles = StyleSheet.create({
     marginTop: 8,
     paddingVertical: 12,
     borderWidth: 1,
-    borderColor: '#F8B125',
+    borderColor: '#FFAD19',
     borderRadius: 12,
   },
   addBtnText: {
-    color: '#F8B125',
+    color: '#FFAD19',
     fontWeight: '700',
     fontSize: 14,
   },

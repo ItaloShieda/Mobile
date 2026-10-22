@@ -25,6 +25,7 @@ import {
 } from '../../services/enderecoService';
 import { clienteStyles, styles } from './styles';
 import { CLIENTE_COLORS } from '../../theme/theme';
+import { BrandLogo } from '../../components/brand/BrandLogo';
 
 const PRIMARY = CLIENTE_COLORS.primary;
 
@@ -132,10 +133,7 @@ export function EnderecosScreen() {
           <View style={[clienteStyles.header, { paddingTop: topPadding }]}>
             <View style={clienteStyles.headerTop}>
               <BackButton onPress={goBack} iconColor={PRIMARY} />
-              <View style={clienteStyles.brandRow}>
-                <Text style={clienteStyles.brandQuick}>Stock</Text>
-                <Text style={clienteStyles.brandStock}>4event</Text>
-              </View>
+              <BrandLogo variant="azul" height={34} />
               <View style={{ width: 32 }} />
             </View>
             <Text style={clienteStyles.title}>Endereços de entrega</Text>
@@ -237,7 +235,7 @@ export function EnderecosScreen() {
         />
 
         {loading ? (
-          <ActivityIndicator color="#F8B125" style={{ marginTop: 24 }} />
+          <ActivityIndicator color="#FFAD19" style={{ marginTop: 24 }} />
         ) : error ? (
           <View style={styles.sectionCard}>
             <Text style={styles.errorText}>{error}</Text>
@@ -248,7 +246,7 @@ export function EnderecosScreen() {
         ) : enderecos.length === 0 ? (
           <View style={styles.sectionCard}>
             <View style={styles.emptyIconWrap}>
-              <Ionicons name="location-outline" size={22} color="#F8B125" />
+              <Ionicons name="location-outline" size={22} color="#FFAD19" />
             </View>
             <Text style={styles.emptyTitle}>Nenhum endereço cadastrado</Text>
             <Text style={styles.emptyText}>
@@ -269,7 +267,7 @@ export function EnderecosScreen() {
                 style={[styles.enderecoCard, index === enderecos.length - 1 && styles.cardLast]}
               >
                 <View style={styles.enderecoIconWrap}>
-                  <Ionicons name="location-outline" size={22} color="#F8B125" />
+                  <Ionicons name="location-outline" size={22} color="#FFAD19" />
                 </View>
                 <View style={styles.enderecoInfo}>
                   <Text style={styles.enderecoApelido}>{endereco.apelido}</Text>

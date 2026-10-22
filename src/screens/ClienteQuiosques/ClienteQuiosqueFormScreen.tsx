@@ -19,6 +19,7 @@ import { formatarPreco } from '../../services/productService';
 import { useHeaderTopPadding } from '../../utils/safeArea';
 import { PRIMARY, styles } from './styles';
 import { useClienteQuiosqueForm } from './useClienteQuiosqueForm';
+import { BrandLogo } from '../../components/brand/BrandLogo';
 
 const FOOTER_SPACE = 170;
 
@@ -60,10 +61,7 @@ export function ClienteQuiosqueFormScreen() {
         <View style={[styles.header, { paddingTop: topPadding }]}>
           <View style={styles.headerTop}>
             <BackButton onPress={goBack} iconColor={PRIMARY} />
-            <View style={styles.brandRow}>
-              <Text style={styles.brandQuick}>Stock</Text>
-              <Text style={styles.brandStock}>4event</Text>
-            </View>
+            <BrandLogo variant="azul" height={34} />
             <View style={styles.headerSide} />
           </View>
           <Text style={styles.title}>{isEditing ? 'Editar quiosque' : 'Novo quiosque'}</Text>

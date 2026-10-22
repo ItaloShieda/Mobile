@@ -15,6 +15,7 @@ import {
   unidadesPedido,
   usePedidos,
 } from './usePedidos';
+import { BrandLogo } from '../../components/brand/BrandLogo';
 
 const ABAS: { key: AbaPedidos; label: string }[] = [
   { key: 'realizados', label: 'Realizados' },
@@ -59,10 +60,7 @@ export function PedidosScreen() {
       >
         <View style={[styles.header, { paddingTop: topPadding }]}>
           <View style={styles.headerTop}>
-            <View style={styles.brandRow}>
-              <Text style={styles.brandQuick}>Stock</Text>
-              <Text style={styles.brandStock}>4event</Text>
-            </View>
+            <BrandLogo variant="azul" height={34} />
             <TouchableOpacity
               style={{ width: 36, height: 36, alignItems: 'center', justifyContent: 'center' }}
               onPress={() => setNotificationsOpen(true)}

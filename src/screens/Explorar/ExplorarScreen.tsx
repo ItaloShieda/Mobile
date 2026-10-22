@@ -17,6 +17,7 @@ import { useHeaderTopPadding } from '../../utils/safeArea';
 import { CATEGORIAS } from './useExplorar';
 import { PRIMARY, styles } from './styles';
 import { useExplorar } from './useExplorar';
+import { BrandLogo } from '../../components/brand/BrandLogo';
 
 export function ExplorarScreen() {
   const { user } = useAuth();
@@ -49,10 +50,7 @@ export function ExplorarScreen() {
       >
         <View style={[styles.header, { paddingTop: topPadding }]}>
           <View style={styles.headerTop}>
-            <View style={styles.brandRow}>
-              <Text style={styles.brandQuick}>Stock</Text>
-              <Text style={styles.brandStock}>4event</Text>
-            </View>
+            <BrandLogo variant="azul" height={34} />
             <TouchableOpacity
               style={styles.bellButton}
               onPress={() => setNotificationsOpen(true)}

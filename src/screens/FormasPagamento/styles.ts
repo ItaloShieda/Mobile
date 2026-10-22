@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#F8B125',
+    color: '#FFAD19',
   },
   sectionSubtitle: {
     marginTop: 4,
@@ -103,7 +103,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   retryText: {
-    color: '#F8B125',
+    color: '#FFAD19',
     fontWeight: '600',
     marginTop: 10,
     textAlign: 'center',
@@ -144,16 +144,16 @@ export const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#F8B125',
+    borderColor: '#FFAD19',
     backgroundColor: '#FFF',
   },
   tipoChipSelected: {
-    backgroundColor: '#F8B125',
+    backgroundColor: '#FFAD19',
   },
   tipoChipText: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#F8B125',
+    color: '#FFAD19',
   },
   tipoChipTextSelected: {
     color: '#333',
@@ -168,7 +168,7 @@ export const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: '#FFF8E7',
     borderWidth: 1,
-    borderColor: '#F8B125',
+    borderColor: '#FFAD19',
   },
   verCartoesText: {
     flex: 1,
@@ -213,7 +213,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 12,
     alignItems: 'center',
     borderRadius: 8,
-    backgroundColor: '#F8B125',
+    backgroundColor: '#FFAD19',
   },
   modalSaveDisabled: {
     opacity: 0.7,
@@ -226,7 +226,7 @@ export const styles = StyleSheet.create({
 });
 
 const PRIMARY = CLIENTE_COLORS.primary;
-const GOLD = '#F8B125';
+const GOLD = '#FFAD19';
 const PAGE_BG = '#F3F5F8';
 
 export const clienteStyles = StyleSheet.create({
@@ -246,22 +246,6 @@ export const clienteStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 12,
-  },
-  brandRow: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    justifyContent: 'center',
-  },
-  brandQuick: {
-    color: '#FFF',
-    fontSize: 20,
-    fontWeight: '800',
-  },
-  brandStock: {
-    color: '#1F2937',
-    fontSize: 20,
-    fontWeight: '800',
   },
   title: {
     color: '#FFF',

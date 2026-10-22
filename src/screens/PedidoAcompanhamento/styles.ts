@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { CLIENTE_COLORS } from '../../theme/theme';
 
-const GOLD = '#F8B125';
+const GOLD = '#FFAD19';
 const SUCCESS = '#2E7D32';
 
 export const styles = StyleSheet.create({
@@ -436,9 +436,6 @@ export const clientePedidoStyles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 12,
   },
-  brandRow: { flex: 1, flexDirection: 'row', alignItems: 'baseline', justifyContent: 'center' },
-  brandQuick: { color: '#FFF', fontSize: 20, fontWeight: '800' },
-  brandStock: { color: '#1F2937', fontSize: 20, fontWeight: '800' },
   title: { color: '#FFF', fontSize: 24, fontWeight: '800', textAlign: 'center', marginBottom: 6 },
   subtitle: { color: 'rgba(255,255,255,0.75)', fontSize: 13, textAlign: 'center' },
   sheet: { paddingHorizontal: 16, paddingTop: 16 },

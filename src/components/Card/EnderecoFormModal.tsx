@@ -183,7 +183,7 @@ export function EnderecoFormModal({
                   maxLength={9}
                 />
                 {loadingCep ? (
-                  <ActivityIndicator color="#F8B125" style={styles.cepLoader} />
+                  <ActivityIndicator color="#FFAD19" style={styles.cepLoader} />
                 ) : null}
               </View>
               {cepAviso ? <Text style={styles.cepAviso}>{cepAviso}</Text> : null}
@@ -319,7 +319,7 @@ const styles = StyleSheet.create({
   rowItemNarrow: { flex: 0.7 },
   errorText: { color: '#D64545', marginTop: 10, textAlign: 'center' },
   saveBtn: {
-    backgroundColor: '#F8B125',
+    backgroundColor: '#FFAD19',
     borderRadius: 14,
     paddingVertical: 14,
     alignItems: 'center',

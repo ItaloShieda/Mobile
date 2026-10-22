@@ -29,6 +29,7 @@ import { clienteStyles, styles } from './styles';
 import { TIPOS_DISPONIVEIS, hintForma, isFormaComDetalhes, isTipoCartao } from './formasHelpers';
 import { useFormasPagamento } from './useFormasPagamento';
 import { CLIENTE_COLORS } from '../../theme/theme';
+import { BrandLogo } from '../../components/brand/BrandLogo';
 
 const PRIMARY = CLIENTE_COLORS.primary;
 
@@ -112,9 +113,9 @@ export function FormasPagamentoScreen() {
 
             {tipoSelecionado === 'pix' ? (
               <TouchableOpacity style={styles.verCartoesBtn} onPress={abrirPix}>
-                <Ionicons name="phone-portrait-outline" size={18} color="#F8B125" />
+                <Ionicons name="phone-portrait-outline" size={18} color="#FFAD19" />
                 <Text style={styles.verCartoesText}>Ver chaves PIX cadastradas</Text>
-                <Ionicons name="chevron-forward" size={16} color="#F8B125" />
+                <Ionicons name="chevron-forward" size={16} color="#FFAD19" />
               </TouchableOpacity>
             ) : null}
 
@@ -123,9 +124,9 @@ export function FormasPagamentoScreen() {
                 style={styles.verCartoesBtn}
                 onPress={() => abrirCartoes(tipoSelecionado)}
               >
-                <Ionicons name="card-outline" size={18} color="#F8B125" />
+                <Ionicons name="card-outline" size={18} color="#FFAD19" />
                 <Text style={styles.verCartoesText}>Ver cartões cadastrados</Text>
-                <Ionicons name="chevron-forward" size={16} color="#F8B125" />
+                <Ionicons name="chevron-forward" size={16} color="#FFAD19" />
               </TouchableOpacity>
             ) : null}
 
@@ -173,10 +174,7 @@ export function FormasPagamentoScreen() {
           <View style={[clienteStyles.header, { paddingTop: topPadding }]}>
             <View style={clienteStyles.headerTop}>
               <BackButton onPress={goBack} iconColor={PRIMARY} />
-              <View style={clienteStyles.brandRow}>
-                <Text style={clienteStyles.brandQuick}>Stock</Text>
-                <Text style={clienteStyles.brandStock}>4event</Text>
-              </View>
+              <BrandLogo variant="azul" height={34} />
               <View style={{ width: 32 }} />
             </View>
             <Text style={clienteStyles.title}>Pagamento</Text>
@@ -288,7 +286,7 @@ export function FormasPagamentoScreen() {
         />
 
         {loading ? (
-          <ActivityIndicator color="#F8B125" style={{ marginTop: 24 }} />
+          <ActivityIndicator color="#FFAD19" style={{ marginTop: 24 }} />
         ) : error ? (
           <View style={styles.sectionCard}>
             <Text style={styles.errorText}>{error}</Text>
@@ -299,7 +297,7 @@ export function FormasPagamentoScreen() {
         ) : formas.length === 0 ? (
           <View style={styles.sectionCard}>
             <View style={styles.emptyIconWrap}>
-              <Ionicons name="wallet-outline" size={22} color="#F8B125" />
+              <Ionicons name="wallet-outline" size={22} color="#FFAD19" />
             </View>
             <Text style={styles.emptyTitle}>Nenhuma forma cadastrada</Text>
             <Text style={styles.emptyText}>
@@ -326,7 +324,7 @@ export function FormasPagamentoScreen() {
                   disabled={!isFormaComDetalhes(forma.tipo)}
                 >
                   <View style={styles.formaIconWrap}>
-                    <Ionicons name={iconeTipoPagamento(forma.tipo)} size={22} color="#F8B125" />
+                    <Ionicons name={iconeTipoPagamento(forma.tipo)} size={22} color="#FFAD19" />
                   </View>
                   <View style={styles.formaInfo}>
                     <Text style={styles.formaApelido}>{forma.apelido}</Text>

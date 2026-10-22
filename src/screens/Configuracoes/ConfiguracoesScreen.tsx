@@ -20,6 +20,7 @@ import { atualizarEmpresa, atualizarUsuario } from '../../services/authService';
 import { formatarCnpjInput, formatarTelefoneInput, normalizarDocumento } from '../../utils/pixUtils';
 import { clienteStyles, styles } from './styles';
 import { CLIENTE_COLORS } from '../../theme/theme';
+import { BrandLogo } from '../../components/brand/BrandLogo';
 
 const PRIMARY = CLIENTE_COLORS.primary;
 
@@ -177,10 +178,7 @@ export function ConfiguracoesScreen() {
           <View style={[clienteStyles.header, { paddingTop: topPadding }]}>
             <View style={clienteStyles.headerTop}>
               <BackButton onPress={goBack} iconColor={PRIMARY} />
-              <View style={clienteStyles.brandRow}>
-                <Text style={clienteStyles.brandQuick}>Stock</Text>
-                <Text style={clienteStyles.brandStock}>4event</Text>
-              </View>
+              <BrandLogo variant="azul" height={34} />
               <View style={{ width: 32 }} />
             </View>
             <Text style={clienteStyles.title}>Dados do cliente</Text>

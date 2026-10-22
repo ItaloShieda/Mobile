@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#F8B125',
+    color: '#FFAD19',
   },
   sectionSubtitle: {
     marginTop: 4,
@@ -86,7 +86,7 @@ export const styles = StyleSheet.create({
   enderecoPrincipal: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#F8B125',
+    color: '#FFAD19',
   },
   emptyIconWrap: {
     width: 40,
@@ -117,7 +117,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   retryText: {
-    color: '#F8B125',
+    color: '#FFAD19',
     fontWeight: '600',
     marginTop: 10,
     textAlign: 'center',
@@ -125,7 +125,7 @@ export const styles = StyleSheet.create({
 });
 
 const PRIMARY = CLIENTE_COLORS.primary;
-const GOLD = '#F8B125';
+const GOLD = '#FFAD19';
 const PAGE_BG = '#F3F5F8';
 
 export const clienteStyles = StyleSheet.create({
@@ -145,22 +145,6 @@ export const clienteStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 12,
-  },
-  brandRow: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    justifyContent: 'center',
-  },
-  brandQuick: {
-    color: '#FFF',
-    fontSize: 20,
-    fontWeight: '800',
-  },
-  brandStock: {
-    color: '#1F2937',
-    fontSize: 20,
-    fontWeight: '800',
   },
   title: {
     color: '#FFF',

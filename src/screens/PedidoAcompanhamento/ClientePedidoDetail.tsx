@@ -19,6 +19,7 @@ import { styles as empresaStyles } from './styles';
 import { clientePedidoStyles as styles } from './styles';
 import { CLIENTE_COLORS } from '../../theme/theme';
 import { CancelarPedidoButton } from './components/CancelarPedidoButton';
+import { BrandLogo } from '../../components/brand/BrandLogo';
 
 const PRIMARY = CLIENTE_COLORS.primary;
 
@@ -78,10 +79,7 @@ export function ClientePedidoDetail({
         <View style={[styles.header, { paddingTop: topPadding }]}>
           <View style={styles.headerTop}>
             <BackButton onPress={goBack} iconColor={PRIMARY} />
-            <View style={styles.brandRow}>
-              <Text style={styles.brandQuick}>Stock</Text>
-              <Text style={styles.brandStock}>4event</Text>
-            </View>
+            <BrandLogo variant="azul" height={34} />
             <View style={{ width: 32 }} />
           </View>
           <Text style={styles.title}>Detalhes do pedido</Text>

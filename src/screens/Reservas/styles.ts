@@ -21,20 +21,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 18,
   },
-  brandRow: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-  },
-  brandQuick: {
-    color: '#FFF',
-    fontSize: 22,
-    fontWeight: '800',
-  },
-  brandStock: {
-    color: '#1F2937',
-    fontSize: 22,
-    fontWeight: '800',
-  },
   bellButton: {
     width: 36,
     height: 36,
@@ -235,7 +221,7 @@ export const styles = StyleSheet.create({
     color: PRIMARY,
   },
   checkoutBtn: {
-    backgroundColor: '#F8B125',
+    backgroundColor: '#FFAD19',
     borderRadius: 22,
     paddingVertical: 16,
     flexDirection: 'row',
@@ -290,7 +276,7 @@ export const styles = StyleSheet.create({
     maxWidth: 260,
   },
   cta: {
-    backgroundColor: '#F8B125',
+    backgroundColor: '#FFAD19',
     borderRadius: 22,
     paddingVertical: 12,
     paddingHorizontal: 22,
@@ -363,6 +349,6 @@ export const styles = StyleSheet.create({
   modalAddBtnText: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#F8B125',
+    color: '#FFAD19',
   },
 });

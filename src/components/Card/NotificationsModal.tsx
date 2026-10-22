@@ -137,7 +137,7 @@ export function NotificationsModal({
           </View>
 
           {loading ? (
-            <ActivityIndicator color="#F8B125" style={{ marginVertical: 24 }} />
+            <ActivityIndicator color="#FFAD19" style={{ marginVertical: 24 }} />
           ) : error ? (
             <View style={styles.emptyWrap}>
               <Text style={styles.errorText}>{error}</Text>
@@ -170,7 +170,7 @@ export function NotificationsModal({
                     onPress={() => handlePress(notificacao)}
                   >
                     <View style={[styles.iconWrap, iconBg]}>
-                      <Ionicons name={iconName} size={20} color="#F8B125" />
+                      <Ionicons name={iconName} size={20} color="#FFAD19" />
                     </View>
                     <View style={styles.itemBody}>
                       <View style={styles.itemTop}>
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
   },
   title: { fontSize: 20, fontWeight: 'bold', color: '#333' },
-  markAll: { fontSize: 12, color: '#F8B125', fontWeight: '600' },
+  markAll: { fontSize: 12, color: '#FFAD19', fontWeight: '600' },
   list: { paddingHorizontal: 16 },
   item: {
     flexDirection: 'row',
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
   },
   itemUnread: {
     backgroundColor: '#FFF8E7',
-    borderColor: '#F8B125',
+    borderColor: '#FFAD19',
   },
   iconWrap: {
     width: 40,
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
   iconOferta: { backgroundColor: '#E3F2FD' },
   itemBody: { flex: 1 },
   itemTop: { flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 2 },
-  itemTipo: { fontSize: 11, fontWeight: '700', color: '#F8B125', textTransform: 'uppercase' },
+  itemTipo: { fontSize: 11, fontWeight: '700', color: '#FFAD19', textTransform: 'uppercase' },
   dot: { width: 8, height: 8, borderRadius: 4, backgroundColor: '#D64545' },
   itemTitulo: { fontSize: 14, fontWeight: '700', color: '#333' },
   itemMsg: { fontSize: 12, color: '#666', marginTop: 2 },
@@ -267,11 +267,11 @@ const styles = StyleSheet.create({
   emptyWrap: { alignItems: 'center', padding: 32, gap: 8 },
   emptyText: { color: '#888', textAlign: 'center' },
   errorText: { color: '#D64545', textAlign: 'center' },
-  retryText: { color: '#F8B125', fontWeight: '600' },
+  retryText: { color: '#FFAD19', fontWeight: '600' },
   closeBtn: {
     marginHorizontal: 20,
     marginTop: 8,
-    backgroundColor: '#F8B125',
+    backgroundColor: '#FFAD19',
     borderRadius: 12,
     paddingVertical: 12,
     alignItems: 'center',

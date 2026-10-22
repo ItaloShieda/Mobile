@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, Easing, StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Animated, Easing, Image, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { AuthBrand } from '../../components/auth/AuthBrand';
 import { BottlesHero } from '../../components/auth/BottlesHero';
@@ -54,14 +53,11 @@ export function AnimationScreen() {
       <Animated.View style={[styles.center, { opacity: fade }]}>
         {phase === 'loading' ? (
           <>
-            <View style={styles.cartWrap}>
-              <Ionicons name="cart" size={72} color="#7EB6F0" />
-              <View style={styles.cartBottles}>
-                <Ionicons name="wine-outline" size={22} color={AUTH_GOLD} />
-                <Ionicons name="beer-outline" size={24} color="#E23B3B" />
-                <Ionicons name="flask-outline" size={20} color="#4DA3E8" />
-              </View>
-            </View>
+            <Image
+              source={require('../../assets/brand/avatar.png')}
+              style={styles.avatar}
+              accessibilityLabel="Stock4event"
+            />
             <View style={styles.track}>
               <Animated.View style={[styles.fill, { width: barWidth }]} />
             </View>
@@ -69,8 +65,7 @@ export function AnimationScreen() {
           </>
         ) : (
           <>
-            <AuthBrand light size="lg" />
-            <Text style={styles.tagline}>Agilidade que conecta negócios</Text>
+            <AuthBrand light slogan size="lg" />
             <View style={styles.splashArt}>
               <BottlesHero compact />
             </View>
@@ -92,14 +87,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 32,
   },
-  cartWrap: {
-    alignItems: 'center',
+  avatar: {
+    width: 150,
+    height: 150,
+    borderRadius: 75,
     marginBottom: 28,
-  },
-  cartBottles: {
-    flexDirection: 'row',
-    gap: 4,
-    marginTop: -8,
   },
   track: {
     width: 180,
@@ -118,12 +110,6 @@ const styles = StyleSheet.create({
     color: 'rgba(255,255,255,0.8)',
     fontSize: 14,
     fontWeight: '600',
-  },
-  tagline: {
-    marginTop: 10,
-    color: 'rgba(255,255,255,0.85)',
-    fontSize: 16,
-    textAlign: 'center',
   },
   splashArt: {
     position: 'absolute',

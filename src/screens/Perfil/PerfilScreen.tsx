@@ -10,6 +10,7 @@ import { useConfirmDialog } from '../../context/ConfirmDialogContext';
 import { useHeaderTopPadding } from '../../utils/safeArea';
 import { RootStackParamList } from '../../navigation/types';
 import { PRIMARY, styles } from './styles';
+import { BrandLogo } from '../../components/brand/BrandLogo';
 
 const MENU = [
   {
@@ -61,10 +62,7 @@ export function PerfilScreen() {
       >
         <View style={[styles.header, { paddingTop: topPadding }]}>
           <View style={styles.headerTop}>
-            <View style={styles.brandRow}>
-              <Text style={styles.brandQuick}>Stock</Text>
-              <Text style={styles.brandStock}>4event</Text>
-            </View>
+            <BrandLogo variant="azul" height={34} />
             <TouchableOpacity
               style={styles.bellButton}
               onPress={() => setNotificationsOpen(true)}
