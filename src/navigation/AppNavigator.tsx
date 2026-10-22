@@ -14,7 +14,7 @@ export function AppNavigator() {
 
   if (isLoading) {
     return <SafeAreaView style={[styles.loading, { paddingTop: safeTopPadding }]} edges={['left', 'right', 'bottom']}>
-      <ActivityIndicator size="large" color="#F8B125" />
+      <ActivityIndicator size="large" color="#FFAD19" />
     </SafeAreaView>;
   }
 

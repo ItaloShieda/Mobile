@@ -21,20 +21,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 18,
   },
-  brandRow: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-  },
-  brandQuick: {
-    color: '#FFF',
-    fontSize: 22,
-    fontWeight: '800',
-  },
-  brandStock: {
-    color: '#1F2937',
-    fontSize: 22,
-    fontWeight: '800',
-  },
   bellButton: {
     width: 36,
     height: 36,

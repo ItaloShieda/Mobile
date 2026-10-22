@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { CLIENTE_COLORS } from '../../theme/theme';
 
 export const PRIMARY = CLIENTE_COLORS.primary;
-export const GOLD = '#F8B125';
+export const GOLD = '#FFAD19';
 export const PAGE_BG = '#F3F5F8';
 export const GREEN = '#22A45A';
 
@@ -23,20 +23,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 22,
-  },
-  brandRow: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-  },
-  brandQuick: {
-    color: '#FFF',
-    fontSize: 22,
-    fontWeight: '800',
-  },
-  brandStock: {
-    color: CLIENTE_COLORS.brandAccent,
-    fontSize: 22,
-    fontWeight: '800',
   },
   bellButton: {
     width: 36,

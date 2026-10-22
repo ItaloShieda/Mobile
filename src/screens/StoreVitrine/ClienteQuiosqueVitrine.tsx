@@ -20,6 +20,7 @@ import { useHeaderTopPadding } from '../../utils/safeArea';
 import { labelTipoFornecedor } from '../../services/marketplaceService';
 import { formatarPreco, Produto, normalizarEstoque } from '../../services/productService';
 import { PRIMARY, clienteQuiosqueStyles as styles } from './clienteQuiosqueStyles';
+import { BrandLogo } from '../../components/brand/BrandLogo';
 
 const CATEGORIAS = [
   { id: 'todas', label: 'Todas', keywords: [] as string[] },
@@ -110,10 +111,7 @@ export function ClienteQuiosqueVitrine({
             <TouchableOpacity style={styles.headerSide} onPress={onBack} activeOpacity={0.8}>
               <Ionicons name="chevron-back" size={24} color="#FFF" />
             </TouchableOpacity>
-            <View style={styles.brandRow}>
-              <Text style={styles.brandQuick}>Stock</Text>
-              <Text style={styles.brandStock}>4event</Text>
-            </View>
+            <BrandLogo variant="azul" height={34} />
             <TouchableOpacity
               style={styles.headerSide}
               onPress={() => setNotificationsOpen(true)}
@@ -143,7 +141,7 @@ export function ClienteQuiosqueVitrine({
               resizeMode="cover"
             />
           ) : (
-            <LinearGradient colors={['#F8B125', '#FFD873']} style={styles.bannerImage} />
+            <LinearGradient colors={['#FFAD19', '#FFD873']} style={styles.bannerImage} />
           )}
           <View style={styles.bannerOverlay}>
             <Text style={styles.bannerSlogan}>Tudo em bebidas para o seu negócio.</Text>

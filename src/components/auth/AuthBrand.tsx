@@ -1,23 +1,25 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { AUTH_GOLD, AUTH_NAVY } from '../../theme/authTheme';
+import { View, StyleSheet } from 'react-native';
+import { BrandLogo } from '../brand/BrandLogo';
 
 export function AuthBrand({
   size = 'md',
   align = 'center',
   light = false,
+  slogan = false,
 }: {
   size?: 'sm' | 'md' | 'lg';
   align?: 'center' | 'left';
   light?: boolean;
+  /** Mostra o slogan "Compras e estoque para eventos" abaixo do nome. */
+  slogan?: boolean;
 }) {
-  const fontSize = size === 'lg' ? 40 : size === 'sm' ? 22 : 32;
-  const quickColor = light ? '#FFF' : AUTH_NAVY;
+  const height = size === 'lg' ? 64 : size === 'sm' ? 32 : 44;
+  const variant = slogan ? (light ? 'sloganBranco' : 'slogan') : light ? 'branco' : 'padrao';
 
   return (
     <View style={[styles.row, align === 'center' && styles.center]}>
-      <Text style={[styles.quick, { fontSize, color: quickColor }]}>Stock</Text>
-      <Text style={[styles.stock, { fontSize }]}>4event</Text>
+      <BrandLogo variant={variant} height={slogan ? Math.round(height * 1.3) : height} />
     </View>
   );
 }
@@ -25,16 +27,8 @@ export function AuthBrand({
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-    alignItems: 'baseline',
   },
   center: {
     justifyContent: 'center',
-  },
-  quick: {
-    fontWeight: '800',
-  },
-  stock: {
-    fontWeight: '800',
-    color: AUTH_GOLD,
   },
 });

@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   actions: { flexDirection: 'row', gap: 10 },
   cancel: { flex: 1, paddingVertical: 12, borderRadius: 12, borderWidth: 1, borderColor: '#EAEAEA', alignItems: 'center' },
   cancelText: { color: '#666', fontWeight: '600' },
-  confirm: { flex: 1, paddingVertical: 12, borderRadius: 12, backgroundColor: '#F8B125', alignItems: 'center' },
+  confirm: { flex: 1, paddingVertical: 12, borderRadius: 12, backgroundColor: '#FFAD19', alignItems: 'center' },
   destructive: { backgroundColor: '#D64545' },
   confirmText: { color: '#FFF', fontWeight: '700' },
 });

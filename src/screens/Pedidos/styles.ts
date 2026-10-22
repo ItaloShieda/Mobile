@@ -21,20 +21,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 12,
   },
-  brandRow: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-  },
-  brandQuick: {
-    color: '#FFF',
-    fontSize: 20,
-    fontWeight: '800',
-  },
-  brandStock: {
-    color: '#1F2937',
-    fontSize: 20,
-    fontWeight: '800',
-  },
   title: {
     color: '#FFF',
     fontSize: 26,
@@ -188,7 +174,7 @@ export const styles = StyleSheet.create({
     lineHeight: 19,
   },
   cta: {
-    backgroundColor: '#F8B125',
+    backgroundColor: '#FFAD19',
     borderRadius: 22,
     paddingVertical: 12,
     paddingHorizontal: 22,
@@ -204,7 +190,7 @@ export const styles = StyleSheet.create({
     marginBottom: 8,
   },
   retryText: {
-    color: '#F8B125',
+    color: '#FFAD19',
     fontWeight: '700',
     textAlign: 'center',
   },

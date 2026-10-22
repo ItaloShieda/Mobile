@@ -80,10 +80,10 @@ export function PixCadastradosModal({
             </Text>
 
             {loading ? (
-              <ActivityIndicator color="#F8B125" style={styles.loader} />
+              <ActivityIndicator color="#FFAD19" style={styles.loader} />
             ) : chaves.length === 0 ? (
               <View style={styles.emptyState}>
-                <Ionicons name="phone-portrait-outline" size={48} color="#F8B125" />
+                <Ionicons name="phone-portrait-outline" size={48} color="#FFAD19" />
                 <Text style={styles.emptyTitle}>Nenhuma chave cadastrada</Text>
                 <Text style={styles.emptyText}>
                   Adicione uma chave PIX para vincular a esta forma de pagamento.
@@ -93,7 +93,7 @@ export function PixCadastradosModal({
               chaves.map((chave) => (
                 <View key={chave.id} style={styles.pixCard}>
                   <View style={styles.pixIconWrap}>
-                    <Ionicons name="phone-portrait-outline" size={22} color="#F8B125" />
+                    <Ionicons name="phone-portrait-outline" size={22} color="#FFAD19" />
                   </View>
                   <View style={styles.pixInfo}>
                     <Text style={styles.pixApelido}>{chave.apelido}</Text>
@@ -110,7 +110,7 @@ export function PixCadastradosModal({
             )}
 
             <TouchableOpacity style={styles.addBtn} onPress={() => setFormVisible(true)}>
-              <Ionicons name="add-circle-outline" size={20} color="#F8B125" />
+              <Ionicons name="add-circle-outline" size={20} color="#FFAD19" />
               <Text style={styles.addBtnText}>Adicionar chave PIX</Text>
             </TouchableOpacity>
 
@@ -224,11 +224,11 @@ const styles = StyleSheet.create({
     marginTop: 8,
     paddingVertical: 12,
     borderWidth: 1,
-    borderColor: '#F8B125',
+    borderColor: '#FFAD19',
     borderRadius: 12,
   },
   addBtnText: {
-    color: '#F8B125',
+    color: '#FFAD19',
     fontWeight: '700',
     fontSize: 14,
   },

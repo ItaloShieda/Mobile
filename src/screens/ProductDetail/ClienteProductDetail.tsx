@@ -12,6 +12,7 @@ import { getImageUrl } from '../../config/api';
 import { formatarPreco } from '../../services/productService';
 import { useHeaderTopPadding, useBottomInset } from '../../utils/safeArea';
 import { GREEN, PRIMARY, clienteProductStyles as styles } from './clienteProductStyles';
+import { BrandLogo } from '../../components/brand/BrandLogo';
 
 interface Props {
   productName: string;
@@ -65,10 +66,7 @@ export function ClienteProductDetail({
           <Ionicons name="chevron-back" size={24} color="#FFF" />
         </TouchableOpacity>
         <View style={styles.headerCenter}>
-          <View style={styles.brandRow}>
-            <Text style={styles.brandQuick}>Stock</Text>
-            <Text style={styles.brandStock}>4event</Text>
-          </View>
+          <BrandLogo variant="azul" height={34} />
           <Text style={styles.headerSubtitle}>Detalhes do produto</Text>
         </View>
         <View style={styles.headerSide} />

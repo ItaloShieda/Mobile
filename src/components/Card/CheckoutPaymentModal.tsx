@@ -159,7 +159,7 @@ export function CheckoutPaymentModal({
 
             {enderecoResumo ? (
               <View style={styles.enderecoBox}>
-                <Ionicons name="location-outline" size={16} color="#F8B125" />
+                <Ionicons name="location-outline" size={16} color="#FFAD19" />
                 <Text style={styles.enderecoText} numberOfLines={2}>
                   {enderecoResumo}
                 </Text>
@@ -178,7 +178,7 @@ export function CheckoutPaymentModal({
                     <Ionicons
                       name={iconeTipoPagamento(item)}
                       size={16}
-                      color={selected ? '#FFF' : '#F8B125'}
+                      color={selected ? '#FFF' : '#FFAD19'}
                     />
                     <Text style={[styles.metodoChipText, selected && styles.metodoChipTextSelected]}>
                       {labelTipoPagamento(item)}
@@ -189,7 +189,7 @@ export function CheckoutPaymentModal({
             </ScrollView>
 
             {loading ? (
-              <ActivityIndicator color="#F8B125" style={{ marginVertical: 20 }} />
+              <ActivityIndicator color="#FFAD19" style={{ marginVertical: 20 }} />
             ) : metodo === 'pix' ? (
               <View style={styles.panel}>
                 <PixQrCode />
@@ -201,12 +201,12 @@ export function CheckoutPaymentModal({
                       style={[styles.optionRow, selected && styles.optionRowSelected]}
                       onPress={() => setPixSelecionado(chave)}
                     >
-                      <Ionicons name="phone-portrait-outline" size={18} color="#F8B125" />
+                      <Ionicons name="phone-portrait-outline" size={18} color="#FFAD19" />
                       <View style={styles.optionInfo}>
                         <Text style={styles.optionTitle}>{chave.apelido}</Text>
                         <Text style={styles.optionSub}>{chave.chaveMascarada}</Text>
                       </View>
-                      {selected ? <Ionicons name="checkmark-circle" size={20} color="#F8B125" /> : null}
+                      {selected ? <Ionicons name="checkmark-circle" size={20} color="#FFAD19" /> : null}
                     </TouchableOpacity>
                   );
                 })}
@@ -215,7 +215,7 @@ export function CheckoutPaymentModal({
               <View style={styles.panel}>
                 {cartoes.length === 0 ? (
                   <TouchableOpacity style={styles.addCardBtn} onPress={() => setCartaoFormVisible(true)}>
-                    <Ionicons name="add-circle-outline" size={20} color="#F8B125" />
+                    <Ionicons name="add-circle-outline" size={20} color="#FFAD19" />
                     <Text style={styles.addCardText}>Cadastrar cartão de {labelTipoPagamento(metodo).toLowerCase()}</Text>
                   </TouchableOpacity>
                 ) : (
@@ -227,14 +227,14 @@ export function CheckoutPaymentModal({
                         style={[styles.optionRow, selected && styles.optionRowSelected]}
                         onPress={() => setCartaoSelecionado(cartao)}
                       >
-                        <Ionicons name="card-outline" size={18} color="#F8B125" />
+                        <Ionicons name="card-outline" size={18} color="#FFAD19" />
                         <View style={styles.optionInfo}>
                           <Text style={styles.optionTitle}>{labelCartao(cartao)}</Text>
                           <Text style={styles.optionSub}>
                           {formatarCartaoExibicao(cartao.ultimosDigitos)} · {cartao.bandeira}
                         </Text>
                         </View>
-                        {selected ? <Ionicons name="checkmark-circle" size={20} color="#F8B125" /> : null}
+                        {selected ? <Ionicons name="checkmark-circle" size={20} color="#FFAD19" /> : null}
                       </TouchableOpacity>
                     );
                   })
@@ -303,7 +303,7 @@ const styles = StyleSheet.create({
   total: {
     fontSize: 26,
     fontWeight: '800',
-    color: '#F8B125',
+    color: '#FFAD19',
     marginTop: 4,
     marginBottom: 12,
   },
@@ -333,18 +333,18 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#F8B125',
+    borderColor: '#FFAD19',
     marginRight: 8,
     backgroundColor: '#FFF',
   },
   metodoChipSelected: {
-    backgroundColor: '#F8B125',
-    borderColor: '#F8B125',
+    backgroundColor: '#FFAD19',
+    borderColor: '#FFAD19',
   },
   metodoChipText: {
     fontSize: 13,
     fontWeight: '700',
-    color: '#F8B125',
+    color: '#FFAD19',
   },
   metodoChipTextSelected: {
     color: '#FFF',
@@ -384,7 +384,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   optionRowSelected: {
-    borderColor: '#F8B125',
+    borderColor: '#FFAD19',
     backgroundColor: '#FFF8E7',
   },
   optionInfo: {
@@ -413,7 +413,7 @@ const styles = StyleSheet.create({
     padding: 14,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#F8B125',
+    borderColor: '#FFAD19',
     borderStyle: 'dashed',
   },
   addCardText: {
@@ -426,7 +426,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   linkBtnText: {
-    color: '#F8B125',
+    color: '#FFAD19',
     fontWeight: '700',
     fontSize: 13,
   },

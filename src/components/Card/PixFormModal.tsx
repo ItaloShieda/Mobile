@@ -214,11 +214,11 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#F8B125',
+    borderColor: '#FFAD19',
     backgroundColor: '#FFF',
   },
-  tipoChipSelected: { backgroundColor: '#F8B125' },
-  tipoChipText: { fontSize: 12, fontWeight: '600', color: '#F8B125' },
+  tipoChipSelected: { backgroundColor: '#FFAD19' },
+  tipoChipText: { fontSize: 12, fontWeight: '600', color: '#FFAD19' },
   tipoChipTextSelected: { color: '#333' },
   input: {
     borderWidth: 1,
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
   },
   errorText: { color: '#D64545', marginTop: 10, textAlign: 'center' },
   saveBtn: {
-    backgroundColor: '#F8B125',
+    backgroundColor: '#FFAD19',
     borderRadius: 14,
     paddingVertical: 14,
     alignItems: 'center',

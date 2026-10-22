@@ -24,20 +24,6 @@ export const clienteProductStyles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  brandRow: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-  },
-  brandQuick: {
-    color: '#FFF',
-    fontSize: 18,
-    fontWeight: '800',
-  },
-  brandStock: {
-    color: '#1F2937',
-    fontSize: 18,
-    fontWeight: '800',
-  },
   headerSubtitle: {
     color: 'rgba(255,255,255,0.75)',
     fontSize: 12,

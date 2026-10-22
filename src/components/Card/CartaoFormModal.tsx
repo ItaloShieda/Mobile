@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   saveBtn: {
-    backgroundColor: '#F8B125',
+    backgroundColor: '#FFAD19',
     borderRadius: 14,
     paddingVertical: 14,
     alignItems: 'center',

@@ -12,7 +12,7 @@ import { listarProdutosFornecedor } from '../../services/marketplaceService';
 
 import { useAuth } from '../../context/AuthContext';
 
-export const GOLD = '#F8B125';
+export const GOLD = '#FFAD19';
 
 export function useProductDetail() {
 
