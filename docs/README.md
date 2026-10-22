@@ -164,7 +164,7 @@ npm test
 ## 👨‍💻 Equipe
 
 * Luan Feitosa Santos
-* José Ítalo S. C. Dantas
+* Jose italo Silva Cordeiro Dantas
 * Marcelo Vitor Viana da Silva
 * Leticia Viviane Pereira da Silva
 * José Lucas Luiz da Silva
